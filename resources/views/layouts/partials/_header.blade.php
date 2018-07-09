@@ -15,5 +15,5 @@
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/fontawesome/css/fontawesome-all.min.css' : '/vendors/fontawesome/css/fontawesome-all.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/css/main.min.css' : '/css/main.min.css') }}">
 
-  @yield('stylesheets');
+  @yield('stylesheets')
 </head>

@@ -13,14 +13,14 @@
 
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/bootstrap/bootstrap.min.css' : '/vendors/bootstrap/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/fontawesome/css/fontawesome-all.min.css' : '/vendors/fontawesome/css/fontawesome-all.min.css') }}">
-  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/css/main.min.css' : '/css/main.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.min.css' : '/vendors/datatable/dataTables.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.bootstrap4.min.css' : '/vendors/datatable/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/css/main.min.css' : '/css/main.min.css') }}">
   <style>
     .c-breadcrumbs__wrapper {
       background-color: #e9ecef;
     }
   </style>
 
-  @yield('stylesheets');
+  @yield('stylesheets')
 </head>

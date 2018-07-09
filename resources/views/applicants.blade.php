@@ -2,6 +2,7 @@
 
 @section('stylesheets')
 @endsection
+
 @section('content')
 	<div class="c-breadcrumbs__wrapper">
     <div class="container">
@@ -47,6 +48,7 @@
     </table>
   </main>
 @endsection
+
 @section('scripts')
   <script>
     $(document).ready(function () {

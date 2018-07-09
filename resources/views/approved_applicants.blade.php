@@ -1,7 +1,9 @@
 @extends('layouts.hr_master')
 
 @section('stylesheets')
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/timepicker/tempusdominus-bootstrap-4.min.css' : '/vendors/timepicker/tempusdominus-bootstrap-4.min.css') }}">
 @endsection
+
 @section('content')
 	<div class="c-breadcrumbs__wrapper">
     <div class="container">
@@ -25,7 +27,7 @@
   <main class="container py-5 ">
     <h2 class="text-center ">Approved Applicants</h2>
     <hr class="line">
-    <table id="tbl-hired-applicant" class="table table-hover ">
+    <table id="tbl-approved-applicant" class="table table-hover ">
       <thead>
         <th>#</th>
         <th>Name</th>
@@ -96,17 +98,71 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-warning">Contact</button>
+            <button type="button" class="btn btn-warning" id="btn-set-interview">Set Interview</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set Interview Modal -->
+    <div class="modal fade" id="set-interview" tabindex="-1" role="dialog" aria-labelledby="setInterviewLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="">Title:</label>
+              <input type="text|" name="" id="" class="form-control" placeholder="Interview">
+              <div class="valid-feedback">Help text</div>
+            </div>
+            <div class="form-group">
+              <label for="">Title:</label>
+              <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+              <div class="valid-feedback">Help text</div>
+            </div>
+            <div class="form-group">
+              <label for="">Date &amp; Time:</label>
+              <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
+              />
+              <div class="valid-feedback">Help text</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning">Save</button>
           </div>
         </div>
       </div>
     </div>
   </main>
 @endsection
+
 @section('scripts')
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/moment.js' : '/vendors/timepicker/moment.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/tempusdominus-bootstrap-4.min.js' : '/vendors/timepicker/tempusdominus-bootstrap-4.min.js') }}"></script>
   <script>
+    $(function () {
+      $('#datetimepicker5').datetimepicker({
+        icons: {
+          time: 'fas fa-clock',
+          date: 'fas fa-calendar-alt'
+        }
+      });
+    });
     $(document).ready(function () {
-      $('#tbl-hired-applicant').dataTable();
+      $('#tbl-approved-applicant').dataTable();
+
+      $('#btn-set-interview').on('click', function () {
+        $('#applicant-profile').modal('hide');
+        $('#applicant-profile').on('hidden.bs.modal', function () {
+          $('#set-interview').modal('show');
+        });
+      });
     });
   </script>
 @endsection
