@@ -1,8 +1,20 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-	<link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_theme_dots.min.css' : '/vendors/smartWizard/smart_wizard_theme_dots.min.css') }}">
+	<link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_3.css' : '/vendors/smartWizard/smart_wizard_3.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.css' : '/vendors/datepicker/datepicker.min.css') }}">
+
+  <style>
+    .actionBar a {
+      margin-left: 5px
+    }
+
+    .actionBar {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 25px;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -42,43 +54,43 @@
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">First Name</label>
+                  <label for="">First Name:</label>
                   <input type="text" name="first_name" id="first-name" class="form-control" placeholder="John">
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Middle Name</label>
+                  <label for="">Middle Name:</label>
                   <input type="text" name="middle_name" id="middle-name" class="form-control" placeholder="Domestic">
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Last Name</label>
+                  <label for="">Last Name:</label>
                   <input type="text" name="last_name" id="last-name" class="form-control" placeholder="Doe">
                 </div>
               </div>
               <div class="col-lg-8 col-md-7 col-sm-12">
                 <div class="form-group">
-                  <label for="">Email Address</label>
+                  <label for="">Email Address:</label>
                   <input type="email" name="email" id="email" class="form-control" placeholder="example@email.com">
                 </div>
               </div>
               <div class="col-lg-4 col-md-5 col-sm-12">
                 <div class="form-group">
-                  <label for="">Mobile #</label>
+                  <label for="">Mobile #:</label>
                   <input type="text" name="mobile" id="mobile" class="form-control" placeholder="+639xx-xxx-xxxx">
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Age</label>
+                  <label for="">Age:</label>
                   <input type="number" name="age" id="age" class="form-control" placeholder="23">
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Gender</label>
+                  <label for="">Gender:</label>
                   <select name="gender" id="gender" class="form-control">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -87,7 +99,7 @@
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Civil Status</label>
+                  <label for="">Civil Status:</label>
                   <select name="civil_status" id="civil-status" class="form-control">
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
@@ -98,19 +110,19 @@
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label for="">Address</label>
+                  <label for="">Address:</label>
                   <input type="text" name="address" id="address" class="form-control" placeholder="#23 P-3 example address, Legazpi City">
                 </div>
               </div>
               <div class="col-lg-8 col-md-7 col-sm-12">
                 <div class="form-group">
-                  <label for="">Place of Birth</label>
+                  <label for="">Place of Birth:</label>
                   <input type="text" name="place_of_birth" id="place-of-birth" class="form-control" placeholder="#23 P-3 example address, Legazpi City">
                 </div>
               </div>
               <div class="col-lg-4 col-md-5 col-sm-12">
                 <div class="form-group">
-                  <label for="">Date of Birth</label>
+                  <label for="">Date of Birth:</label>
                   <input type="text" name="date_of_birth" id="date-of-birth" class="form-control" data-toggle="datepicker" placeholder="06/21/1995">
                 </div>
               </div>
@@ -121,7 +133,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="form-group">
-                  <label for="">Username</label>
+                  <label for="">Username:</label>
                   <input type="text" name="username" id="username" class="form-control" placeholder="username">
                 </div>
               </div>
@@ -129,7 +141,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="form-group">
-                  <label for="">Password</label>
+                  <label for="">Password:</label>
                   <input type="password" name="password" id="password" class="form-control" placeholder="********">
                 </div>
               </div>
@@ -137,7 +149,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="form-group">
-                  <label for="">Re-type Password</label>
+                  <label for="">Re-type Password:</label>
                   <input type="password" name="retype_password" id="retype-password" class="form-control" placeholder="********">
                 </div>
               </div>
@@ -212,24 +224,26 @@
 
 @section('scripts')
 	<script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
-  <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard.min.js' : '/vendors/smartWizard/jquery.smartWizard.min.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard_3.js' : '/vendors/smartWizard/jquery.smartWizard_3.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/register.js' : '/js/pages/register.js') }}"></script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
   <script>
     $(document).ready(function () {
       $('#smartwizard').smartWizard({
         transitionEffect: 'fade',
-        toolbarSettings: {
-          toolbarExtraButtons: [
-            $('<button class="btn-submit"></button>').html('<i class="fa fa-check"></i>&nbsp; Submit')
-            .addClass('btn btn-warning')
-            .attr('disabled', true)
-          ]
-        },
+        buttonOrder: ['prev', 'next', 'finish'],
         onFinish: function() {
            $("#frm-register").submit();
         }
       });
+
+      $('.buttonPrevious, .buttonNext').addClass('btn btn-secondary');
+      $('.buttonFinish').addClass('btn btn-warning').html('<i class="fas fa-check"></i>&nbsp; Finish');
+
+      $('.buttonPrevious ').html('<i class="fas fa-chevron-left"></i>&nbsp; Previous');
+      $('.buttonNext ').html('Next&nbsp; <i class="fas fa-chevron-right"></i>');
+
+      $('.msgBox, .loader').hide();
 
       $('[data-toggle="datepicker"]').datepicker();
 
