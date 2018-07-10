@@ -29,7 +29,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a role="button" class="btn btn-warning" type="button" data-toggle="modal" data-target="#login-modal">Login</a>
+              <a class="btn btn-warning" data-toggle="modal" data-target="#login-modal">Login</a>
             </li>
           </ul>
         </div>

@@ -8,14 +8,14 @@ $(document).ready(function () {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 $('#image-preview').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    $("#image").change(function() {
+    $("#image").change(function () {
         var image_filename = $(this)[0].files.length ? $(this)[0].files[0].name : "";
         var image = image_filename.split('.').pop();
         if (image == 'jpg' || image == 'png' || image == 'jpeg') {
@@ -45,9 +45,9 @@ $(document).ready(function () {
             email: {
                 required: true,
                 remote: {
-                    url:"/check-email",
-                    type:"get"
-               }
+                    url: "/check-email",
+                    type: "get"
+                }
             },
             mobile: {
                 required: true,
@@ -62,12 +62,11 @@ $(document).ready(function () {
             username: {
                 required: true,
                 remote: {
-                    url:"/check-username",
-                    type:"get"
-               }
+                    url: "/check-username",
+                    type: "get"
+                }
             },
             password: {
-                minlength: 6,
                 maxlength: 20
             },
             retype_password: {
@@ -93,12 +92,11 @@ $(document).ready(function () {
             last_name: "Required field cannot be left blank.",
             email: {
                 required: 'Required field cannot be left blank.',
-                remote: 'This email already in used. Try different email.'
+                remote: 'This email already in used. Please choose different email.'
             },
             mobile: {
                 required: 'Required field cannot be left blank.',
-                minlength: 'Please enter at least 10 characters.',
-                maxlength: 'Please enter at least 10 characters.',
+                maxlength: 'Please enter at least 11 characters.',
                 digits: 'Please enter your mobile number.'
             },
             age: "Required field cannot be left blank.",
@@ -107,14 +105,32 @@ $(document).ready(function () {
             date_of_birth: "Required field cannot be left blank.",
             username: {
                 required: 'Required field cannot be left blank.',
-                remote: 'This username already in used. Try different username.'
+                remote: 'This username already in used. Please choose different username.'
+            },
+            retype_password: {
+                equalTo: 'Password did not match.'
             },
             image: {
                 required: 'Required field cannot be left blank.',
                 extension: "You must select an image file only."
             }
         },
-        submitHandler: function(frm_register, e) {
+        highlight: function (element) {
+            $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
+        },
+        errorElement: 'div',
+        errorClass: 'invalid-feedback',
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (frm_register, e) {
             event.preventDefault();
 
             var data = new FormData($("#frm-register")[0]);
@@ -129,29 +145,29 @@ $(document).ready(function () {
                 dataType: 'json',
                 processData: false,
                 contentType: false,
-                success: function(data) {
-                    setTimeout(function() {
+                success: function (data) {
+                    setTimeout(function () {
                         var email = $('#email').val();
                         $('.btn-submit').attr('disabled', false);
                         $('.btn-submit').html('<i class="fas fa-check"></i>&nbsp; Submit');
                         $('#verification-modal').modal('show');
                         $('#hdn-email').val(email);
 
-/*                      $.toast({
-                            heading: 'Success',
-                            text: 'Registered successfully.',
-                            position: 'top-right',
-                            icon: 'success',
-                            hideAfter: 3500
-                        });*/
+                        /*                      $.toast({
+                                                    heading: 'Success',
+                                                    text: 'Registered successfully.',
+                                                    position: 'top-right',
+                                                    icon: 'success',
+                                                    hideAfter: 3500
+                                                });*/
 
                     }, 2000);
                 },
-                error: function(xhr, error, ajaxOptions, thrownError) {
+                error: function (xhr, error, ajaxOptions, thrownError) {
                     alert(xhr.responseText);
                 }
             });
         }
     });
 
- });
+});
