@@ -26,11 +26,11 @@ $(document).ready(function () {
     });
 
     $("#frm-register").unbind('submit').on('submit', function (event) {
-        if ($('#first-name').val() == '' || $('#middle_name').val() == '' || $('#last-name').val() == '' || $('#email').val() == '' || $('#mobile').val() == '' || $('#age').val() == '' || $('#address').val() == '' || $('#place-of-birth').val() == '' || $('#date_of_birth').val() == '') {
+        if ($('#first-name').is('.error') || $('#middle_name').is('.error') || $('#last-name').is('.error') || $('#email').is('.error') || $('#mobile').is('.error') || $('#age').is('.error') || $('#address').is('.error') || $('#place-of-birth').is('.error') || $('#date-of-birth').is('.error')) {
             window.location.href = '/register#personal';
-        } else if ($('#username').val() == '' || $('#password').val() == '' || $('#retype-password').is('.error')) {
+        } else if ($('#username').is('.error') || $('#password').is('.error') || $('#retype-password').is('.error')) {
             window.location.href = '/register#account';
-        } else if ($('#image').val() == '') {
+        } else if ($('#image').is('.error')) {
             window.location.href = '/register#photo';
         }
     });
