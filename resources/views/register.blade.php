@@ -253,15 +253,15 @@
       $('[data-toggle="datepicker"]').datepicker();
 
       $(".sw-btn-next").on('click', function (event) {
-        if ($('.sw-btn-next').is('.disabled')) {
+        if ($(this).is('.disabled')) {
           $('.btn-submit').attr('disabled', false);
-        } else if ($('.sw-btn-next').not('.disabled')) {
-          $('.btn-submit').attr('disabled', true);
         }
       });
 
       $(".sw-btn-prev").on('click', function (event) {
-          $('.btn-submit').attr('disabled', true);
+        if ($(this).is('.disabled')) {
+          $('.btn-submit').attr('disabled', false);
+        }
       });
     });
   </script>
