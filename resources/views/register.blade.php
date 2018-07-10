@@ -242,6 +242,7 @@
           toolbarExtraButtons: [
             $('<button class="btn-submit"></button>').html('<i class="fa fa-check"></i>&nbsp; Submit')
             .addClass('btn btn-warning')
+            .attr('disabled', true)
           ]
         },
         onFinish: function() {
@@ -250,6 +251,18 @@
       });
 
       $('[data-toggle="datepicker"]').datepicker();
+
+      $(".sw-btn-next").on('click', function (event) {
+        if ($('.sw-btn-next').is('.disabled')) {
+          $('.btn-submit').attr('disabled', false);
+        } else if ($('.sw-btn-next').not('.disabled')) {
+          $('.btn-submit').attr('disabled', true);
+        }
+      });
+
+      $(".sw-btn-prev").on('click', function (event) {
+          $('.btn-submit').attr('disabled', true);
+      });
     });
   </script>
 @endsection
