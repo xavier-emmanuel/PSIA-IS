@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.min.css' : '/vendors/datatable/dataTables.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.bootstrap4.min.css' : '/vendors/datatable/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/css/main.min.css' : '/css/main.min.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/toast-master/css/jquery.toast.css' : '/vendors/toast-master/css/jquery.toast.css') }}">
   <style>
     .c-breadcrumbs__wrapper {
       background-color: #e9ecef;
