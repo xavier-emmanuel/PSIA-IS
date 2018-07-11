@@ -1,20 +1,9 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-	<link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_3.css' : '/vendors/smartWizard/smart_wizard_3.css') }}">
+	<!-- <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_3.css' : '/vendors/smartWizard/smart_wizard_3.css') }}"> -->
+	<link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_theme_dots.min.css' : '/vendors/smartWizard/smart_wizard_theme_dots.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.css' : '/vendors/datepicker/datepicker.min.css') }}">
-
-  <style>
-    .actionBar a {
-      margin-left: 5px
-    }
-
-    .actionBar {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 25px;
-    }
-  </style>
 @endsection
 
 @section('content')
@@ -176,7 +165,7 @@
                 </div>
               </div>
             </div>
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
               <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="form-group">
                   <label for="">Captcha:</label>
@@ -184,7 +173,7 @@
                   <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -224,40 +213,8 @@
 
 @section('scripts')
 	<script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
-  <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard_3.js' : '/vendors/smartWizard/jquery.smartWizard_3.js') }}"></script>
+  <!-- <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard_3.js' : '/vendors/smartWizard/jquery.smartWizard_3.js') }}"></script> -->
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard.min.js' : '/vendors/smartWizard/jquery.smartWizard.min.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/register.js' : '/js/pages/register.js') }}"></script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
-  <script>
-    $(document).ready(function () {
-      $('#smartwizard').smartWizard({
-        transitionEffect: 'fade',
-        buttonOrder: ['prev', 'next', 'finish'],
-        onFinish: function() {
-           $("#frm-register").submit();
-        }
-      });
-
-      $('.buttonPrevious, .buttonNext').addClass('btn btn-secondary');
-      $('.buttonFinish').addClass('btn btn-warning').html('<i class="fas fa-check"></i>&nbsp; Finish');
-
-      $('.buttonPrevious ').html('<i class="fas fa-chevron-left"></i>&nbsp; Previous');
-      $('.buttonNext ').html('Next&nbsp; <i class="fas fa-chevron-right"></i>');
-
-      $('.msgBox, .loader').hide();
-
-      $('[data-toggle="datepicker"]').datepicker();
-
-      $(".sw-btn-next").on('click', function (event) {
-        if ($(this).is('.disabled')) {
-          $('.btn-submit').attr('disabled', false);
-        }
-      });
-
-      $(".sw-btn-prev").on('click', function (event) {
-        if ($(this).is('.disabled')) {
-          $('.btn-submit').attr('disabled', false);
-        }
-      });
-    });
-  </script>
 @endsection
