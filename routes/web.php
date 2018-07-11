@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/GM-dashboard', 'GMPagesController@dashboard');
+
 Route::get('/hired-applicants', 'HRPagesController@hiredApplicants');
 Route::get('/approved-applicants', 'HRPagesController@approvedApplicants');
 Route::get('/applicants', 'HRPagesController@applicants');
