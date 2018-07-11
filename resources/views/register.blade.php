@@ -64,7 +64,7 @@
               <div class="col-lg-4 col-md-5 col-sm-12">
                 <div class="form-group">
                   <label for="">Mobile #:</label>
-                  <input type="text" name="mobile" id="mobile" class="form-control" placeholder="+639xx-xxx-xxxx"></div>
+                  <input type="text" name="mobile" id="mobile" class="form-control" placeholder="09xx-xxx-xxxx"></div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
@@ -153,7 +153,7 @@
                   <div class="div-preview">
                     <label for="">Preview:</label>
                     <figure>
-                      <img src="http://via.placeholder.com/192x192" id="image-preview" alt="" width="192px" height="192px"></figure>
+                      <img class="border border-secondary" src="http://via.placeholder.com/192x192" id="image-preview" alt="" width="192px" height="192px"></figure>
                   </div>
                 </div>
               </div>
@@ -171,35 +171,6 @@
       </div>
     </div>
   </main>
-
-  <!-- Verification Modal -->
-  <div class="modal fade" id="verification-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-        <form id="frm-verify" method="post" name="frm_verify">
-          <input type="hidden" name="hdn_email" id="hdn-email" class="form-control">
-          {{ csrf_field() }}
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group text-center">
-              <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="Patton Security & Investigation Agency" width="100px" height="100px"></div>
-            <div class="form-group">
-              <label for="v-code">Code:</label>
-              <input type="text" name="v_code_input" id="v-code-input" class="form-control" placeholder="12345">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning btn-block btn-verify">Verify</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 @endsection
 
 @section('scripts')

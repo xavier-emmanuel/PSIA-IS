@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('#smartwizard').smartWizard({
         transitionEffect: 'fade',
@@ -15,18 +14,18 @@ $(document).ready(function () {
             personalValidator();
             var valid = $('#frm-personal').valid();
             if (!valid && stepDirection === 'forward') {
-                
+
                 return false;
-                
+
             }
-            $('.btn-finish').prop('disabled', false); 
+            $('.btn-finish').prop('disabled', false);
         }
 
         if (stepNumber === 1) {
             accountValidator();
             var valid2 = $('#frm-account').valid();
             if (!valid2 && stepDirection === 'forward') {
-                
+
                 return false;
             }
             $('.btn-finish').prop('disabled', false);
@@ -36,7 +35,7 @@ $(document).ready(function () {
             photoValidator();
             var valid3 = $('#frm-photo').valid();
             if (!valid3 && stepDirection === 'forward') {
-                
+
                 return false;
             }
             $('.btn-finish').prop('disabled', false);
@@ -52,16 +51,16 @@ $(document).ready(function () {
         var valid2 = $('#frm-account').valid();
         photoValidator();
         var valid3 = $('#frm-photo').valid();
-        if(valid && valid2 && valid3){
+        if (valid && valid2 && valid3) {
             event.preventDefault();
 
-            var formData =  new FormData($("#frm-photo")[0]);
+            var formData = new FormData($("#frm-photo")[0]);
             var data_personal = $("#frm-personal").serializeArray();
-            for (var i=0; i<data_personal.length; i++) {
+            for (var i = 0; i < data_personal.length; i++) {
                 formData.append(data_personal[i].name, data_personal[i].value);
             }
             var data_account = $("#frm-account").serializeArray();
-            for (var i=0; i<data_account.length; i++) {
+            for (var i = 0; i < data_account.length; i++) {
                 formData.append(data_account[i].name, data_account[i].value);
             }
 
@@ -73,10 +72,10 @@ $(document).ready(function () {
             $.ajax({
                 url: '/register/store',
                 type: 'POST',
-                headers: {'X-CSRF-TOKEN': token},
-                data: 
-                    formData
-                ,
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                data: formData,
                 dataType: 'json',
                 processData: false,
                 contentType: false,
@@ -95,7 +94,7 @@ $(document).ready(function () {
             });
         } else {
             if (!valid) {
-            window.location.href = '/register#personal';
+                window.location.href = '/register#personal';
             } else if (!valid2) {
                 window.location.href = '/register#account';
             } else if (!valid3) {
@@ -148,6 +147,7 @@ $(document).ready(function () {
                 },
                 mobile: {
                     required: true,
+                    minlength: 11,
                     maxlength: 11,
                     digits: true
                 },
@@ -248,7 +248,7 @@ $(document).ready(function () {
                     extension: "jpg|png|jpeg"
                 },
                 hiddenRecaptcha: {
-                    required: function() {
+                    required: function () {
                         if (grecaptcha.getResponse() == '') {
                             return true;
                         } else {
@@ -263,15 +263,15 @@ $(document).ready(function () {
                     extension: "You must select an image file only."
                 }
             },
-            highlight: function(element) {
+            highlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             },
-            unhighlight: function(element) {
+            unhighlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
             },
             errorElement: 'div',
             errorClass: 'invalid-feedback',
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 if (element.parent('.input-group').length) {
                     error.insertAfter(element.parent());
                 } else {
@@ -280,5 +280,4 @@ $(document).ready(function () {
             }
         });
     }
-
 });

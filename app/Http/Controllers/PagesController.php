@@ -15,7 +15,7 @@ class PagesController extends Controller
 		}
 
 		public function contact() {
-			return view('contact')->with(array('page' => 'Contact'));
+			return view('contact')->with(array('page' => 'Contact Us'));
 		}
 
 		public function register() {
