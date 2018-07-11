@@ -21,4 +21,8 @@ class PagesController extends Controller
 		public function register() {
 			return view('register')->with(array('page' => 'Register'));
 		}
+
+		public function verifyAccount() {
+			return view('verify')->with(array('page' => 'Verify Account'));
+		}
 }
