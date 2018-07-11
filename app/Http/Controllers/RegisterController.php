@@ -24,7 +24,7 @@ class RegisterController extends Controller
 		$register->middle_name = $input['middle_name'];
 		$register->last_name = $input['last_name'];
 		$register->email = $input['email'];
-		$register->mobile = '+63'.$input['mobile'];
+		$register->mobile = $input['mobile'];
 		$register->age = $input['age'];
 		$register->gender = $input['gender'];
 		$register->civil_status = $input['civil_status'];
