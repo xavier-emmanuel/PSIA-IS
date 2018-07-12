@@ -46,7 +46,7 @@
                   John D.
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="profile.html">
+                  <a class="dropdown-item" href="/user-profile">
                     <i class="fas fa-user-circle"></i>&nbsp; Profile</a>
                   <a class="dropdown-item" href="index.html">
                     <i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>

@@ -25,4 +25,8 @@ class HRPagesController extends Controller
     public function hiredApplicants() {
     	return view('hired_applicants')->with(array('page' => 'Hired Applicants'));
     }
+
+    public function profile() {
+        return view('profile')->with(array('page' => 'User Profile'));
+    }
 }

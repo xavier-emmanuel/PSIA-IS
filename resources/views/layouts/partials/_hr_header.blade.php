@@ -20,6 +20,14 @@
     .c-breadcrumbs__wrapper {
       background-color: #e9ecef;
     }
+    .error {
+      color: #b90504;
+      border-color: #b90504;
+    }
+    label.error {
+      font-size: 80%;
+      font-weight: 400;
+    }
   </style>
 
   @yield('stylesheets')

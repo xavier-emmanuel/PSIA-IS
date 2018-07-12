@@ -11,7 +11,13 @@
 |
 */
 Route::get('/GM-dashboard', 'GMPagesController@dashboard');
+Route::post('/job-vacancy/delete', 'JobVacancyController@ajaxDelete');
+Route::get('/job-vacancy/update-show', 'JobVacancyController@ajaxUpdateShow');
+Route::post('/job-vacancy/update', 'JobVacancyController@ajaxUpdate');
+Route::post('/job-vacancy/create', 'JobVacancyController@ajaxStore');
+Route::get('/job-vacancy/show', 'JobVacancyController@ajaxShow');
 
+Route::get('/user-profile', 'HRPagesController@profile');
 Route::get('/hired-applicants', 'HRPagesController@hiredApplicants');
 Route::get('/approved-applicants', 'HRPagesController@approvedApplicants');
 Route::get('/applicants', 'HRPagesController@applicants');

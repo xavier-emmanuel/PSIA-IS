@@ -11,7 +11,7 @@
             <a href="javascript:void(0);">Applicants</a>
           </li>
           <li class="breadcrumb-item ">
-            <a href="applicants.html">Applicant Lists</a>
+            <a href="/applicants">Applicant Lists</a>
           </li>
           <li class="breadcrumb-item active " aria-current="page ">Hired</li>
         </ol>
