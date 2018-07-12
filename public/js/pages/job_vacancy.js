@@ -8,6 +8,12 @@ $(document).ready(function() {
 			url: '/job-vacancy/show',
 			type: 'GET'
 		},
+		columnDefs: [ {
+        targets: 3,
+        render: function ( data, type, row ) {
+            return data.substr( 0, 60 ) +'…';
+        }
+    } ]
   });
 
   CKEDITOR.replace('job_description');
