@@ -158,14 +158,14 @@
                 </div>
               </div>
             </div>
-            {{-- <div class="row justify-content-center">
+            <div class="row justify-content-center">
               <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="form-group">
                   <label for="">Captcha:</label>
                   <div class="g-recaptcha" data-sitekey="6Ld4T2MUAAAAAAOOPthxpLG-2Loe1FjD0gouvyoJ"></div>
                   <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha"></div>
               </div>
-            </div> --}}
+            </div>
           </form>
         </div>
       </div>
