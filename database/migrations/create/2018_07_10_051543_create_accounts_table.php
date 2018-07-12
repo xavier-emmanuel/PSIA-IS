@@ -30,8 +30,10 @@ class CreateAccountsTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('image');
-            $table->integer('v_status');
+            $table->integer('verified');
             $table->string('v_code');
+            $table->integer('approved');
+            $table->integer('hired');
             $table->timestamps();
         });
     }

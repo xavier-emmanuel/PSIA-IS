@@ -54,8 +54,10 @@ class RegisterController extends Controller
 		$register->username = $input['username'];
 		$register->password = bcrypt($input['password']);
 		$register->image = $name;
-		$register->v_status = 0;
+		$register->verified = 0;
 		$register->v_code = $code;
+		$register->approved = 0;
+		$register->hired = 0;
 		$register->updated_at = null;
 
 		$register->save();
