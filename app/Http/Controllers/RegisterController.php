@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
 		$account->save();
 
-		return response()->json(['success'=>'Account has been successfully verified.']);
+		return response()->json(['success'=>'Your account has been successfully verified.']);
 
 	}
 
