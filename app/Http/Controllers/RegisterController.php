@@ -24,7 +24,7 @@ class RegisterController extends Controller
 		$parameters = array(
 		    'apikey' => '9a904a2b4f629e2fd4fbac04ef75a2fe', //Your API KEY
 		    'number' => ''.$input['mobile'].'',
-		    'message' => 'This is Patton Security & Investigation Agency. Your verification code is '.$code. '.',
+		    'message' => 'This is Patton Security & Investigation Agency. Your verification code is '.$code.'.',
 		    'sendername' => ''
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
