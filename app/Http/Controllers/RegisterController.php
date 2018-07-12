@@ -71,7 +71,7 @@ class RegisterController extends Controller
 		$input = Input::all();
 		$account = Register::findOrFail($input['hdn_id']);
 
-		$account->v_status = 1;
+		$account->verified = 1;
 
 		$account->save();
 
