@@ -178,5 +178,5 @@
   <!-- <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard_3.js' : '/vendors/smartWizard/jquery.smartWizard_3.js') }}"></script> -->
   <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard.min.js' : '/vendors/smartWizard/jquery.smartWizard.min.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/register.js' : '/js/pages/register.js') }}"></script>
-  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
 @endsection
