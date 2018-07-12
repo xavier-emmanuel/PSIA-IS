@@ -27,7 +27,7 @@ $(document).ready(function () {
         error.insertAfter(element);
       }
     },
-    submitHandler: function(frm_verify, e) {
+    submitHandler: function (frm_verify, e) {
       event.preventDefault();
 
       var data = new FormData($("#frm-verify")[0]);
@@ -42,13 +42,13 @@ $(document).ready(function () {
         dataType: 'json',
         processData: false,
         contentType: false,
-        success: function(data) {
-          localStorage.setItem("Verified",data.OperationStatus);
-          setTimeout(function() {
+        success: function (data) {
+          localStorage.setItem("Verified", data.OperationStatus);
+          setTimeout(function () {
             window.location.href = '/';
           }, 2000);
         },
-        error: function(xhr, error, ajaxOptions, thrownError) {
+        error: function (xhr, error, ajaxOptions, thrownError) {
           alert(xhr.responseText);
         }
       });
