@@ -2,6 +2,11 @@
 
 @section('stylesheets')
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/contents.css' : '/vendors/ckeditor/contents.css') }}">
+  <style>
+    td > h1, h2, h3, h4, h5, h6, p {
+      margin-bottom: 0;
+    }
+  </style>
 @endsection
 @section('content')
 	<div class="c-breadcrumbs__wrapper">
@@ -14,7 +19,7 @@
           <li class="breadcrumb-item active " aria-current="page ">Job Vacancy Lists</li>
         </ol>
         <div class="action ml-auto p-2">
-          <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#add-job-vacancy" data-backdrop="static" id="btn-add-job-vacancy">
+          <a class="btn btn-warning" data-toggle="modal" data-target="#add-job-vacancy" data-backdrop="static" id="btn-add-job-vacancy">
             <i class="fas fa-plus"></i>&nbsp; Add Job Vacancy</a>
         </div>
       </nav>
@@ -31,6 +36,7 @@
           <th>Name</th>
           <th>Vacancy</th>
           <th>Description</th>
+          <th>Urgent</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -175,7 +181,7 @@
               <div class="d-flex align-items-center">
                 <input type="hidden" name="hdn_delete_job_id" id="hdn-delete-job-id">
                 <i class="fas fa-question-circle" style="font-size: 32px;"></i>
-                <p class="mb-0 ml-2">Are you sure you want to delete <span id="job-name-show"></span> from the job vacancy list?</p>
+                <p class="mb-0 ml-2">Are you sure you want to delete <span class="font-weight-bold text-primary" id="job-name-show"></span> from the job vacancy list?</p>
               </div>
             </div>
             <div class="modal-footer">

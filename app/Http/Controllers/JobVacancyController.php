@@ -12,12 +12,17 @@ class JobVacancyController extends Controller
 		$job_vacancy = JobVacancy::all();
 
 		$data = array();
-	
+
     	foreach($job_vacancy as $row) {
             $id = '<td>'.$row->id.'</td>';
             $name = '<td>'.$row->name.'</td>';
             $vacancy = '<td>'.$row->no_of_vacancy.'</td>';
             $description = '<td>'.$row->description.'</td>';
+						if($row->hiring_status == 0 ) {
+							$urgent = '<td><span class="badge badge-danger">No</span></td>';
+						} else {
+							$urgent = '<td><span class="badge badge-success">Yes</span></td>';
+						}
             $button = '<td>
                         <button class="btn btn-info btn-edit-job-vacancy" title="Edit Job Vacancy" data-toggle="modal" data-target="#edit-job-vacancy" data-backdrop="static" data-id="'.$row->id.'" data-image="'.$row->image.'">
                           <i class="fas fa-edit "></i>
@@ -31,7 +36,8 @@ class JobVacancyController extends Controller
  								$id,
  								$name,
  								$vacancy,
- 								$description,
+								$description,
+								$urgent,
  								$button
 	     					);
   	    }
@@ -69,7 +75,7 @@ class JobVacancyController extends Controller
 
     public function ajaxUpdate(Request $request) {
     	$job_vacancy = JobVacancy::find($request->hdn_edit_job_id);
-	  	
+
 	  	if($request->hasfile('edit_job_image')) {
 	  		$file = $request->edit_job_image;
 	      $image_name = time().$file->getClientOriginalName();
