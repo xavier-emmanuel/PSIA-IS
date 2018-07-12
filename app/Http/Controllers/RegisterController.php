@@ -56,6 +56,7 @@ class RegisterController extends Controller
 		$register->image = $name;
 		$register->verified = 0;
 		$register->v_code = $code;
+		$register->job_vacancy_id = 0;
 		$register->approved = 0;
 		$register->hired = 0;
 		$register->updated_at = null;

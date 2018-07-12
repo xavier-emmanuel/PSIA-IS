@@ -32,6 +32,7 @@ class CreateAccountsTable extends Migration
             $table->string('image');
             $table->integer('verified');
             $table->string('v_code');
+            $table->integer('job_vacancy_id');
             $table->integer('approved');
             $table->integer('hired');
             $table->timestamps();
