@@ -21,8 +21,9 @@ Route::get('/HR-dashboard', 'HRPagesController@dashboard');
 Route::get('/check-email', 'RegisterController@checkEmail');
 Route::get('/check-username', 'RegisterController@checkUsername');
 Route::post('/register/store', 'RegisterController@ajaxStore');
+Route::post('/account/verify', 'RegisterController@ajaxVerify');
 
-Route::get('/verify-account', 'PagesController@verifyAccount');
+Route::get('/verify-account/{username}', 'PagesController@verifyAccount');
 Route::get('/register', 'PagesController@register');
 Route::get('/contact', 'PagesController@contact');
 Route::get('/about', 'PagesController@about');

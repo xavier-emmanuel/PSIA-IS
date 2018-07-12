@@ -18,6 +18,26 @@ class RegisterController extends Controller
 			$file->move(public_path().'/uploads/accounts/', $name);
 		}
 
+		$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
+		
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => '9a904a2b4f629e2fd4fbac04ef75a2fe', //Your API KEY
+		    'number' => ''.$input['mobile'].'',
+		    'message' => 'PSIA verification code: '.$code,
+		    'sendername' => ''
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
 		$register = new Register();
 
     	$register->first_name = $input['first_name'];
@@ -35,13 +55,26 @@ class RegisterController extends Controller
 		$register->password = bcrypt($input['password']);
 		$register->image = $name;
 		$register->v_status = 0;
-		$register->v_code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
+		$register->v_code = $code;
 		$register->updated_at = null;
 
 		$register->save();
 
-		return response()->json(['success'=>'Registered successfully.']);
+		return response()->json($output);
     }
+
+    public function ajaxVerify(Request $request){
+
+		$input = Input::all();
+		$account = Register::findOrFail($input['hdn_id']);
+
+		$account->v_status = 1;
+
+		$account->save();
+
+		return response()->json(['success'=>'Account has been successfully verified.']);
+
+	}
 
     public function checkEmail(Request $request){
 

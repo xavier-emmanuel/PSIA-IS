@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Register;
 
 class PagesController extends Controller
 {
@@ -22,7 +23,8 @@ class PagesController extends Controller
 			return view('register')->with(array('page' => 'Register'));
 		}
 
-		public function verifyAccount() {
-			return view('verify')->with(array('page' => 'Verify Account'));
+		public function verifyAccount($username) {
+			$account = Register::where('username', $username)->first();
+			return view('verify')->with(array('page' => 'Verify Account', 'data' => $account));
 		}
 }

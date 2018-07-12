@@ -81,11 +81,8 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (data) {
                     setTimeout(function () {
-                        var email = $('#email').val();
-                        $('.btn-finish').attr('disabled', false);
-                        $('.btn-finish').html('<i class="fas fa-check"></i>&nbsp; Finish');
-                        $('#verification-modal').modal('show');
-                        $('#hdn-email').val(email);
+                        var username = $('#username').val();
+                        window.location.href = '/verify-account/'+username;
                     }, 2000);
                 },
                 error: function (xhr, error, ajaxOptions, thrownError) {

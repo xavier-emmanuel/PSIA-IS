@@ -18,13 +18,16 @@
         <div class="card">
           <div class="card-body">
             <p class="font-weight-bold">Enter the code you received via SMS:</p>
-            <form action="" id="frm-verify">
+            <form action="frm-verify" id="frm-verify" name="frm_verify">
+              <input type="hidden" id="hdn-id" name="hdn_id" value="{{ $data->id }}">
+              <input type="hidden" id="hdn-code" name="hdn_code" value="{{ $data->v_code }}">
+              {{ csrf_field() }}
               <div class="form-group">
                 <input type="number" class="form-control" name="verification_code" id="verification-code">
                 <small><em>Code has been set to your device via SMS.</em></small>
               </div>
               <div class="action d-flex justify-content-end">
-                <button class="btn btn-warning" type="submit"><i class="fas fa-check"></i>&nbsp; Verify</button>
+                <button class="btn btn-warning btn-verify" type="submit"><i class="fas fa-check"></i>&nbsp; Verify</button>
               </div>
             </form>
           </div>
