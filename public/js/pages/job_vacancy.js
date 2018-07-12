@@ -3,6 +3,47 @@ var add_job_vacancy_form;
 var edit_job_vacancy_form;
 
 $(document).ready(function() {
+  jQuery.fn.dataTable.render.ellipsis = function ( cutoff, wordbreak, escapeHtml ) {
+    var esc = function ( t ) {
+        return t
+            .replace( /&/g, '&amp;' )
+            .replace( /</g, '&lt;' )
+            .replace( />/g, '&gt;' )
+            .replace( /"/g, '&quot;' );
+    };
+ 
+    return function ( d, type, row ) {
+        // Order, search and type get the original data
+        if ( type !== 'display' ) {
+            return d;
+        }
+ 
+        if ( typeof d !== 'number' && typeof d !== 'string' ) {
+            return d;
+        }
+ 
+        d = d.toString(); // cast numbers
+ 
+        if ( d.length <= cutoff ) {
+            return d;
+        }
+ 
+        var shortened = d.substr(0, cutoff-1);
+ 
+        // Find the last white space character in the string
+        if ( wordbreak ) {
+            shortened = shortened.replace(/\s([^\s]*)$/, '');
+        }
+ 
+        // Protect against uncontrolled HTML input
+        if ( escapeHtml ) {
+            shortened = esc( shortened );
+        }
+ 
+        return '<span class="ellipsis" title="'+esc(d)+'">'+shortened+'&#8230;</span>';
+    };
+	};
+
   tbl_job_vacancy = $('#tbl-job-vacancy').DataTable({
   	'ajax': {
 			url: '/job-vacancy/show',
@@ -10,9 +51,7 @@ $(document).ready(function() {
 		},
 		columnDefs: [ {
         targets: 3,
-        render: function ( data, type, row ) {
-            return data.substr( 0, 60 ) +'…';
-        }
+        render: $.fn.dataTable.render.ellipsis(50)
     } ]
   });
 
