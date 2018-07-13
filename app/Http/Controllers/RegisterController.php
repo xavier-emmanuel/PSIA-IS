@@ -18,7 +18,7 @@ class RegisterController extends Controller
 			$file->move(public_path().'/uploads/accounts/', $name);
 		}
 
-		$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
+		$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
 		
 		$username = "imjordanlopez@gmail.com";
 		$hash = "5c768719065ead607b69e04c08ce2fc4e8265884f91fec5bdaed27ecfd1e9f9a";
@@ -27,9 +27,11 @@ class RegisterController extends Controller
 		$test = "0";
 
 		// Data for text message. This is the text message data.
-		$sender = "Patton Security & Investigation Agency"; // This is who the message appears to be from.
+		$sender = "PSIA"; // This is who the message appears to be from.
 		$numbers = "63".$input['mobile']; // A single number or a comma-seperated list of numbers
-		$message = 'This is Patton Security & Investigation Agency. Your verification code is '.$code.'.';
+		$message = 'This is Patton Security & Investigation Agency. 
+		
+		Your verification code is '.$code.'.';
 		// 612 chars or less
 		// A single number or a comma-seperated list of numbers
 		$message = urlencode($message);
@@ -43,7 +45,7 @@ class RegisterController extends Controller
 
 		$register = new Register();
 
-    	$register->first_name = $input['first_name'];
+    $register->first_name = $input['first_name'];
 		$register->middle_name = $input['middle_name'];
 		$register->last_name = $input['last_name'];
 		$register->email = $input['email'];
