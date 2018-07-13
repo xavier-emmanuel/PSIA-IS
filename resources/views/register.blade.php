@@ -104,7 +104,7 @@
               <div class="col-lg-4 col-md-5 col-sm-12">
                 <div class="form-group">
                   <label for="">Date of Birth:</label>
-                  <input type="text" name="date_of_birth" id="date-of-birth" class="form-control" data-toggle="datepicker" placeholder="06/21/1995"></div>
+                  <input type="text" name="date_of_birth" id="date-of-birth" class="form-control" data-toggle="datepicker" placeholder="mm/dd/yyyy"></div>
               </div>
             </div>
           </form>
