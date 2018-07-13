@@ -33,22 +33,7 @@
         <th>Action</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John Doe</td>
-          <td>Security Guard</td>
-          <td>+63900-000-0000</td>
-          <td>23</td>
-          <td>Male</td>
-          <td>
-            <button class="btn btn-info " title="View ">
-              <i class="fas fa-eye "></i>
-            </button>
-            <button class="btn btn-info " title="Profile ">
-              <i class="fas fa-user-circle "></i>
-            </button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
   </main>
@@ -56,7 +41,12 @@
 @section('scripts')
   <script>
     $(document).ready(function () {
-      $('#tbl-hired-applicant').dataTable();
+      $('#tbl-hired-applicant').DataTable({
+        "ajax": {
+            url: "/hired-applicants/show",
+            type: 'GET'
+        },
+      });
     });
   </script>
 @endsection

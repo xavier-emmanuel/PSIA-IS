@@ -29,7 +29,9 @@ Route::get('/check-username', 'RegisterController@checkUsername');
 Route::post('/register/store', 'RegisterController@ajaxStore');
 Route::post('/account/verify', 'RegisterController@ajaxVerify');
 
-Route::get('/applicants/show', 'ApplicantsController@ajaxShow');
+Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
+Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
+Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');
 
 Route::get('/verify-account/{username}', 'PagesController@verifyAccount');
 Route::get('/register', 'PagesController@register');
