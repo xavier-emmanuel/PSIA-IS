@@ -144,8 +144,8 @@ $(document).ready(function () {
                 },
                 mobile: {
                     required: true,
-                    minlength: 11,
-                    maxlength: 11,
+                    minlength: 10,
+                    maxlength: 10,
                     digits: true
                 },
                 age: "required",
@@ -163,7 +163,8 @@ $(document).ready(function () {
                 },
                 mobile: {
                     required: 'Required field cannot be left blank.',
-                    maxlength: 'Please enter at least 11 characters.',
+                    minlength: 'Please enter at least 10 characters. Ex: 9123456789',
+                    maxlength: 'Please enter at least 10 characters. Ex: 9123456789',
                     digits: 'Please enter your mobile number.'
                 },
                 age: "Required field cannot be left blank.",

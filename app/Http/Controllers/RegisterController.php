@@ -20,23 +20,26 @@ class RegisterController extends Controller
 
 		$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
 		
-		$ch = curl_init();
-		$parameters = array(
-		    'apikey' => '9a904a2b4f629e2fd4fbac04ef75a2fe', //Your API KEY
-		    'number' => ''.$input['mobile'].'',
-				'message' => 'This is Patton Security & Investigation Agency. Your verification code is '.$code.'.',
-		    'sendername' => ''
-		);
-		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
-		curl_setopt( $ch, CURLOPT_POST, 1 );
+		$username = "imjordanlopez@gmail.com";
+		$hash = "5c768719065ead607b69e04c08ce2fc4e8265884f91fec5bdaed27ecfd1e9f9a";
 
-		//Send the parameters set above with the request
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+		// Config variables. Consult http://api.txtlocal.com/docs for more info.
+		$test = "0";
 
-		// Receive response from server
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		$output = curl_exec( $ch );
-		curl_close ($ch);
+		// Data for text message. This is the text message data.
+		$sender = "Patton Security & Investigation Agency"; // This is who the message appears to be from.
+		$numbers = "63".$input['mobile']; // A single number or a comma-seperated list of numbers
+		$message = 'This is Patton Security & Investigation Agency. Your verification code is '.$code.'.';
+		// 612 chars or less
+		// A single number or a comma-seperated list of numbers
+		$message = urlencode($message);
+		$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+		$ch = curl_init('http://api.txtlocal.com/send/?');
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch); // This is the result from the API
+		curl_close($ch);
 
 		$register = new Register();
 
@@ -44,7 +47,7 @@ class RegisterController extends Controller
 		$register->middle_name = $input['middle_name'];
 		$register->last_name = $input['last_name'];
 		$register->email = $input['email'];
-		$register->mobile = $input['mobile'];
+		$register->mobile = '+63'.$input['mobile'];
 		$register->age = $input['age'];
 		$register->gender = $input['gender'];
 		$register->civil_status = $input['civil_status'];
@@ -63,7 +66,7 @@ class RegisterController extends Controller
 
 		$register->save();
 
-		return response()->json($output);
+		return response()->json('success');
     }
 
     public function ajaxVerify(Request $request){
