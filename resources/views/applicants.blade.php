@@ -31,19 +31,7 @@
         <th>Action</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John Doe</td>
-          <td>Security Guard</td>
-          <td>+63900-000-0000</td>
-          <td>23</td>
-          <td>Male</td>
-          <td>
-            <button class="btn btn-info " title="View Profile ">
-              <i class="fas fa-eye "></i>
-            </button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
   </main>
@@ -52,7 +40,12 @@
 @section('scripts')
   <script>
     $(document).ready(function () {
-      $('#tbl-applicant').dataTable();
+      $('#tbl-applicant').DataTable({
+        "ajax": {
+            url: "/applicants/show",
+            type: 'GET'
+        },
+      });
     });
   </script>
 @endsection
