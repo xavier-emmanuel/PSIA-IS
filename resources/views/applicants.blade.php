@@ -1,6 +1,11 @@
 @extends('layouts.hr_master')
 
 @section('stylesheets')
+  <style>
+    .c-breadcrumbs__wrapper {
+      margin-top: 91px;
+    }
+  </style>
 @endsection
 
 @section('content')

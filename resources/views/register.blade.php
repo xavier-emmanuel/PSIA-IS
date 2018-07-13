@@ -1,9 +1,13 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-	<!-- <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_3.css' : '/vendors/smartWizard/smart_wizard_3.css') }}"> -->
 	<link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/smart_wizard_theme_dots.min.css' : '/vendors/smartWizard/smart_wizard_theme_dots.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.css' : '/vendors/datepicker/datepicker.min.css') }}">
+  <style>
+    main {
+      margin-top: 91px;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -180,7 +184,6 @@
 
 @section('scripts')
 	<script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
-  <!-- <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard_3.js' : '/vendors/smartWizard/jquery.smartWizard_3.js') }}"></script> -->
   <script src="{{ asset(App::environment('production') ? '/public/vendors/smartWizard/jquery.smartWizard.min.js' : '/vendors/smartWizard/jquery.smartWizard.min.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/register.js' : '/js/pages/register.js') }}"></script>
   <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>

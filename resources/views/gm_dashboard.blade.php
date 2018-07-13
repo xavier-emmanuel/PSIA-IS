@@ -1,6 +1,11 @@
 @extends('layouts.gm_master')
 
 @section('stylesheets')
+  <style>
+    main {
+      margin-top: 91px;
+    }
+  </style>
 @endsection
 
 @section('content')

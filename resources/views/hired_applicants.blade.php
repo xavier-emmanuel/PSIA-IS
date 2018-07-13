@@ -1,7 +1,13 @@
 @extends('layouts.hr_master')
 
 @section('stylesheets')
+  <style>
+    .c-breadcrumbs__wrapper {
+      margin-top: 91px;
+    }
+  </style>
 @endsection
+
 @section('content')
 	 <div class="c-breadcrumbs__wrapper">
     <div class="container">
@@ -38,6 +44,7 @@
     </table>
   </main>
 @endsection
+
 @section('scripts')
   <script>
     $(document).ready(function () {

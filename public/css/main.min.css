@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900);.sw-btn-prev::before {
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900);
+.sw-btn-prev::before {
   content: "\F053           ";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
@@ -19,12 +20,12 @@ table.dataTable.no-footer {
   border-bottom: 1px solid #dee2e6;
 }
 
-.table > thead > tr > th,
-.table > tbody > tr > th,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
+.table>thead>tr>th,
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
   vertical-align: middle !important;
 }
 
@@ -36,8 +37,8 @@ table.dataTable.no-footer {
 
 html {
   -moz-text-size-adjust: 100%;
-   -ms-text-size-adjust: 100%;
-       text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -93,7 +94,7 @@ hr.line::after {
 
 .c-box:hover {
   -webkit-box-shadow: 0 2px 5px rgba(163, 163, 163, 0.75);
-          box-shadow: 0 2px 5px rgba(163, 163, 163, 0.75);
+  box-shadow: 0 2px 5px rgba(163, 163, 163, 0.75);
 }
 
 .c-box i {
@@ -104,7 +105,7 @@ hr.line::after {
 .dropdown-toggle:hover,
 .btn-secondary:not(:disabled):not(.disabled).active,
 .btn-secondary:not(:disabled):not(.disabled):active,
-.show > .btn-secondary.dropdown-toggle {
+.show>.btn-secondary.dropdown-toggle {
   background-color: transparent;
   border: none;
 }
@@ -113,17 +114,16 @@ hr.line::after {
 .btn-secondary:focus,
 .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .btn-secondary:not(:disabled):not(.disabled):active:focus,
-.show > .btn-secondary.dropdown-toggle:focus {
+.show>.btn-secondary.dropdown-toggle:focus {
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .dropdown-menu {
   top: 40px;
 }
 
-.p-header .navbar-brand > img {
+.p-header .navbar-brand>img {
   width: 70px;
   height: 65px;
 }
-

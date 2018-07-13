@@ -6,8 +6,17 @@
     td > h1, h2, h3, h4, h5, h6, p {
       margin-bottom: 0;
     }
+
+    .c-breadcrumbs__wrapper {
+      margin-top: 91px;
+    }
+
+    .navbar-nav {
+      padding-right: 0;
+    }
   </style>
 @endsection
+
 @section('content')
 	<div class="c-breadcrumbs__wrapper">
     <div class="container">
@@ -94,6 +103,17 @@
                   <label class="form-check-label" for="hiring-status2">No</label>
                 </div>
               </div>
+              <div class="form-group">
+                <label for="">Featured?&nbsp; </label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
+                  <label class="form-check-label" for="">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="" id="" value="No">
+                  <label class="form-check-label" for="">No</label>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -145,7 +165,7 @@
                 <div class="valid-feedback">Help text</div>
               </div>
               <div class="form-group">
-                <label for="">Immediate Hiring?&nbsp; </label>
+                <label for="">Urgent Hiring?&nbsp; </label>
                 <div class="form-check form-check-inline ml-3">
                   <input class="form-check-input" type="radio" name="edit_hiring_status" id="edit-hiring-status1" value="Yes">
                   <label class="form-check-label" for="edit-hiring-status1">Yes</label>
@@ -153,6 +173,17 @@
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="edit_hiring_status" id="edit-hiring-status2" value="No">
                   <label class="form-check-label" for="edit-hiring-status2">No</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Featured?&nbsp; </label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
+                  <label class="form-check-label" for="">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="" id="" value="No">
+                  <label class="form-check-label" for="">No</label>
                 </div>
               </div>
             </div>
@@ -194,6 +225,7 @@
     </div>
   </main>
 @endsection
+
 @section('scripts')
   <script src="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/ckeditor.js' : '/vendors/ckeditor/ckeditor.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/config.js' : '/vendors/ckeditor/config.js') }}"></script>
