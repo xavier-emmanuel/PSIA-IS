@@ -33,6 +33,8 @@ Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
 Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');
 
+Route::get('/hired-applicant-report', 'ReportsController@hiredApplicantReport');
+
 Route::get('/verify-account/{username}', 'PagesController@verifyAccount');
 Route::get('/register', 'PagesController@register');
 Route::get('/contact', 'PagesController@contact');
