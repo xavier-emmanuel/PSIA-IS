@@ -33,7 +33,7 @@
                 Reports
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/hired-applicant-report">Hired Applicants</a>
+                <a class="dropdown-item" href="/hired-applicant-report" target="_blank">Hired Applicants</a>
               </div>
             </li>
           </ul>
