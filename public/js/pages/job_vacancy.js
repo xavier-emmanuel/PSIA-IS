@@ -88,6 +88,7 @@ function addJobVacancy() {
             extension: "jpg|png|jpeg"
         },
         hiring_status: "required",
+        featured: "required",
         job_description: {
             required: function() {
                 CKEDITOR.instances.job_description.updateElement();
@@ -108,7 +109,8 @@ function addJobVacancy() {
 				job_description: {
 					required: 'Required field cannot be left blank.'
 				},
-				hiring_status: 'Please select from the options.'
+				hiring_status: 'Please select from the options.',
+				featured: 'Please select from the options.'
     },errorPlacement: function(error, element) {
       if ( element.is(":radio") ) {
         error.appendTo( element.parents('.form-group') );
@@ -178,6 +180,14 @@ function updateJobVacancy() {
 				} else {
 					$('#edit-hiring-status1').attr('checked', false);
 					$('#edit-hiring-status2').attr('checked', true);
+				}
+
+				if (job.featured == 1) {
+					$('#edit-featured1').attr('checked', true);
+					$('#edit-featured2').attr('checked', false);
+				} else {
+					$('#edit-featured1').attr('checked', false);
+					$('#edit-featured2').attr('checked', true);
 				}
 			}
 		});

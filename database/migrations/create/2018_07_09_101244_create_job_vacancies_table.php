@@ -20,6 +20,7 @@ class CreateJobVacanciesTable extends Migration
             $table->string('image');
             $table->longText('description');
             $table->string('hiring_status');
+            $table->string('featured');
             $table->timestamps();
         });
     }

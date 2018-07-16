@@ -106,12 +106,12 @@
               <div class="form-group">
                 <label for="">Featured?&nbsp; </label>
                 <div class="form-check form-check-inline ml-3">
-                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
-                  <label class="form-check-label" for="">Yes</label>
+                  <input class="form-check-input" type="radio" name="featured" id="featured1" value="Yes">
+                  <label class="form-check-label" for="featured1">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="" id="" value="No">
-                  <label class="form-check-label" for="">No</label>
+                  <input class="form-check-input" type="radio" name="featured" id="featured2" value="No">
+                  <label class="form-check-label" for="featured2">No</label>
                 </div>
               </div>
             </div>
@@ -178,11 +178,11 @@
               <div class="form-group">
                 <label for="">Featured?&nbsp; </label>
                 <div class="form-check form-check-inline ml-3">
-                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
+                  <input class="form-check-input" type="radio" name="edit_featured" id="edit-featured1" value="Yes">
                   <label class="form-check-label" for="">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="" id="" value="No">
+                  <input class="form-check-input" type="radio" name="edit_featured" id="edit-featured2" value="No">
                   <label class="form-check-label" for="">No</label>
                 </div>
               </div>

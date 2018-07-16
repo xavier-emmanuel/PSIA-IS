@@ -26,7 +26,6 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::post('/job-vacancy/update', 'JobVacancyController@ajaxUpdate');
 	Route::post('/job-vacancy/create', 'JobVacancyController@ajaxStore');
 	Route::get('/job-vacancy/show', 'JobVacancyController@ajaxShow');
-});
 
 	Route::get('/user-profile', 'HRPagesController@profile');
 	Route::get('/hired-applicants', 'HRPagesController@hiredApplicants');
@@ -35,17 +34,17 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::get('/job-vacancy', 'HRPagesController@jobVacancy');
 	Route::get('/HR-dashboard', 'HRPagesController@dashboard');
 
-	Route::get('/check-email', 'RegisterController@checkEmail');
-	Route::get('/check-username', 'RegisterController@checkUsername');
-	Route::post('/register/store', 'RegisterController@ajaxStore');
-	Route::post('/account/verify', 'RegisterController@ajaxVerify');
-
 	Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 	Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');
 
 	Route::get('/hired-applicant-report', 'ReportsController@hiredApplicantReport');
+});
 
+Route::get('/check-email', 'RegisterController@checkEmail');
+Route::get('/check-username', 'RegisterController@checkUsername');
+Route::post('/register/store', 'RegisterController@ajaxStore');
+Route::post('/account/verify', 'RegisterController@ajaxVerify');
 
 Route::get('/verify-account/{username}', 'PagesController@verifyAccount');
 Route::get('/register', 'PagesController@register');

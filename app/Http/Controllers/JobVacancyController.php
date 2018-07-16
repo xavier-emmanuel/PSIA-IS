@@ -67,6 +67,12 @@ class JobVacancyController extends Controller
     		$job_vacancy->hiring_status = 0;
     	}
 
+        if(Input::get('featured') == 'Yes') {
+            $job_vacancy->featured = 1;
+        } elseif (Input::get('featured') == 'No') {
+            $job_vacancy->featured = 0;
+        }
+
     	$job_vacancy->updated_at = null;
     	$job_vacancy->save();
 
@@ -78,8 +84,8 @@ class JobVacancyController extends Controller
 
 	  	if($request->hasfile('edit_job_image')) {
 	  		$file = $request->edit_job_image;
-	      $image_name = time().$file->getClientOriginalName();
-				$file->move(public_path().'/uploads/job_vacancy/', $image_name);
+            $image_name = time().$file->getClientOriginalName();
+			$file->move(public_path().'/uploads/job_vacancy/', $image_name);
 
 	  		$job_vacancy->image = $image_name;
 	  	}
@@ -93,6 +99,12 @@ class JobVacancyController extends Controller
     	} elseif (Input::get('edit_hiring_status') == 'No') {
     		$job_vacancy->hiring_status = 0;
     	}
+
+        if(Input::get('edit_featured') == 'Yes') {
+            $job_vacancy->featured = 1;
+        } elseif (Input::get('edit_featured') == 'No') {
+            $job_vacancy->featured = 0;
+        }
 
 			$job_vacancy->save();
 
