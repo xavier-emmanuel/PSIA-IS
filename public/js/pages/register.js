@@ -81,8 +81,7 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (data) {
                     setTimeout(function () {
-                        var username = $('#username').val();
-                        window.location.href = '/verify-account/'+username;
+                        window.location.href = '/verify-account/'+data.username;
                     }, 2000);
                 },
                 error: function (xhr, error, ajaxOptions, thrownError) {
@@ -203,10 +202,12 @@ $(document).ready(function () {
                     }
                 },
                 password: {
-                    maxlength: 20
+                    maxlength: 20,
+                    required: true
                 },
                 retype_password: {
-                    equalTo: "#password"
+                    equalTo: "#password",
+                    required: true
                 }
             },
             messages: {
@@ -214,8 +215,12 @@ $(document).ready(function () {
                     required: 'Required field cannot be left blank.',
                     remote: 'This username already in used. Please choose different username.'
                 },
+                password: {
+                    required: 'Required field cannot be left blank.'
+                },
                 retype_password: {
-                    equalTo: 'Password did not match.'
+                    equalTo: 'Password did not match.',
+                    required: 'Required field cannot be left blank.'
                 }
             },
             highlight: function (element) {

@@ -29,6 +29,7 @@ class CreateAccountsTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->string('role');
             $table->string('image');
             $table->integer('verified');
             $table->string('v_code');

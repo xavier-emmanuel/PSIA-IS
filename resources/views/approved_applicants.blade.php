@@ -1,4 +1,4 @@
-@extends('layouts.hr_master')
+@extends('layouts.master')
 
 @section('stylesheets')
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/timepicker/tempusdominus-bootstrap-4.min.css' : '/vendors/timepicker/tempusdominus-bootstrap-4.min.css') }}">

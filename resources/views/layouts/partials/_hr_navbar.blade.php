@@ -40,15 +40,16 @@
           <ul class="navbar-nav">
             <li class="nav-item d-flex align-items-center">
               <img src="http://via.placeholder.com/50x50" alt="" class="rounded-circle">
+              {{-- <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ Auth::user()->image }}" alt="" class="rounded-circle"> --}}
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
-                  John D.
+                  {{ Auth::user()->first_name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="/user-profile">
                     <i class="fas fa-user-circle"></i>&nbsp; Profile</a>
-                  <a class="dropdown-item" href="index.html">
+                  <a class="dropdown-item" href="/logout">
                     <i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>
                 </div>
               </div>

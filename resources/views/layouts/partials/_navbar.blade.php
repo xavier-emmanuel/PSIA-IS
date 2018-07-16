@@ -11,25 +11,42 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
               <a class="nav-link" href="/">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('about') ? 'active' : '' }}" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
               <a class="nav-link" href="/about">About</a>
             </li>
-            <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
               <a class="nav-link" href="/contact">Contact Us</a>
             </li>
           </ul>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" style="display: {{ Auth::check() ? 'none' : '' }}">
             <li class="nav-item {{ Request::is('register') ? 'active' : '' }}">
               <a class="nav-link" href="/register">Register
               </a>
             </li>
-            <li class="nav-item">
-              <a class="btn btn-warning" data-toggle="modal" data-target="#login-modal">Login</a>
+            <li class="nav-item" style="display: {{ Auth::check() ? 'none' : '' }}">
+              <a class="btn btn-warning" data-toggle="modal" data-target="#login-modal" id="login-button">Login</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav" style="display: {{ Auth::check() ? 'block' : 'none' }}">
+            <li class="nav-item d-flex align-items-center">
+              <img src="http://via.placeholder.com/50x50" alt="" class="rounded-circle">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  {{ Auth::check() ? Auth::user()->first_name : '' }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/user-profile" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
+                    <i class="fas fa-user-circle"></i>&nbsp; Profile</a>
+                  <a class="dropdown-item" href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -40,34 +57,39 @@
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group text-center">
-              <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="Patton Security & Investigation Agency" width="100px" height="100px">
+          <form id="frm-login" name="fmr_login" action="/login" method="post">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="alert alert-danger" role="alert">
-              ERROR MESSAGE HERE. DO NOT REMOVE THIS --> Don't have an account?
-              <a href="register.html" class="alert-link">Register here.</a>
+            <div class="modal-body">
+              <div class="form-group text-center">
+                <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="Patton Security & Investigation Agency" width="100px" height="100px">
+              </div>
+              @if($errors->any())
+              <div class="alert alert-danger" role="alert" id="error">
+                <div class="text-center"><i class="fas fa-exclamation-triangle"></i> Invalid login credentials!</div>
+                <small>Don't have an account?&nbsp;<a href="/register" class="alert-link">Register here.</a></small>
+              </div>
+              @endif
+              <div class="form-group">
+                <label for="login-username">Username:</label>
+                <input type="text" name="login_username" id="login-username" class="form-control" placeholder="John Doe" autocomplete="off">
+                <div class="valid-feedback">Help text</div>
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password:</label>
+                <input type="password" name="login_password" id="login-password" class="form-control" placeholder="********">
+                <div class="valid-feedback">Help text</div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="login-username">Username:</label>
-              <input type="text" name="login_username" id="login-username" class="form-control" placeholder="John Doe">
-              <div class="valid-feedback">Help text</div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-warning btn-block" id="btn-login">LOGIN</button>
             </div>
-            <div class="form-group">
-              <label for="login-password">Password:</label>
-              <input type="password" name="login_password" id="login-password" class="form-control" placeholder="John Doe">
-              <div class="valid-feedback">Help text</div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning btn-block">Login</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

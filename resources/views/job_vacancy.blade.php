@@ -1,4 +1,4 @@
-@extends('layouts.hr_master')
+@extends('layouts.master')
 
 @section('stylesheets')
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/contents.css' : '/vendors/ckeditor/contents.css') }}">

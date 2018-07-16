@@ -23,12 +23,12 @@
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
-                  John D.
+                  {{ Auth::user()->first_name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="profile.html">
+                  <a class="dropdown-item" href="/user-profile">
                     <i class="fas fa-user-circle"></i>&nbsp; Profile</a>
-                  <a class="dropdown-item" href="index.html">
+                  <a class="dropdown-item" href="/logout">
                     <i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>
                 </div>
               </div>

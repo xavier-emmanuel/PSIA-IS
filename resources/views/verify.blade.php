@@ -20,8 +20,8 @@
           <div class="card-body">
             <p class="font-weight-bold">Enter the code you received via SMS:</p>
             <form action="frm-verify" id="frm-verify" name="frm_verify">
-              <input type="hidden" id="hdn-id" name="hdn_id" value="{{ $data->id }}">
-              <input type="hidden" id="hdn-code" name="hdn_code" value="{{ $data->v_code }}">
+              <input type="hidden" id="hdn-id" name="hdn_id" value="{{ Auth::user()->id }}">
+              <input type="hidden" id="hdn-code" name="hdn_code" value="{{ Auth::user()->v_code }}">
               {{ csrf_field() }}
               <div class="form-group">
                 <input type="number" class="form-control" name="verification_code" id="verification-code">

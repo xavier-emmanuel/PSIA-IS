@@ -1,4 +1,4 @@
-@extends('layouts.hr_master')
+@extends('layouts.master')
 
 @section('stylesheets')
   <style>

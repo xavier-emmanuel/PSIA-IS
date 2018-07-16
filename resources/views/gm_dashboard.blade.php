@@ -1,4 +1,4 @@
-@extends('layouts.gm_master')
+@extends('layouts.master')
 
 @section('stylesheets')
   <style>
