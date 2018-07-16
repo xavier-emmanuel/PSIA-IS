@@ -9,9 +9,8 @@ use PDF;
 class ReportsController extends Controller
 {
     public function hiredApplicantReport(Request $request) {
-        // Mag query ka lang digdi...
-        // Tapos sa baba kang $html duman ka mag loop
-        // Mag html concatenations ka $html .=
+        $hired = Applicant::where('hired', 1)->get();
+
         PDF::setHeaderCallback(function($pdf) {
             PDF::Image('img/patton-logo.png', 60, 13, 20, 'PNG');
             PDF::SetFont('dejavusans','', 13);
@@ -48,20 +47,20 @@ class ReportsController extends Controller
                         <td>Date Hired</td>
                     </tr>';
 
-        // LOOP HERE
+        foreach($hired as $row) {
         $html .= '<tr>
-                    <td>Name</td>
-                    <td>Position</td>
-                    <td>Present Address</td>
-                    <td>Contact</td>
-                    <td>Date of Birth</td>
-                    <td>Age</td>
-                    <td>Gender</td>
+                    <td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>
+                    <td>'.$row->jobVacancies->name.'</td>
+                    <td>'.$row->address.'</td>
+                    <td>'.$row->mobile.'</td>
+                    <td>'.$row->date_of_birth.'</td>
+                    <td>'.$row->age.'</td>
+                    <td>'.$row->gender.'</td>
                     <td>Status</td>
                     <td>Score</td>
                     <td>Date Hired</td>
                 </tr>';
-        // END LOOP
+        }
 
         $html .= '</table>';
 
