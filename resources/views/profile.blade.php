@@ -179,7 +179,12 @@
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="">Mobile #:</label>
-                  <input type="text" name="mobile" id="mobile" class="form-control" value="{{ Auth::user()->mobile }}" autocomplete="off">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">+63</div>
+                    </div>
+                    <input type="text" name="mobile" id="mobile" class="form-control" value="{{ str_replace('+63', '', Auth::user()->mobile) }}" autocomplete="off">
+                  </div>
                 </div>
               </div>
               <div class="col-lg-8 col-md-8 col-sm-12">

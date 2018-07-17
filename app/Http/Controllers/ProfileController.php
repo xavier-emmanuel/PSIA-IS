@@ -55,7 +55,7 @@ class ProfileController extends Controller
     public function ajaxUpdateContact(Request $request) {
     	$account = Register::find(Auth::id());
 
-    	$account->mobile = $request->mobile;
+    	$account->mobile = '+63'.$request->mobile;
     	$account->email = $request->email;
     	$account->address = $request->address;
     	$account->save();
