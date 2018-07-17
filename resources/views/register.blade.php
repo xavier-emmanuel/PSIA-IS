@@ -162,7 +162,7 @@
                   <div class="div-preview">
                     <label for="">Preview:</label>
                     <figure>
-                      <img class="border border-secondary" src="http://via.placeholder.com/192x192" id="image-preview" alt="" width="192px" height="192px"></figure>
+                      <img class="border" src="img/default_image.png" id="image-preview" alt="" width="192px" height="192px"></figure>
                   </div>
                 </div>
               </div>

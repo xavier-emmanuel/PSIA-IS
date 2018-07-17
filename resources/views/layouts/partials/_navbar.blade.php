@@ -34,7 +34,7 @@
           </ul>
           <ul class="navbar-nav" style="display: {{ Auth::check() ? 'block' : 'none' }}">
             <li class="nav-item d-flex align-items-center">
-              <img src="http://via.placeholder.com/50x50" alt="" class="rounded-circle">
+              <img src="img/default_image.png" alt="" class="rounded-circle" style="width: 50px; height: 50px; background-color: #fff;">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">

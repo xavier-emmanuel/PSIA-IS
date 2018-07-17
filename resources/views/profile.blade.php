@@ -36,7 +36,7 @@
               </div>
               <div class="card-body">
                 <div class="p-profile__image text-center">
-                  <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ Auth::user()->image }}" alt="{{ Auth::user()->first_name }}" width="150px" height="150px" class="img-thumbnail" id="image-preview">
+                  <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ Auth::user()->image }}" alt="{{ Auth::user()->first_name }}" class="img-thumbnail" id="image-preview" style="width: 150px; height: 150px;">
                 </div>
                 <div class="form-group">
                   <input type="file" class="form-control my-3" id="user-image" name="user_image">
