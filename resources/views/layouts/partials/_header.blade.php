@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/bootstrap/bootstrap.min.css' : '/vendors/bootstrap/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/fontawesome/css/fontawesome-all.min.css' : '/vendors/fontawesome/css/fontawesome-all.min.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/toast-master/css/jquery.toast.css' : '/vendors/toast-master/css/jquery.toast.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.min.css' : '/vendors/datatable/dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datatable/dataTables.bootstrap4.min.css' : '/vendors/datatable/dataTables.bootstrap4.min.css') }}">
 
   @yield('stylesheets')
 
