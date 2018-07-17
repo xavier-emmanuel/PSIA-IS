@@ -201,7 +201,10 @@ function updateContact() {
 	$('#frm-contact-details').validate({
 		rules: {
 			mobile: {
-				required: true
+				required: true,
+                minlength: 10,
+                maxlength: 10,
+                digits: true
 			},
 			email: {
 				required: true,
@@ -214,13 +217,31 @@ function updateContact() {
 		},
 		messages: {
 			mobile: {
-				required: 'Required field cannot be left blank.'
+				required: 'Required field cannot be left blank.',
+                minlength: 'Please enter at least 10 characters. Ex: 9123456789',
+                maxlength: 'Please enter at least 10 characters. Ex: 9123456789',
+                digits: 'Please enter a valid mobile number.'
 			},
 			email: {
 				required: 'Required field cannot be left blank.',
 				// remote: 'This email already in used. Please choose different email.'
 			},
 			address: 'Required field cannot be left blank.',
+		},
+		highlight: function(element) {
+			$(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+		},
+		unhighlight: function(element) {
+			$(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
+		},
+		errorElement: 'div',
+		errorClass: 'invalid-feedback',
+		errorPlacement: function(error, element) {
+			if (element.parent('.input-group').length) {
+				error.insertAfter(element.parent());
+			} else {
+				error.insertAfter(element);
+			}
 		},
 		submitHandler: function (frm_contact_details, e) {
 			e.preventDefault();

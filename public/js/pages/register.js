@@ -164,7 +164,7 @@ $(document).ready(function () {
                     required: 'Required field cannot be left blank.',
                     minlength: 'Please enter at least 10 characters. Ex: 9123456789',
                     maxlength: 'Please enter at least 10 characters. Ex: 9123456789',
-                    digits: 'Please enter your mobile number.'
+                    digits: 'Please enter a valid mobile number.'
                 },
                 age: "Required field cannot be left blank.",
                 address: "Required field cannot be left blank.",
