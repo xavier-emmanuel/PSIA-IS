@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Register;
+use App\JobVacancy;
 
 class PagesController extends Controller
 {
 		public function index() {
-			return view('index')->with(array('page' => 'Home'));
+			$featured_jobs = JobVacancy::where('featured', '=', 1)->get();
+			$jobs = JobVacancy::where([['featured', '=', 0], ['hiring_status', '=', 1] ])->get();
+			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'jobs' => $jobs));
 		}
 
 		public function about() {

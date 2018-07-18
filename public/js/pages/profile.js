@@ -61,6 +61,12 @@ function updatePhoto() {
 				success: function(data) {
 					$('#frm-photo')[0].reset();
 					$('#btn-update-photo').removeAttr('disabled', 'disabled').html('<i class="fas fa-upload"></i>&nbsp; Upload Photo')
+					
+					if (location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+						$('#user-image').attr('src', '/uploads/accounts/'+data.image);
+					} else {
+						$('#user-image').attr('src', '/public/uploads/accounts/'+data.image);
+					}
 
 					$.toast({
 						heading: 'Success!',
@@ -180,6 +186,7 @@ function updatePersonal() {
 				contentType: false,
 				success: function (data) {
 					$('#btn-update-personal').removeAttr('disabled', 'disabled').html('<i class="fas fa-save"></i>&nbsp; Save Changes')
+					$('#user-firstname').text(data.firstname);
 
 					$.toast({
 						heading: 'Success!',

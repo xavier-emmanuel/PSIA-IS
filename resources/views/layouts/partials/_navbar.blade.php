@@ -1,7 +1,7 @@
   <header class="p-header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{ Auth::check() ? Auth::user()->verified == 0 ? '#' : '/' : '/'}}">
           <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="Patton Security Investigation and Agency" width="100%">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -34,11 +34,11 @@
           </ul>
           <ul class="navbar-nav" style="display: {{ Auth::check() ? 'block' : 'none' }}">
             <li class="nav-item d-flex align-items-center">
-              <img src="img/default_image.png" alt="" class="rounded-circle" style="width: 50px; height: 50px; background-color: #fff;">
+              <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ Auth::check() ? Auth::user()->image : '' }}" alt="" class="rounded-circle" style="width: 50px; height: 50px; background-color: #fff;" id="user-image">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
-                  {{ Auth::check() ? Auth::user()->first_name : '' }}
+                  <span id="user-firstname">{{ Auth::check() ? Auth::user()->first_name : '' }}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="/user-profile" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
@@ -69,12 +69,10 @@
               <div class="form-group text-center">
                 <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="Patton Security & Investigation Agency" width="100px" height="100px">
               </div>
-              @if($errors->any())
               <div class="alert alert-danger" role="alert" id="error">
                 <div class="text-center"><i class="fas fa-exclamation-triangle"></i> Invalid login credentials!</div>
                 <small>Don't have an account?&nbsp;<a href="/register" class="alert-link">Register here.</a></small>
               </div>
-              @endif
               <div class="form-group">
                 <label for="login-username">Username:</label>
                 <input type="text" name="login_username" id="login-username" class="form-control" placeholder="John Doe" autocomplete="off">

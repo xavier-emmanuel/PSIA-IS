@@ -13,13 +13,13 @@ class ProfileController extends Controller
 
 	  	if($request->hasfile('user_image')) {
 	  		$file = $request->user_image;
-	      $image_name = time().$file->getClientOriginalName();
-				$file->move(public_path().'/uploads/accounts/', $image_name);
+            $image_name = time().$file->getClientOriginalName();
+			$file->move(public_path().'/uploads/accounts/', $image_name);
 
 	  		$account->image = $image_name;
-				$account->save();
+			$account->save();
 	  	}
-			return response()->json(['success'=>'Profile image has been successfully updated.']);
+		return response()->json(['success'=>'Profile image has been successfully updated.', 'image'=>$image_name]);
     }
 
     public function ajaxUpdateAccount(Request $request) {
@@ -29,11 +29,11 @@ class ProfileController extends Controller
    			$account->username = $request->username;   			
    		}
    		if(! $request->new_password == '') {
-		 		$account->password = bcrypt($request->new_password);   			
+		 	$account->password = bcrypt($request->new_password);   			
    		}
-			$account->save();
+		$account->save();
 
-			return response()->json(['success'=>'User credentials has been successfully updated.']);
+		return response()->json(['success'=>'User credentials has been successfully updated.']);
     }
 
     public function ajaxUpdatePersonal(Request $request) {
@@ -49,7 +49,7 @@ class ProfileController extends Controller
     	$account->place_of_birth = $request->place_of_birth;
     	$account->save();
 			
-			return response()->json(['success'=>'Personal details has been successfully updated.']);
+		return response()->json(['success'=>'Personal details has been successfully updated.', 'firstname' => $account->first_name]);
     }
 
     public function ajaxUpdateContact(Request $request) {
@@ -60,6 +60,6 @@ class ProfileController extends Controller
     	$account->address = $request->address;
     	$account->save();
 
-			return response()->json(['success'=>'Contact details has been successfully updated.']);
+		return response()->json(['success'=>'Contact details has been successfully updated.']);
     }
 }

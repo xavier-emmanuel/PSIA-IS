@@ -30,54 +30,33 @@
                 <div class="col-lg-9 col-md-9 col-sm-12">
                     <div class="card c-job-list__featured mb-4">
                         <div class="card-header bg-primary text-light">Featured Hiring</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Security Guard</h5>
-                            <p class="card-text">Job content here..</p>
-                            <button class="btn btn-sm btn-outline-primary"><i class="fas fa-check"></i>&nbsp; Apply</button>
-                        </div>
+                        @foreach($featured_jobs as $featured_job)
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $featured_job->name }}</h5>
+                                <p class="card-text">{!! $featured_job->description !!}</p>
+                                <a href="" style="display: {{ Auth::check() ? '' : 'none' }}"><button class="btn btn-sm btn-outline-primary"><i class="fas fa-check"></i>&nbsp; Apply</button></a>
+                                <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-check"></i>&nbsp; Apply</button>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="card c-job-list__urgent mb-4">
                         <div class="card-header bg-primary text-light">Urgent Hiring</div>
                         <div class="card-body p-0">
+                            @foreach($jobs as $job)
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex align-items-start">
-                                    <img src="img/patton-logo.png" alt="" class="border mr-2" width="80px">
+                                    <img src="{{ asset(App::environment('production') ? '/public/uploads/job_vacancy' : '/uploads/job_vacancy') }}/{{ $job->image }}" alt="" class="border mr-2" width="80px">
                                     <div class="flex-column w-100">
                                         <div class="d-flex justify-content-between">
-                                            <h5>asdas</h5>
+                                            <h5>{{ $job->name }}</h5>
                                             <small class="text-muted">3 days ago</small>
                                         </div>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nostrum quidem</p>
+                                        {!! $job->description !!}
                                         <a href="" class="btn btn-link p-0">Read more</a>
                                     </div>
                                 </li>
                             </ul>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex align-items-start">
-                                    <img src="img/patton-logo.png" alt="" class="border mr-2" width="80px">
-                                    <div class="flex-column w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h5>asdas</h5>
-                                            <small class="text-muted">3 days ago</small>
-                                        </div>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nostrum quidem</p>
-                                        <a href="" class="btn btn-link p-0">Read more</a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex align-items-start">
-                                    <img src="img/patton-logo.png" alt="" class="border mr-2" width="80px">
-                                    <div class="flex-column w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <h5>asdas</h5>
-                                            <small class="text-muted">3 days ago</small>
-                                        </div>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nostrum quidem</p>
-                                        <a href="" class="btn btn-link p-0">Read more</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
