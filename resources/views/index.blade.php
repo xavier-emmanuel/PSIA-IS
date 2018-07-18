@@ -49,7 +49,7 @@
                                     <div class="flex-column w-100">
                                         <div class="d-flex justify-content-between">
                                             <h5>{{ $job->name }}</h5>
-                                            <small class="text-muted">3 days ago</small>
+                                            <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
                                         </div>
                                         {!! $job->description !!}
                                         <a href="" class="btn btn-link p-0">Read more</a>
