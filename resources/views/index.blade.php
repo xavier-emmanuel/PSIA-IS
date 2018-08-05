@@ -51,7 +51,7 @@
                                             <h5>{{ $job->name }}</h5>
                                             <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
                                         </div>
-                                        {!! $job->description !!}
+                                        {!! str_limit($job->description, 200) !!}
                                         <a href="" class="btn btn-link p-0">Read more</a>
                                     </div>
                                 </li>
