@@ -14,10 +14,6 @@ class HRPagesController extends Controller
     	return view('job_vacancy')->with(array('page' => 'Job Vacancy'));
     }
 
-    public function applicants() {
-    	return view('applicants')->with(array('page' => 'Applicant List'));
-    }
-
     public function approvedApplicants() {
     	return view('approved_applicants')->with(array('page' => 'Approved Applicants'));
     }

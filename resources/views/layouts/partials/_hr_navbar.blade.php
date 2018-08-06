@@ -11,9 +11,13 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{ Request::is('HR-dashboard') ? 'active' : '' }}">
+              <a class="nav-link" href="/HR-dashboard">Dashboard
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
             <li class="nav-item {{ Request::is('job-vacancy') ? 'active' : '' }}">
               <a class="nav-link" href="/job-vacancy">Job Vacancy
-                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown {{ Request::is('applicants') || Request::is('hired-applicants') || Request::is('approved-applicants') ? 'active' : '' }}">
@@ -22,7 +26,6 @@
                 Applicants
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/applicants">Applicant Lists</a>
                 <a class="dropdown-item" href="/hired-applicants">Hired</a>
                 <a class="dropdown-item" href="/approved-applicants">Approved</a>
               </div>

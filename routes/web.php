@@ -30,7 +30,6 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::get('/user-profile', 'HRPagesController@profile');
 	Route::get('/hired-applicants', 'HRPagesController@hiredApplicants');
 	Route::get('/approved-applicants', 'HRPagesController@approvedApplicants');
-	Route::get('/applicants', 'HRPagesController@applicants');
 	Route::get('/job-vacancy', 'HRPagesController@jobVacancy');
 	Route::get('/HR-dashboard', 'HRPagesController@dashboard');
 
