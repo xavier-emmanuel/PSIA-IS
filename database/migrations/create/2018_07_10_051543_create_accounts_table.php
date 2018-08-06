@@ -36,8 +36,6 @@ class CreateAccountsTable extends Migration
             $table->integer('job_vacancy_id');
             $table->integer('approved');
             $table->integer('hired');
-            $table->timestamp('date_hired')->nullable();
-            $table->timestamp('date_approved')->nullable();
             $table->timestamps();
         });
     }
