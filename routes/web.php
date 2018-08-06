@@ -48,7 +48,10 @@ Route::post('/account/verify', 'RegisterController@ajaxVerify');
 
 Route::get('/verify-account/{username}', 'PagesController@verifyAccount');
 Route::get('/register', 'PagesController@register');
+
 Route::get('/contact', 'PagesController@contact');
+Route::post('/contact/send', 'ContactController@contactSend');
+
 Route::get('/about', 'PagesController@about');
 Route::get('/', 'PagesController@index');
 
