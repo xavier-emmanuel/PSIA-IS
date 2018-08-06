@@ -34,8 +34,7 @@ $(document).ready(function() {
         months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
 
-        var formattedTime = now.getHours() + ':' + now.getMinutes();
-
+        var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
         $('#hdn-id').val(id);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
