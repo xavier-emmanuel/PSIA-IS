@@ -32,9 +32,12 @@
                         <div class="card-header bg-primary text-light">Featured Hiring</div>
                         @foreach($featured_jobs as $featured_job)
                             <div class="card-body">
-                                <h5 class="card-title">{{ $featured_job->name }}</h5>
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="card-title">{{ $featured_job->name }}</h4>
+                                    <small class="text-muted">{{ $featured_job->created_at->diffForHumans() }}</small>
+                                </div>
                                 <p class="card-text">{!! $featured_job->description !!}</p>
-                                <a href="" style="display: {{ Auth::check() ? '' : 'none' }}"><button class="btn btn-sm btn-outline-primary"><i class="fas fa-check"></i>&nbsp; Apply</button></a>
+                                <a href="" style="display: {{ Auth::check() ? '' : 'none' }}"><button class="btn btn-outline-primary"><i class="fas fa-briefcase"></i>&nbsp; Apply</button></a>
                                 <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-check"></i>&nbsp; Apply</button>
                             </div>
                         @endforeach
@@ -48,14 +51,14 @@
                                     <img src="{{ asset(App::environment('production') ? '/public/uploads/job_vacancy' : '/uploads/job_vacancy') }}/{{ $job->image }}" alt="" class="border mr-2" width="80px">
                                     <div class="flex-column w-100">
                                         <div class="d-flex justify-content-between">
-                                            <h5>{{ $job->name }}</h5>
+                                            <h4 class="card-title">{{ $job->name }}</h4>
                                             <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
                                         </div>
                                         <div class="flex-column w-100">
                                             <div>
                                                 {!! str_limit($job->description, 200) !!}
                                             </div>
-                                            <a href="" class="btn btn-link p-0">Read more</a>
+                                            <button class="btn btn-link p-0" data-toggle="modal" data-target="#job-modal">Read more</button>
                                         </div>
                                     </div>
                                 </li>
@@ -70,6 +73,26 @@
             </div>
         </section>
     </main>
+
+    <!-- Job Modal -->
+    <div class="modal fade" id="job-modal" tabindex="-1" role="dialog" aria-labelledby="job-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="job-modal">Job Title Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Job Description Here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary btn-lg"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
 	<script>
