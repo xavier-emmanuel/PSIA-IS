@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Applicant;
+use App\JobVacancy;
 
 class HRPagesController extends Controller
 {
     public function dashboard() {
-    	return view('hr_dashboard')->with(array('page' => 'Dashboard'));
+        $approved = Applicant::where('approved', 1)->count();
+        $hired = Applicant::where('hired', 1)->count();
+        $job = JobVacancy::where('no_of_vacancy', '!=', 0)->count();
+    	return view('hr_dashboard')->with(array('page' => 'Dashboard', 'approved' => $approved, 'hired' => $hired, 'job' => $job));
     }
 
     public function jobVacancy() {
