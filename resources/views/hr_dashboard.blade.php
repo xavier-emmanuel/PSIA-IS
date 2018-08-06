@@ -66,6 +66,8 @@
     </section>
 
     <section class="mt-5">
+      <h2 class="text-center">Applicant Lists</h2>
+      <hr class="line">
       <table id="tbl-applicant" class="table table-hover ">
         <thead>
           <th>#</th>
