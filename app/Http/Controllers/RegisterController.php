@@ -46,7 +46,7 @@ class RegisterController extends Controller
 
 			$register = new Register();
 
-	    $register->first_name = $input['first_name'];
+	    	$register->first_name = $input['first_name'];
 			$register->middle_name = $input['middle_name'];
 			$register->last_name = $input['last_name'];
 			$register->email = $input['email'];
@@ -66,13 +66,15 @@ class RegisterController extends Controller
 			$register->job_vacancy_id = 0;
 			$register->approved = 0;
 			$register->hired = 0;
+			$register->date_hired = null;
+			$register->date_approved = null;
 			$register->updated_at = null;
 
 			$register->save();
 
 			$credentials = array(
-	    'username' => $input['username'],
-	    'password' => $input['password']
+		    'username' => $input['username'],
+		    'password' => $input['password']
 			);
 
 			if (Auth::attempt($credentials)) {
@@ -86,6 +88,8 @@ class RegisterController extends Controller
 		$account = Register::findOrFail($input['hdn_id']);
 
 		$account->verified = 1;
+		$account->date_hired = null;
+		$account->date_approved = null;
 
 		$account->save();
 

@@ -34,6 +34,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/hired-applicant-report" target="_blank">Hired Applicants</a>
+                <a class="dropdown-item" href="/approved-applicant-report" target="_blank">Approved Applicants</a>
               </div>
             </li>
           </ul>

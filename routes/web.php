@@ -39,6 +39,7 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');
 
 	Route::get('/hired-applicant-report', 'ReportsController@hiredApplicantReport');
+	Route::get('/approved-applicant-report', 'ReportsController@approvedApplicantReport');
 });
 
 Route::get('/check-email', 'RegisterController@checkEmail');
