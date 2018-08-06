@@ -89,7 +89,7 @@ class ReportsController extends Controller
        });
 
         PDF::SetMargins(10, 10, 10, 10);
-        PDF::SetTitle('Hired Applicants');
+        PDF::SetTitle('Approved Applicants');
         PDF::AddPage('L', 'A4');
         PDF::Ln(40);
         PDF::SetFont('dejavusans','', 15);
