@@ -177,8 +177,6 @@
       $('#btn-set-interview').on('click', function () {
         $('#applicant-profile').modal('hide');
         $('#applicant-profile').on('hidden.bs.modal', function () {
-          $('#frm-set-interview').trigger('reset');
-          $('#frm-set-interview').validate().resetForm();
           $('#set-interview').modal('show');
         });
       });

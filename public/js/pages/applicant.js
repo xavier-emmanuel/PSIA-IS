@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $('#applicant-profile').on('show.bs.modal', function(e) {
+        $('#frm-set-interview').trigger('reset');
+        $('#frm-set-interview').validate().resetForm();
         var id = $(e.relatedTarget).data('id');
         var image = $(e.relatedTarget).data('image');
         var name = $(e.relatedTarget).data('name');
