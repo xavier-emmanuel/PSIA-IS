@@ -39,9 +39,10 @@ $(document).ready(function() {
             months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
             var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-            $('#btn-set-interview').html('Interview Details')
+            $('#setInterviewLabel').html('Interview Details');
+            $('#btn-set-interview').html('Interview Details');
             $('#frm-set-interview :input').attr('readonly','readonly');
-            $('.btn-save').hide();
+            $('.btn-save').html('Update');
         } else {
             var formattedDate = 'N/A';
             var formattedTime = 'N/A';
@@ -93,7 +94,11 @@ $(document).ready(function() {
         },
         submitHandler: function(frm_add_job_vacancy, e) {
             e.preventDefault();
-            $('.btn-save').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving')
+            if($.trim($(".btn-save").html()) == 'Save') {
+                $('.btn-save').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving');
+            } else if($.trim($(".btn-save").html()) == 'Update') {
+                $('.btn-save').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Updating');
+            }
             var data = new FormData($("#frm-set-interview")[0]);
 
             $.ajax({
