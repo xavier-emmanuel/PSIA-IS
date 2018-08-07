@@ -112,11 +112,22 @@ $(document).ready(function() {
                     $('#tbl-applicant').DataTable().ajax.reload(null, false);
                     $('#frm-set-interview')[0].reset();
                     $('#set-interview').modal('hide');
-                    $('.btn-save').removeAttr('disabled', 'disabled').html('Save');
+
+                    if($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving') {
+                        $('.btn-save').removeAttr('disabled', 'disabled').html('Save');
+                    } else if($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Updating') {
+                        $('.btn-save').removeAttr('disabled', 'disabled').html('Update');
+                    }
+                    
+                    if($.trim($(".btn-save").html()) == 'Save') {
+                        var message = data.success;
+                    } else if($.trim($(".btn-save").html()) == 'Update') {
+                        var message = 'Interview details has been successfully updated.';
+                    }
 
                     $.toast({
                         heading: 'Success!',
-                        text: data.success,
+                        text: message,
                         position: 'top-right',
                         icon: 'success',
                         hideAfter: 3500,
