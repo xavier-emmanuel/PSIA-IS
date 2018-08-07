@@ -89,27 +89,27 @@
             </div>
             <dl class="row">
               <dt class="col-sm-4">Name:</dt>
-              <dd class="col-sm-8" id="name">John Doe</dd>
+              <dd class="col-sm-8" id="name"></dd>
               <dt class="col-sm-4">Applying for:</dt>
-              <dd class="col-sm-8" id="job">Security Guard</dd>
+              <dd class="col-sm-8" id="job"></dd>
               <dt class="col-sm-4">Age:</dt>
-              <dd class="col-sm-8" id="age">23</dd>
+              <dd class="col-sm-8" id="age"></dd>
               <dt class="col-sm-4">Gender:</dt>
-              <dd class="col-sm-8" id="gender">Male</dd>
+              <dd class="col-sm-8" id="gender"></dd>
               <dt class="col-sm-4">Address:</dt>
-              <dd class="col-sm-8" id="address">#23 P-3 example address, Legazpi City</dd>
+              <dd class="col-sm-8" id="address"></dd>
               <dt class="col-sm-4">Contact Number:</dt>
-              <dd class="col-sm-8" id="mobile">+639xx-xxx-xxxx</dd>
+              <dd class="col-sm-8" id="mobile"></dd>
               <dt class="col-sm-4">Interview Date:</dt>
-              <dd class="col-sm-8" id="interview-date">July 10, 2018</dd>
+              <dd class="col-sm-8" id="interview-date"></dd>
               <dt class="col-sm-4">Inteview Time:</dt>
-              <dd class="col-sm-8" id="interview-time">09:00 AM</dd>
+              <dd class="col-sm-8" id="interview-time"></dd>
               <dt class="col-sm-4">Result:</dt>
               <dd class="col-sm-8" id="result">Hired</dd>
               <dt class="col-sm-4">Training Date:</dt>
-              <dd class="col-sm-8" id="training-date">August 17, 2018 09:00 AM</dd>
+              <dd class="col-sm-8" id="training-date"></dd>
               <dt class="col-sm-4">Date Hired:</dt>
-              <dd class="col-sm-8" id="date-hired">July 10, 2018</dd>
+              <dd class="col-sm-8" id="date-hired"></dd>
             </dl>
           </div>
           <div class="modal-footer">
@@ -136,17 +136,17 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="">Title:</label>
-                <input type="text" name="interview_title" id="" class="form-control" placeholder="Interview">
+                <input type="text" name="interview_title" id="interview-title" class="form-control" placeholder="Interview">
                 <div class="valid-feedback">Help text</div>
               </div>
               <div class="form-group">
                 <label for="">Message:</label>
-                <textarea name="interview_message" id="" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+                <textarea name="interview_message" id="interview-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
                 <div class="valid-feedback">Help text</div>
               </div>
               <div class="form-group">
                 <label for="">Date &amp; Time:</label>
-                <input type="text" name="interview_date" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
+                <input type="text" name="interview_date" class="form-control datetimepicker-input interview-date" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
                 />
                 <div class="valid-feedback">Help text</div>
               </div>

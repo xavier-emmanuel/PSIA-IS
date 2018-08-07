@@ -8,6 +8,8 @@ $(document).ready(function() {
         var gender = $(e.relatedTarget).data('gender');
         var address = $(e.relatedTarget).data('address');
         var mobile = $(e.relatedTarget).data('mobile');
+        var interview_title = $(e.relatedTarget).data('interview-title');
+        var interview_message = $(e.relatedTarget).data('interview-message');
         var interview_date = $(e.relatedTarget).data('interview-date');
         var interview_time = $(e.relatedTarget).data('interview-time');
         var result = $(e.relatedTarget).data('result');
@@ -30,11 +32,16 @@ $(document).ready(function() {
             date_hired = 'N/A';
         }
 
-        var now = new Date(interview_date);
-        months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
+        if (interview_date !== 'N/A') {
+            var now = new Date(interview_date);
+            months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
+            var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        } else {
+            var formattedDate = 'N/A';
+            var formattedTime = 'N/A';
+        }
 
-        var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
         $('#hdn-id').val(id);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
@@ -48,6 +55,9 @@ $(document).ready(function() {
         $('#result').html(result);
         $('#training-date').html(training_date);
         $('#date-hired').html(date_hired);
+        $('#interview-title').val(interview_title);
+        $('#interview-message').val(interview_message);
+        $('.interview-date').val(interview_date);
     });
 
     $("#frm-set-interview").validate({

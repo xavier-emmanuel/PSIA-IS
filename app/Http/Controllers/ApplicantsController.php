@@ -31,7 +31,7 @@ class ApplicantsController extends Controller
             $age = '<td>'.$row->age.'</td>';
             $gender = '<td>'.$row->gender.'</td>';
             $button = '<td>
-                        <button class="btn btn-info " title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'">
+                        <button class="btn btn-info " title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'">
                           <i class="fas fa-eye "></i>
                         </button>
                       </td>';
