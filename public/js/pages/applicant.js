@@ -57,7 +57,7 @@ $(document).ready(function() {
         $('#date-hired').html(date_hired);
         $('#interview-title').val(interview_title);
         $('#interview-message').val(interview_message);
-        $('.interview-date').val(interview_date);
+        $('.interview-date').val($(e.relatedTarget).data('interview-date'));
     });
 
     $("#frm-set-interview").validate({
