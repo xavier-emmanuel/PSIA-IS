@@ -39,6 +39,9 @@ $(document).ready(function() {
             months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
             var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            $('#btn-set-interview').html('Interview Details')
+            $('#frm-set-interview :input').attr('readonly','readonly');
+            $('.btn-save').hide();
         } else {
             var formattedDate = 'N/A';
             var formattedTime = 'N/A';
@@ -104,7 +107,7 @@ $(document).ready(function() {
                     $('#tbl-applicant').DataTable().ajax.reload(null, false);
                     $('#frm-set-interview')[0].reset();
                     $('#set-interview').modal('hide');
-                    $('.btn-save').removeAttr('disabled', 'disabled').html('Save')
+                    $('.btn-save').removeAttr('disabled', 'disabled').html('Save');
 
                     $.toast({
                         heading: 'Success!',
