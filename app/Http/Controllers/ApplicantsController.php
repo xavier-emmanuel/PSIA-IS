@@ -21,7 +21,7 @@ class ApplicantsController extends Controller
             } else if ($row->hired == 0 && $row->approved == 1) {
               $result = 'Approved';
             } else {
-              $result = 'N/A';
+              $result = '';
             }
 
             $id = '<td>'.$row->id.'</td>';

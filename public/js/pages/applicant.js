@@ -1,47 +1,61 @@
-$(document).ready(function() {
-    $('#applicant-profile').on('show.bs.modal', function(e) {
+$(document).ready(function () {
+    $('#applicant-profile').on('show.bs.modal', function (e) {
         $('#frm-set-interview').trigger('reset');
         $('#frm-set-interview').validate().resetForm();
-        var id = $(e.relatedTarget).data('id');
-        var image = $(e.relatedTarget).data('image');
-        var name = $(e.relatedTarget).data('name');
-        var job = $(e.relatedTarget).data('job');
-        var age = $(e.relatedTarget).data('age');
-        var gender = $(e.relatedTarget).data('gender');
-        var address = $(e.relatedTarget).data('address');
-        var mobile = $(e.relatedTarget).data('mobile');
-        var interview_title = $(e.relatedTarget).data('interview-title');
-        var interview_message = $(e.relatedTarget).data('interview-message');
-        var interview_date = $(e.relatedTarget).data('interview-date');
-        var interview_time = $(e.relatedTarget).data('interview-time');
-        var result = $(e.relatedTarget).data('result');
-        var training_date = $(e.relatedTarget).data('training-date');
-        var date_hired = $(e.relatedTarget).data('date-hired');
+        var id = $(e.relatedTarget).data('id'),
+            image = $(e.relatedTarget).data('image'),
+            name = $(e.relatedTarget).data('name'),
+            job = $(e.relatedTarget).data('job'),
+            age = $(e.relatedTarget).data('age'),
+            gender = $(e.relatedTarget).data('gender'),
+            address = $(e.relatedTarget).data('address'),
+            mobile = $(e.relatedTarget).data('mobile'),
+            interview_title = $(e.relatedTarget).data('interview-title'),
+            interview_message = $(e.relatedTarget).data('interview-message'),
+            interview_date = $(e.relatedTarget).data('interview-date'),
+            interview_time = $(e.relatedTarget).data('interview-time'),
+            result = $(e.relatedTarget).data('result'),
+            training_date = $(e.relatedTarget).data('training-date'),
+            date_hired = $(e.relatedTarget).data('date-hired');
 
         if (interview_date == '') {
             interview_date = 'N/A';
+            $('.dd-interview-date').addClass("d-none");
+            $('.interview-field').addClass("d-none");
         }
 
         if (interview_time == '') {
             interview_time = 'N/A';
+            $('.dd-interview-time').addClass("d-none");
         }
 
         if (training_date == '') {
             training_date = 'N/A';
+            $('.dd-training-date').addClass("d-none");
         }
 
         if (date_hired == '') {
             date_hired = 'N/A';
+            $('.dd-date-hired').addClass("d-none");
+        }
+
+        if (result == '') {
+            result = 'N/A';
+            $('.dd-result').addClass("d-none");
         }
 
         if (interview_date !== 'N/A') {
             var now = new Date(interview_date);
-            months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             var formattedDate = months[now.getMonth()] + ' ' + now.getDate() + ", " + now.getFullYear();
-            var formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            var formattedTime = now.toLocaleString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
             $('#setInterviewLabel').html('Interview Details');
             $('#btn-set-interview').html('Interview Details');
-            $('#frm-set-interview :input').attr('readonly','readonly');
+            $('#frm-set-interview :input').attr('readonly', 'readonly');
             $('.btn-save').html('Update');
         } else {
             var formattedDate = 'N/A';
@@ -85,18 +99,18 @@ $(document).ready(function() {
             interview_message: 'Required field cannot be left blank.',
             interview_date: 'Required field cannot be left blank.'
         },
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             if (element.is(":radio")) {
                 error.appendTo(element.parents('.form-group'));
             } else {
                 error.insertAfter(element);
             }
         },
-        submitHandler: function(frm_add_job_vacancy, e) {
+        submitHandler: function (frm_add_job_vacancy, e) {
             e.preventDefault();
-            if($.trim($(".btn-save").html()) == 'Save') {
+            if ($.trim($(".btn-save").html()) == 'Save') {
                 $('.btn-save').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving');
-            } else if($.trim($(".btn-save").html()) == 'Update') {
+            } else if ($.trim($(".btn-save").html()) == 'Update') {
                 $('.btn-save').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Updating');
             }
             var data = new FormData($("#frm-set-interview")[0]);
@@ -108,20 +122,20 @@ $(document).ready(function() {
                 dataType: 'json',
                 processData: false,
                 contentType: false,
-                success: function(data) {
+                success: function (data) {
                     $('#tbl-applicant').DataTable().ajax.reload(null, false);
                     $('#frm-set-interview')[0].reset();
                     $('#set-interview').modal('hide');
 
-                    if($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving') {
+                    if ($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Saving') {
                         $('.btn-save').removeAttr('disabled', 'disabled').html('Save');
-                    } else if($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Updating') {
+                    } else if ($.trim($(".btn-save").html()) == '<i class="fas fa-spinner fa-spin"></i>&nbsp; Updating') {
                         $('.btn-save').removeAttr('disabled', 'disabled').html('Update');
                     }
-                    
-                    if($.trim($(".btn-save").html()) == 'Save') {
+
+                    if ($.trim($(".btn-save").html()) == 'Save') {
                         var message = data.success;
-                    } else if($.trim($(".btn-save").html()) == 'Update') {
+                    } else if ($.trim($(".btn-save").html()) == 'Update') {
                         var message = 'Interview details has been successfully updated.';
                     }
 
@@ -134,7 +148,7 @@ $(document).ready(function() {
                         stack: 6
                     });
                 },
-                error: function(xhr, error, ajaxOptions, thrownError) {
+                error: function (xhr, error, ajaxOptions, thrownError) {
                     alert(xhr.responseText);
                 }
             });

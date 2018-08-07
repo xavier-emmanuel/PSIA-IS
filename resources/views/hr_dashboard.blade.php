@@ -100,16 +100,16 @@
               <dd class="col-sm-8" id="address"></dd>
               <dt class="col-sm-4">Contact Number:</dt>
               <dd class="col-sm-8" id="mobile"></dd>
-              <dt class="col-sm-4">Interview Date:</dt>
-              <dd class="col-sm-8" id="interview-date"></dd>
-              <dt class="col-sm-4">Inteview Time:</dt>
-              <dd class="col-sm-8" id="interview-time"></dd>
-              <dt class="col-sm-4">Result:</dt>
-              <dd class="col-sm-8" id="result">Hired</dd>
-              <dt class="col-sm-4">Training Date:</dt>
-              <dd class="col-sm-8" id="training-date"></dd>
-              <dt class="col-sm-4">Date Hired:</dt>
-              <dd class="col-sm-8" id="date-hired"></dd>
+              <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
+              <dd class="col-sm-8 dd-interview-date" id="interview-date"></dd>
+              <dt class="col-sm-4 dd-interview-time">Inteview Time:</dt>
+              <dd class="col-sm-8 dd-interview-time" id="interview-time"></dd>
+              <dt class="col-sm-4 dd-result">Result:</dt>
+              <dd class="col-sm-8 dd-result" id="result">Hired</dd>
+              <dt class="col-sm-4 dd-training-date">Training Date:</dt>
+              <dd class="col-sm-8 dd-training-date" id="training-date"></dd>
+              <dt class="col-sm-4 dd-date-hired">Date Hired:</dt>
+              <dd class="col-sm-8 dd-date-hired" id="date-hired"></dd>
             </dl>
           </div>
           <div class="modal-footer">
@@ -137,18 +137,37 @@
               <div class="form-group">
                 <label for="">Title:</label>
                 <input type="text" name="interview_title" id="interview-title" class="form-control" placeholder="Interview">
-                <div class="valid-feedback">Help text</div>
               </div>
               <div class="form-group">
                 <label for="">Message:</label>
                 <textarea name="interview_message" id="interview-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
-                <div class="valid-feedback">Help text</div>
               </div>
               <div class="form-group">
                 <label for="">Date &amp; Time:</label>
                 <input type="text" name="interview_date" class="form-control datetimepicker-input interview-date" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
                 />
-                <div class="valid-feedback">Help text</div>
+              </div>
+              <div class="form-group interview-field">
+                <label for="">Interviewed?</label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
+                  <label class="form-check-label" for="">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="" id="" value="No">
+                  <label class="form-check-label" for="">No</label>
+                </div>
+              </div>
+              <div class="form-group interview-field">
+                <label for="">Score:</label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="" id="" value="Passed">
+                  <label class="form-check-label" for="">Passed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="" id="" value="Failed">
+                  <label class="form-check-label" for="">Failed</label>
+                </div>
               </div>
             </div>
             <div class="modal-footer">
