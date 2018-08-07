@@ -19,6 +19,6 @@ class InterviewController extends Controller
 		$interview->date_approved = null;
 		$interview->save();
 
-		return response()->json(['success'=> 'Success!']);
+		return response()->json(['success'=> 'You have successfully set an interview.']);
     }
 }
