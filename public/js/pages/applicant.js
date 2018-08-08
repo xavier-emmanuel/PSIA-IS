@@ -17,6 +17,8 @@ $(document).ready(function () {
             result = $(e.relatedTarget).data('result'),
             training_date = $(e.relatedTarget).data('training-date'),
             date_hired = $(e.relatedTarget).data('date-hired');
+            interviewed = $(e.relatedTarget).data('interviewed'),
+            score = $(e.relatedTarget).data('score');
 
         if (interview_date == '') {
             interview_date = 'N/A';
@@ -44,6 +46,14 @@ $(document).ready(function () {
             $('.dd-result').addClass("d-none");
         }
 
+        if (interviewed == 1) {
+            $('#interviewed-yes').prop('checked', true);
+            $('#interviewed-no').prop('checked', false);
+        } else {
+            $('#interviewed-yes').prop('checked', false);
+            $('#interviewed-no').prop('checked', true);
+        }
+
         if (interview_date !== 'N/A') {
             var now = new Date(interview_date);
             months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -53,6 +63,9 @@ $(document).ready(function () {
                 minute: 'numeric',
                 hour12: true
             });
+            $('.dd-interview-date').removeClass("d-none");
+            $('.interview-field').removeClass("d-none");
+            $('.dd-interview-time').removeClass("d-none");
             $('#setInterviewLabel').html('Interview Details');
             $('#btn-set-interview').html('Interview Details');
             $('#frm-set-interview :input').attr('readonly', 'readonly');

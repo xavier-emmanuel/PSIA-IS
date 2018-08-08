@@ -150,23 +150,12 @@
               <div class="form-group interview-field">
                 <label for="">Interviewed?</label>
                 <div class="form-check form-check-inline ml-3">
-                  <input class="form-check-input" type="radio" name="" id="" value="Yes">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-yes" value="1">
                   <label class="form-check-label" for="">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="" id="" value="No">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-no" value="0" checked="checked">
                   <label class="form-check-label" for="">No</label>
-                </div>
-              </div>
-              <div class="form-group interview-field">
-                <label for="">Score:</label>
-                <div class="form-check form-check-inline ml-3">
-                  <input class="form-check-input" type="radio" name="" id="" value="Passed">
-                  <label class="form-check-label" for="">Passed</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="" id="" value="Failed">
-                  <label class="form-check-label" for="">Failed</label>
                 </div>
               </div>
             </div>

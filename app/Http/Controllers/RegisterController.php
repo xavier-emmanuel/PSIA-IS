@@ -66,6 +66,7 @@ class RegisterController extends Controller
 			$register->job_vacancy_id = 0;
 			$register->approved = 0;
 			$register->hired = 0;
+			$register->interviewed = 0;
 			$register->date_hired = null;
 			$register->date_approved = null;
 			$register->updated_at = null;
