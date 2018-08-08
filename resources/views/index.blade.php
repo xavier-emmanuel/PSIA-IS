@@ -28,7 +28,7 @@
         <section class="c-job-list container">
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-12">
-                    <div class="card c-job-list__featured mb-4">
+                    <div class="card c-job-list__featured mb-4" style="display: {{ $featured_jobs->count() == 0 ? 'none' : ''}}">
                         <div class="card-header bg-primary text-light">Featured Hiring</div>
                         @foreach($featured_jobs as $featured_job)
                             <div class="card-body">
@@ -42,7 +42,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="card c-job-list__urgent mb-4">
+                    <div class="card c-job-list__urgent mb-4" style="display: {{ $jobs->count() == 0 ? 'none' : ''}}">
                         <div class="card-header bg-primary text-light">Urgent Hiring</div>
                         <div class="card-body p-0">
                             @foreach($jobs as $job)
@@ -58,7 +58,7 @@
                                             <div>
                                                 {!! str_limit($job->description, 200) !!}
                                             </div>
-                                            <button class="btn btn-link p-0" data-toggle="modal" data-target="#job-modal">Read more</button>
+                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-job-id="{{ $job->id }}" data-job-name="{{ $job->name }}" data-job-description="{{ $job->description }}" data-job-vacancy="{{ $job->no_of_vacancy }}" data-job-image="{{ $job->image }}" data-job-time="{{ $job->created_at->diffForHumans() }}">Read more</button>
                                         </div>
                                     </div>
                                 </li>
@@ -79,16 +79,15 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="job-modal">Job Title Here</h5>
+                <h5 class="modal-title" id="job-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Job Description Here
+            <div class="modal-body" id="job-description">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary btn-lg"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-primary btn-lg" id="btn-apply"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
             </div>
             </div>
         </div>
@@ -109,4 +108,5 @@
             }
     });
 	</script>
+    <script src="{{ asset(App::environment('production') ? '/public/js/pages/apply.js' : '/js/pages/apply.js') }}"></script>
 @endsection
