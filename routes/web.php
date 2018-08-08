@@ -35,6 +35,8 @@ Route::group( [ 'middleware' => 'auth' ], function()
 
 	Route::post('/set-interview', 'InterviewController@setInterview');
 
+	Route::post('/approve-applicant', 'ApprovalController@approveApplicant');
+
 	Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 	Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');

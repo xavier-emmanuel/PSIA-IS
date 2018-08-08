@@ -78,4 +78,38 @@ $(document).ready(function () {
         $('#date-hired').html(date_hired);
         $('#score').html(score);
     });
+
+    $("#frm-approve-applicant").unbind('submit').on('submit', function (event) {
+        event.preventDefault();
+
+        var data = new FormData($("#frm-approve-applicant")[0]);
+
+        $('#btn-approve').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Approving');
+
+        $.ajax({
+            url: '/approve-applicant',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $('#btn-approve').removeAttr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Approve');
+
+                $('#applicant-profile').modal('hide');
+                $('#tbl-evaluated-applicants').DataTable().ajax.reload(null, false);
+
+                $.toast({
+                    heading: 'Success',
+                    text: data.success,
+                    position: 'top-right',
+                    icon: 'success',
+                    hideAfter: 3500
+                });
+            },
+            error: function (xhr, error, ajaxOptions, thrownError) {
+                alert(xhr.responseText);
+            }
+        });
+    });
 });
