@@ -102,7 +102,7 @@
               <dd class="col-sm-8" id="mobile"></dd>
               <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
               <dd class="col-sm-8 dd-interview-date" id="interview-date"></dd>
-              <dt class="col-sm-4 dd-interview-time">Inteview Time:</dt>
+              <dt class="col-sm-4 dd-interview-time">Interview Time:</dt>
               <dd class="col-sm-8 dd-interview-time" id="interview-time"></dd>
               <dt class="col-sm-4 dd-result">Result:</dt>
               <dd class="col-sm-8 dd-result" id="result">Hired</dd>
