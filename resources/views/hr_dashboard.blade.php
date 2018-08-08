@@ -172,7 +172,7 @@
 @section('scripts')
   <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/moment.js' : '/vendors/timepicker/moment.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/tempusdominus-bootstrap-4.min.js' : '/vendors/timepicker/tempusdominus-bootstrap-4.min.js') }}"></script>
-  <script src="{{ asset(App::environment('production') ? '/public/js/pages/applicant.js' : '/js/pages/applicant.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/hr-applicant.js' : '/js/pages/hr-applicant.js') }}"></script>
   <script>
     $(document).ready(function () {
       $('#tbl-applicant').DataTable({
