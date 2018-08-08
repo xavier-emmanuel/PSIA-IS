@@ -117,7 +117,7 @@ class ReportsController extends Controller
         if (empty($row->date_approved)) {
             $date_approved = '';
         } else {
-            $date_approved = $row->date_approved->format('F d, Y h:i A');
+            $date_approved = Carbon::parse($row->date_approved)->format('F d, Y h:i A');
         }
         $html .= '<tr>
                     <td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>
@@ -128,7 +128,7 @@ class ReportsController extends Controller
                     <td>'.$row->age.'</td>
                     <td>'.$row->gender.'</td>
                     <td>Approved</td>
-                    <td>Score</td>
+                    <td>'.$row->score.'</td>
                     <td>'.$date_approved.'</td>
                 </tr>';
         }
