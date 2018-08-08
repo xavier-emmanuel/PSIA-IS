@@ -80,7 +80,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset(App::environment('production') ? '/public/js/pages/gm-applicant.js' : '/js/pages/gm-applicant.js') }}"></script>
+<script src="{{ asset(App::environment('production') ? '/public/js/pages/gm_applicant.js' : '/js/pages/gm_applicant.js') }}"></script>
   <script>
     $(document).ready(function() {
       $('#tbl-evaluated-applicants').DataTable({
