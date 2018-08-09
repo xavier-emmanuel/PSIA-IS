@@ -75,6 +75,11 @@ $(document).ready(function () {
             var formattedTime = 'N/A';
         }
 
+        if (result !== 'N/A') {
+            $(':radio:not(:checked)').attr('disabled', true);
+            $('.btn-save').hide();
+        }
+
         $('#hdn-id').val(id);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
