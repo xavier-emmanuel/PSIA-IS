@@ -83,6 +83,8 @@
         <div class="modal-content">
           <form method="post" id="frm-approve-applicant">
             <input type="hidden" name="hdn_id" id="hdn-id">
+            <input type="hidden" name="hdn_email" id="hdn-email">
+            <input type="hidden" name="hdn_name" id="hdn-name">
             {{ csrf_field() }}
             <div class="modal-header">
               <h5 class="modal-title" id="approveApplicantLabel">Approval</h5>

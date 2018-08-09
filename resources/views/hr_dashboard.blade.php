@@ -126,6 +126,9 @@
         <div class="modal-content">
           <form method="post" id="frm-set-interview">
             <input type="hidden" name="hdn_id" id="hdn-id">
+            <input type="hidden" name="hdn_email" id="hdn-email">
+            <input type="hidden" name="hdn_name" id="hdn-name">
+            <input type="hidden" name="frm_status" id="frm-status" value="Save">
             {{ csrf_field() }}
             <div class="modal-header">
               <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>

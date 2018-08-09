@@ -21,15 +21,15 @@ class ContactController extends Controller
 	                'name' => $name,
 	                'email' => $from ,
 	                'subject' => $subject,
-	                'page' => 'Contact',
+	                'page' => 'Contact Us',
 	                'msg' => $request->message
 	            );
 	   
-	    Mail::send('contact-message',
+	    Mail::send('contact_message',
 	       $data, function($message) use ($from, $subject, $name)
 	    {	
 	       $message->from($from, $name);
-	       $message->to('patton_scrty@yahoo.com', 'Patton Security & Investigation Agency')->subject($subject);
+	       $message->to('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')->subject($subject);
 	    });
 
 	    return response()->json(['success' => 'Thanks for contacting us!']);

@@ -2,7 +2,11 @@ $(document).ready(function () {
     $('#applicant-profile').on('show.bs.modal', function (e) {
         $('#frm-set-interview').trigger('reset');
         $('#frm-set-interview').validate().resetForm();
+        $('#frm-set-interview :input').removeAttr('readonly', 'readonly');
+        $('.btn-save').html('Save');
+        $('.btn-save').show();
         var id = $(e.relatedTarget).data('id'),
+            email = $(e.relatedTarget).data('email'),
             image = $(e.relatedTarget).data('image'),
             name = $(e.relatedTarget).data('name'),
             job = $(e.relatedTarget).data('job'),
@@ -70,6 +74,7 @@ $(document).ready(function () {
             $('#btn-set-interview').html('Interview Details');
             $('#frm-set-interview :input').attr('readonly', 'readonly');
             $('.btn-save').html('Update');
+            $('#frm-status').val('Update');
         } else {
             var formattedDate = 'N/A';
             var formattedTime = 'N/A';
@@ -81,6 +86,8 @@ $(document).ready(function () {
         }
 
         $('#hdn-id').val(id);
+        $('#hdn-email').val(email);
+        $('#hdn-name').val(name);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
         $('#job').html(job);
