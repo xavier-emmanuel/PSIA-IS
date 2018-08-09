@@ -113,7 +113,7 @@
             </dl>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" id="btn-set-interview-close" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-warning" id="btn-set-interview">Set Interview</button>
           </div>
         </div>
@@ -160,7 +160,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
               <button type="submit" class="btn btn-warning btn-save">Save</button>
             </div>
           </form>
@@ -184,8 +184,10 @@
 
       $('#btn-set-interview').on('click', function () {
         $('#applicant-profile').modal('hide');
-        $('#applicant-profile').on('hidden.bs.modal', function () {
-          $('#set-interview').modal('show');
+        $('#set-interview').modal('show');
+        var hdn_id = $('#hdn-id').val();
+        $('#btn-save-close').on('click', function () {
+          $('#btn-view-profile-'+ hdn_id).click();
         });
       });
     });

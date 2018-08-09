@@ -63,6 +63,11 @@ $(document).ready(function () {
             var formattedTime = 'N/A';
         }
 
+        if (result !== 'N/A') {
+            $('.dd-result').removeClass("d-none");
+            $('#btn-approval').hide();
+        }
+
         $('#hdn-id').val(id);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
@@ -77,6 +82,7 @@ $(document).ready(function () {
         $('#training-date').html(training_date);
         $('#date-hired').html(date_hired);
         $('#score').html(score);
+        $('#appicant-name').html(name);
     });
 
     $("#frm-approve-applicant").unbind('submit').on('submit', function (event) {
@@ -84,7 +90,7 @@ $(document).ready(function () {
 
         var data = new FormData($("#frm-approve-applicant")[0]);
 
-        $('#btn-approve').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Approving');
+        $('#btn-approve').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Yes');
 
         $.ajax({
             url: '/approve-applicant',
@@ -94,9 +100,9 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-                $('#btn-approve').removeAttr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Approve');
+                $('#btn-approve').removeAttr('disabled', 'disabled').html('Yes');
 
-                $('#applicant-profile').modal('hide');
+                $('#approve-applicant').modal('hide');
                 $('#tbl-evaluated-applicants').DataTable().ajax.reload(null, false);
 
                 $.toast({
