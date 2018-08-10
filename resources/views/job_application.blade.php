@@ -1,9 +1,14 @@
 @extends('layouts.master')
 
 @section('stylesheets')
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.css' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.css' : '/vendors/datepicker/datepicker.min.css') }}">
   <style>
     .bootstrap-tagsinput {
       width: 100%;
+    }
+    main {
+      margin-top: 94px;
     }
   </style>
 @endsection
@@ -937,12 +942,12 @@
             <div class="form-group">
               <label for="">Have you ever convicted/ charge in any court law?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="convictionOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="convictionOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="convictionOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="convictionOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
@@ -955,12 +960,12 @@
             <div class="form-group">
               <label for="">Do you have any health problems?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="healthProblemOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="healthProblemOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="healthProblemOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="healthProblemOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
@@ -973,18 +978,18 @@
             <div class="form-group">
               <label for="">Have you ever had an accident or operation?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="operationOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="operationOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="operationOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="operationOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation" id="application-operation" class="form-control" placeholder="If YES, Please please describe">
+              <input type="text" name="application_operation"  class="form-control" placeholder="If YES, Please please describe">
             </div>
           </div>
           <div class="col-sm-12">
@@ -997,54 +1002,54 @@
             <div class="form-group">
               <label for="">Do you have friend/s or relative/s working in the Company?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="companyRelativeOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="companyRelativeOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="companyRelativeOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="companyRelativeOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation" id="application-operation" class="form-control" placeholder="If YES, Please state name and relation">
+              <input type="text" name="application_operation"  class="form-control" placeholder="If YES, Please state name and relation">
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
               <label for="">Are you willing to be assigned to any subsidiary office of the Corporation?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="subsidiaryOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="subsidiaryOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="subsidiaryOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="subsidiaryOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation" id="application-operation" class="form-control" placeholder="If NO, Please state your reason">
+              <input type="text" name="application_operation"  class="form-control" placeholder="If NO, Please state your reason">
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
               <label for="">Are you willing to accept provincial assignments?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" id="inlineRadio1" value="Yes">
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" value="Yes">
+                <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" id="inlineRadio2" value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
+                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" value="No">
+                <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation" id="application-operation" class="form-control" placeholder="If YES, Please state your preffered province of assignment">
+              <input type="text" name="application_operation"  class="form-control" placeholder="If YES, Please state your preffered province of assignment">
             </div>
           </div>
           <div class="col-sm-12">
@@ -1060,25 +1065,25 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Accounting Work" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Accounting Work">
               <label class="form-check-label" for="defaultCheck1">
                 Accounting Work
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Clerical Work" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Clerical Work">
               <label class="form-check-label" for="defaultCheck1">
                 Clerical Work
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Computer Operations" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Computer Operations">
               <label class="form-check-label" for="defaultCheck1">
                 Computer Operations
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Supervisory Work" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Supervisory Work">
               <label class="form-check-label" for="defaultCheck1">
                 Supervisory Work
               </label>
@@ -1086,25 +1091,25 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Computer Repair" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Computer Repair">
               <label class="form-check-label" for="defaultCheck1">
                 Computer Repair
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Profiling Clients" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Profiling Clients">
               <label class="form-check-label" for="defaultCheck1">
                 Profiling Clients
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Sales Marketing" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Sales Marketing">
               <label class="form-check-label" for="defaultCheck1">
                 Sales Marketing
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Typing" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Typing">
               <label class="form-check-label" for="defaultCheck1">
                 Typing
               </label>
@@ -1112,31 +1117,31 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Stenography" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Stenography">
               <label class="form-check-label" for="defaultCheck1">
                 Stenography
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Driving (w/ license)" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Driving (w/ license)">
               <label class="form-check-label" for="defaultCheck1">
                 Driving (w/ license)
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Collection" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Collection">
               <label class="form-check-label" for="defaultCheck1">
                 Collection
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Programming" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Programming">
               <label class="form-check-label" for="defaultCheck1">
                 Programming
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Others" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="Others">
               <label class="form-check-label" for="defaultCheck1">
                 Others
               </label>
@@ -1168,25 +1173,25 @@
             <div class="form-group">
               <label for="">In fifty words or less, please describe yourself. Indicate your likes and dislikes, strengths and areas of
                 improvements, hobbies and interest among others</label>
-              <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">Explain why you joined Patton Security &amp; Investigation Agency Inc,.? </label>
-              <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">Briefly state our personal and career goals. How do you see yourself in five years from today? </label>
-              <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">State your three (3) most important accomplishment in life: </label>
-              <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
 
@@ -1220,49 +1225,49 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Full Name">
+              <input type="text" name="" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Occupation">
+              <input type="text" name="" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Full Name">
+              <input type="text" name="" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Occupation">
+              <input type="text" name="" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Full Name">
+              <input type="text" name="" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Occupation">
+              <input type="text" name="" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
@@ -1288,11 +1293,8 @@
 @endsection
 
 @section('scripts')
-  <script src="assets/vendors/jquery/jquery.min.js"></script>
-  <script src="assets/vendors/popper/popper.min.js"></script>
-  <script src="assets/vendors/bootstrap/bootstrap.min.js"></script>
-  <script src="assets/vendors/datepicker/datepicker.min.js"></script>
-  <script src="assets/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script>
+    <script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
+    <script src="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js') }}"></script>
   <script>
     $(document).ready(function () {
       $('#application-date-of-birth').datepicker();

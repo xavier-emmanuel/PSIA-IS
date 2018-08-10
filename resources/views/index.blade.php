@@ -109,4 +109,5 @@
     });
 	</script>
     <script src="{{ asset(App::environment('production') ? '/public/js/pages/apply.js' : '/js/pages/apply.js') }}"></script>
+    <script src="{{ asset(App::environment('production') ? '/public/js/pages/login.js' : '/js/pages/login.js') }}"></script>
 @endsection

@@ -30,4 +30,8 @@ class PagesController extends Controller
 			$account = Register::where('username', $username)->first();
 			return view('verify')->with(array('page' => 'Verify Account', 'data' => $account));
 		}
+
+		public function jobApplication() {
+			return view('job_application')->with(array('page' => 'Job Application'));
+		}
 }

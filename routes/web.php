@@ -12,6 +12,8 @@
 */
 Route::group( [ 'middleware' => 'auth' ], function()
 {	
+	Route::get('/job-application', 'PagesController@jobApplication');
+
 	Route::get('/GM-dashboard', 'GMPagesController@dashboard');
 
 	Route::get('/profile-update/check-email', 'RegisterController@checkEmail');
