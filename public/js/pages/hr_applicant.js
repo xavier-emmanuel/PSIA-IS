@@ -3,6 +3,7 @@ $(document).ready(function () {
         $('#frm-set-interview').trigger('reset');
         $('#frm-set-interview').validate().resetForm();
         $('#frm-set-interview :input').removeAttr('readonly', 'readonly');
+        $('#frm-set-interview :input:radio').removeAttr('disabled', 'disabled');
         $('.btn-save').html('Save');
         $('.btn-save').show();
         var id = $(e.relatedTarget).data('id'),
@@ -20,7 +21,7 @@ $(document).ready(function () {
             interview_time = $(e.relatedTarget).data('interview-time'),
             result = $(e.relatedTarget).data('result'),
             training_date = $(e.relatedTarget).data('training-date'),
-            date_hired = $(e.relatedTarget).data('date-hired');
+            date_hired = $(e.relatedTarget).data('date-hired'),
             interviewed = $(e.relatedTarget).data('interviewed'),
             score = $(e.relatedTarget).data('score');
 
@@ -50,12 +51,29 @@ $(document).ready(function () {
             $('.dd-result').addClass("d-none");
         }
 
+        if (score == '') {
+            score = 'N/A';
+            $('.interview-field-score').addClass("d-none");
+        }
+
         if (interviewed == 1) {
             $('#interviewed-yes').prop('checked', true);
             $('#interviewed-no').prop('checked', false);
+            $('.interview-field-score').removeClass("d-none");
         } else {
             $('#interviewed-yes').prop('checked', false);
             $('#interviewed-no').prop('checked', true);
+        }
+
+        if (score == 'Passed') {
+            $('#exam-passed').prop('checked', true);
+            $('#exam-failed').prop('checked', false);
+        } else if (score == 'Failed') {
+            $('#exam-passed').prop('checked', false);
+            $('#exam-failed').prop('checked', true);
+        } else {
+            $('#exam-passed').prop('checked', false);
+            $('#exam-failed').prop('checked', false);
         }
 
         if (interview_date !== 'N/A') {
@@ -81,13 +99,28 @@ $(document).ready(function () {
         }
 
         if (result !== 'N/A') {
-            $(':radio:not(:checked)').attr('disabled', true);
+            $('#frm-set-interview').find(':radio:not(:checked)').attr('disabled', true);
+            $('.dd-result').removeClass("d-none");
             $('.btn-save').hide();
         }
 
-        $('#hdn-id').val(id);
-        $('#hdn-email').val(email);
-        $('#hdn-name').val(name);
+        if (score !== 'N/A') {
+            $('.interview-field-score').removeClass("d-none");
+        }
+
+        $('#interviewed-yes').on('click', function() {
+            $('.interview-field-score').removeClass("d-none");
+        });
+
+        $('#interviewed-no').on('click', function() {
+            $('input[name=exam_score]').prop('checked', false);
+            $('.interview-field-score').addClass("d-none");
+        });
+        
+
+        $('.hdn-id').val(id);
+        $('.hdn-email').val(email);
+        $('.hdn-name').val(name);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
         $('#job').html(job);

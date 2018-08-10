@@ -115,7 +115,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" id="btn-set-interview-close" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-warning" id="btn-set-interview">Set Interview</button>
-            <button type="button" class="btn btn-warning" id="btn-set-exam" data-toggle="modal" data-target="#set-exam">Set Exam</button>
+            <button type="button" class="btn btn-warning d-none" id="btn-set-exam" data-toggle="modal" data-target="#set-exam">Set Exam</button>
           </div>
         </div>
       </div>
@@ -126,9 +126,9 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <form method="post" id="frm-set-interview">
-            <input type="hidden" name="hdn_id" id="hdn-id">
-            <input type="hidden" name="hdn_email" id="hdn-email">
-            <input type="hidden" name="hdn_name" id="hdn-name">
+            <input type="hidden" name="hdn_id" class="hdn-id">
+            <input type="hidden" name="hdn_email" class="hdn-email">
+            <input type="hidden" name="hdn_name" class="hdn-name">
             <input type="hidden" name="frm_status" id="frm-status" value="Save">
             {{ csrf_field() }}
             <div class="modal-header">
@@ -162,6 +162,17 @@
                   <label class="form-check-label" for="">No</label>
                 </div>
               </div>
+              <div class="form-group interview-field-score">
+                <label for="">Score:&nbsp; </label>
+                <div class="form-check form-check-inline ml-3 passed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-passed" value="Passed">
+                  <label class="form-check-label" for="">Passed</label>
+                </div>
+                <div class="form-check form-check-inline failed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-failed" value="Failed">
+                  <label class="form-check-label" for="">Failed</label>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
@@ -176,10 +187,10 @@
     <div class="modal fade" id="set-exam" tabindex="-1" role="dialog" aria-labelledby="setExamLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form method="post" id="frm-set-interview">
-            <input type="hidden" name="hdn_id" id="hdn-id">
-            <input type="hidden" name="hdn_email" id="hdn-email">
-            <input type="hidden" name="hdn_name" id="hdn-name">
+          <form method="post" id="frm-set-exam">
+            <input type="hidden" name="hdn_id" class="hdn-id">
+            <input type="hidden" name="hdn_email" class="hdn-email">
+            <input type="hidden" name="hdn_name" class="hdn-name">
             <input type="hidden" name="frm_status" id="frm-status" value="Save">
             {{ csrf_field() }}
             <div class="modal-header">
@@ -226,7 +237,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" id="btn-back-exam" data-dismiss="modal">Back</button>
-              <button type="submit" class="btn btn-warning btn-save">Save</button>
+              <button type="submit" class="btn btn-warning btn-save-exam">Save</button>
             </div>
           </form>
         </div>
@@ -250,15 +261,17 @@
       $('#btn-set-interview').on('click', function () {
         $('#applicant-profile').modal('hide');
         $('#set-interview').modal('show');
-        var hdn_id = $('#hdn-id').val();
         $('#btn-save-close').on('click', function () {
-          $('#btn-view-profile-'+ hdn_id).click();
+          $('#btn-view-profile-'+ $('.hdn-id').val()).click();
         });
       });
 
       $('#btn-set-exam').on('click', function () {
         $('#applicant-profile').modal('hide');
         $('#set-exam').modal('show');
+        $('#btn-back-exam').on('click', function () {
+          $('#btn-view-profile-'+ $('.hdn-id').val()).click();
+        });
       });
     });
 

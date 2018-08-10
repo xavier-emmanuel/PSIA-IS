@@ -16,7 +16,7 @@ $(document).ready(function () {
             interview_time = $(e.relatedTarget).data('interview-time'),
             result = $(e.relatedTarget).data('result'),
             training_date = $(e.relatedTarget).data('training-date'),
-            date_hired = $(e.relatedTarget).data('date-hired');
+            date_hired = $(e.relatedTarget).data('date-hired'),
             interviewed = $(e.relatedTarget).data('interviewed'),
             score = $(e.relatedTarget).data('score');
 

@@ -20,7 +20,7 @@ class InterviewController extends Controller
 			$interview->date_of_interview = $input['interview_date'];
 			$interview->date_hired = null;
 			$interview->date_approved = null;
-			$interview->interviewed = $input['interviewed'];
+			$interview->score = null;
 			$interview->save();
 
 			$data = array(
@@ -40,12 +40,20 @@ class InterviewController extends Controller
 		       $message->to($input['hdn_email'], $input['hdn_name'])->subject($input['interview_title']);
 		    });
     	} else if ($input['frm_status'] == 'Update') {
+
+    		if (isset($input['exam_score'])) {
+    			$score = $input['exam_score'];
+    		} else {
+    			$score = null;
+    		}
+
     		$interview->interview_title = $input['interview_title'];
 			$interview->interview_message = $input['interview_message'];
 			$interview->date_of_interview = $input['interview_date'];
 			$interview->date_hired = null;
 			$interview->date_approved = null;
 			$interview->interviewed = $input['interviewed'];
+			$interview->score = $score;
 			$interview->save();
     	}
     	
