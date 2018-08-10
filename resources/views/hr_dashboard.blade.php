@@ -115,6 +115,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" id="btn-set-interview-close" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-warning" id="btn-set-interview">Set Interview</button>
+            <button type="button" class="btn btn-warning" id="btn-set-exam" data-toggle="modal" data-target="#set-exam">Set Exam</button>
           </div>
         </div>
       </div>
@@ -170,6 +171,67 @@
         </div>
       </div>
     </div>
+
+    <!-- Set Exam Modal -->
+    <div class="modal fade" id="set-exam" tabindex="-1" role="dialog" aria-labelledby="setExamLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" id="frm-set-interview">
+            <input type="hidden" name="hdn_id" id="hdn-id">
+            <input type="hidden" name="hdn_email" id="hdn-email">
+            <input type="hidden" name="hdn_name" id="hdn-name">
+            <input type="hidden" name="frm_status" id="frm-status" value="Save">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="setExamLabel">Set Exam</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+                <label for="">Message for:&nbsp; </label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="exam_hiring" id="exam-hiring" value="Yes">
+                  <label class="form-check-label" for="exam-hiring">Hiring</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="exam_training" id="exam-training" value="No">
+                  <label class="form-check-label" for="exam-training">Training</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="exam_others" id="exam-others" value="No">
+                  <label class="form-check-label" for="edit-exam-others">Others</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exam-title">Title:</label>
+                <input type="text" name="exam_title" id="exam-title" class="form-control" placeholder="Interview">
+              </div>
+              <div class="form-group">
+                <label for="exam-message">Message:</label>
+                <textarea name="exam_message" id="exam-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group interview-field">
+                <label for="">Score:&nbsp; </label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-passed" value="Passed">
+                  <label class="form-check-label" for="">Passed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-failed" value="Failed">
+                  <label class="form-check-label" for="">Failed</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="btn-back-exam" data-dismiss="modal">Back</button>
+              <button type="submit" class="btn btn-warning btn-save">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -192,6 +254,11 @@
         $('#btn-save-close').on('click', function () {
           $('#btn-view-profile-'+ hdn_id).click();
         });
+      });
+
+      $('#btn-set-exam').on('click', function () {
+        $('#applicant-profile').modal('hide');
+        $('#set-exam').modal('show');
       });
     });
 
