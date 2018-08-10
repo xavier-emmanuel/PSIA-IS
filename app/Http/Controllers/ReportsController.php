@@ -50,7 +50,7 @@ class ReportsController extends Controller
         if (empty($row->date_hired)) {
             $date_hired = '';
         } else {
-            $date_hired = $row->date_hired->format('F d, Y h:i A');
+            $date_hired = $row->date_hired->format('F d, Y');
         }
         $html .= '<tr>
                     <td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>
@@ -59,7 +59,7 @@ class ReportsController extends Controller
                     <td>'.$row->mobile.'</td>
                     <td>'.$row->age.'</td>
                     <td>'.$row->gender.'</td>
-                    <td>Passed</td>
+                    <td>'.$row->score.'</td>
                     <td>'.$date_hired.'</td>
                 </tr>';
         }
@@ -111,7 +111,7 @@ class ReportsController extends Controller
         if (empty($row->date_approved)) {
             $date_approved = '';
         } else {
-            $date_approved = Carbon::parse($row->date_approved)->format('F d, Y h:i A');
+            $date_approved = Carbon::parse($row->date_approved)->format('F d, Y');
         }
         $html .= '<tr>
                     <td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>

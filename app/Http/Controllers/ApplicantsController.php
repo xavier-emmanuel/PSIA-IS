@@ -9,7 +9,7 @@ class ApplicantsController extends Controller
 {
     //
 	public function ajaxShowApplicants(Request $request) {
-		$applicant = Applicant::where('job_vacancy_id', '!=', 0)->get();
+		$applicant = Applicant::where('job_vacancy_id', '!=', 0)->where('approved', '!=', 1)->where('hired', '!=', 1)->get();
 
 		$data = array();
 

@@ -122,10 +122,6 @@
       $('#btn-approval').on('click', function () {
         $('#applicant-profile').modal('hide');
         $('#approve-applicant').modal('show');
-        var hdn_id = $('#hdn-id').val();
-        $('#btn-approve-close').on('click', function () {
-          $('#btn-view-profile-'+ hdn_id).click();
-        });
       });
     });
   </script>
