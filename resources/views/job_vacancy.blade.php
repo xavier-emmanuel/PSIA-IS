@@ -9,16 +9,21 @@
 
     .c-breadcrumbs__wrapper {
       margin-top: 91px;
+      z-index: -1
     }
 
     .navbar-nav {
       padding-right: 0;
     }
+
+    main {
+      margin-top: 145px;
+    }
   </style>
 @endsection
 
 @section('content')
-	<div class="c-breadcrumbs__wrapper">
+	<div class="c-breadcrumbs__wrapper fixed-top">
     <div class="container">
       <nav aria-label="breadcrumb" class="d-flex align-items-center">
         <ol class="breadcrumb mb-0">
