@@ -4,33 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use App\Mail\ContactUs;
 use Mail;
 
 class ContactController extends Controller
 {
-    //
-    public function contactSend(Request $request) 
-   	{
-	   	$input = Input::all();
-	   	$name = $input['contact_name'];
-	   	$from = $input['contact_email'];
-	   	$subject = $input['contact_subject'];
-	   	$message = $input['message'];
 
-	   	$data = array(
-	                'name' => $name,
-	                'email' => $from ,
-	                'subject' => $subject,
-	                'page' => 'Contact Us',
-	                'msg' => $request->message
-	            );
-	   
-	    Mail::send('contact_message',
-	       $data, function($message) use ($from, $subject, $name)
-	    {	
-	       $message->from($from, $name);
-	       $message->to('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')->subject($subject);
-	    });
+    public function contactSend(Request $request) {
+
+			Mail::to('pattonsecu@gmail.com')->send(new ContactUs($input['contact_name'], $input['contact_email'], $input['contact_subject'], $input['message']));
 
 	    return response()->json(['success' => 'Thanks for contacting us!']);
    	}
