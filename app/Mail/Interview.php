@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ApprovedApplicant extends Mailable
+class Interview extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,11 +17,17 @@ class ApprovedApplicant extends Mailable
      * @return void
      */
 
-    public $name;
+    public $interviewDate;
+    public $interviewTime;
+    public $title;
+    public $message;
 
-    public function __construct($name)
+    public function __construct($interviewDate, $interviewTime, $title, $message)
     {
-        $this->name = $name;
+        $this->interviewDate = $interviewDate;
+        $this->interviewTime = $interviewTime;
+        $this->title = $title;
+        $this->message = $message;
     }
 
     /**
@@ -32,7 +38,7 @@ class ApprovedApplicant extends Mailable
     public function build()
     {
         return $this->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')
-                    ->subject('Application Approval')
-                    ->markdown('emails.approved-applicant');
+                    ->subject('Job Interview')
+                    ->markdown('emails.interview');
     }
 }

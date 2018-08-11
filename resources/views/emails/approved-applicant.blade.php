@@ -3,11 +3,7 @@
 
 Good Day {{ $name }}!
 
-Your job application to Back-end Developer position has been approved!
-
-@component('mail::button', ['url' => 'http://127.0.0.1:8000'])
-View Dashboard
-@endcomponent
+Your job application to <strong>Back End Developer</strong> position has been approved!
 
 Thanks,<br>
 {{ config('app.name') }}
