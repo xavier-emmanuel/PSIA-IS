@@ -65,6 +65,10 @@ $(document).ready(function () {
             var formattedTime = 'N/A';
         }
 
+        if (date_hired !== 'N/A') {
+            $('.dd-date-hired').removeClass("d-none");
+        }
+
         if (result !== 'N/A') {
             $('.dd-result').removeClass("d-none");
             $('#btn-approval').hide();
