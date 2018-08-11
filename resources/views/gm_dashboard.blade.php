@@ -85,6 +85,7 @@
             <input type="hidden" name="hdn_id" id="hdn-id">
             <input type="hidden" name="hdn_email" id="hdn-email">
             <input type="hidden" name="hdn_name" id="hdn-name">
+            <input type="hidden" name="hdn_job" id="hdn-job">
             {{ csrf_field() }}
             <div class="modal-header">
               <h5 class="modal-title" id="approveApplicantLabel">Approval</h5>

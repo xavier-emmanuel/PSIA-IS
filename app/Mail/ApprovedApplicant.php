@@ -18,10 +18,12 @@ class ApprovedApplicant extends Mailable
      */
 
     public $name;
+    public $job;
 
-    public function __construct($name)
+    public function __construct($name, $job)
     {
         $this->name = $name;
+        $this->job = $job;
     }
 
     /**
@@ -33,6 +35,6 @@ class ApprovedApplicant extends Mailable
     {
         return $this->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')
                     ->subject('Application Approval')
-                    ->markdown('emails.approved-applicant');
+                    ->markdown('emails.approved_applicant');
     }
 }

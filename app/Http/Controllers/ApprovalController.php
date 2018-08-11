@@ -17,15 +17,16 @@ class ApprovalController extends Controller
 
     	$approve->date_approved = Carbon::now();
     	$approve->approved = 1;
-			$approve->date_hired = null;
+		$approve->date_hired = null;
 
-			$approve->save();
+		$approve->save();
 
-			$name = $input['hdn_name'];
-			$email = $input['hdn_email'];
+		$name = $input['hdn_name'];
+		$email = $input['hdn_email'];
+		$job = $input['hdn_job'];
 
-			Mail::to($email)->send(new ApprovedApplicant($name));
+		Mail::to($email)->send(new ApprovedApplicant($name, $job));
 
-			return response()->json(['success'=> 'You have successfully approved the applicant.']);
+		return response()->json(['success'=> 'You have successfully approved the applicant.']);
     }
 }

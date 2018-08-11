@@ -73,6 +73,7 @@ $(document).ready(function () {
         $('#hdn-id').val(id);
         $('#hdn-email').val(email);
         $('#hdn-name').val(name);
+        $('#hdn-job').val(job);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
         $('#job').html(job);
