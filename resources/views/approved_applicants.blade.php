@@ -42,6 +42,7 @@
         <th>Contact</th>
         <th>Age</th>
         <th>Gender</th>
+        <th>Status</th>
         <th>Action</th>
       </thead>
       <tbody>
