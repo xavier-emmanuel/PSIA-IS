@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Applicant;
 use Carbon\Carbon;
+use App\Mail\ApprovedApplicant;
 use Mail;
 
 class ApprovalController extends Controller
@@ -16,29 +17,15 @@ class ApprovalController extends Controller
 
     	$approve->date_approved = Carbon::now();
     	$approve->approved = 1;
-		$approve->date_hired = null;
-	    
-		$approve->save();
+			$approve->date_hired = null;
 
-		$name = $input['hdn_name'];
-		$first_name = explode(' ',trim($name));
+			$approve->save();
 
-		$data = array(
-	                'name' => $input['hdn_name'],
-	                'email' => $input['hdn_email'],
-	                'subject' => 'Approval',
-	                'page' => 'Dashboard',
-	                'msg' => 'Hi '. $first_name[0] .','.
-	                		 '<br><br>'.'Your application has been approved. Thank you!'
-	            );
-	   
-	    Mail::send('approval_message',
-	       $data, function($message) use ($input)
-	    {	
-	       $message->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency');
-	       $message->to($input['hdn_email'], $input['hdn_name'])->subject('Approval');
-	    });
+			$name = $input['hdn_name'];
+			$email = $input['hdn_email'];
 
-		return response()->json(['success'=> 'You have successfully approved the applicant.']);
+			Mail::to($email)->send(new ApprovedApplicant($name));
+
+			return response()->json(['success'=> 'You have successfully approved the applicant.']);
     }
 }
