@@ -12,7 +12,7 @@ class ContactController extends Controller
 
     public function contactSend(Request $request) {
 
-			Mail::to('pattonsecu@gmail.com')->send(new ContactUs($input['contact_name'], $input['contact_email'], $input['contact_subject'], $input['message']));
+			Mail::to('pattonsecu@gmail.com')->send(new ContactUs($request->contact_name, $request->contact_email, $request->contact_subject, $request->message));
 
 	    return response()->json(['success' => 'Thanks for contacting us!']);
    	}
