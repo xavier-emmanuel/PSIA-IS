@@ -74,6 +74,10 @@ $(document).ready(function () {
             $('#btn-approval').hide();
         }
 
+        var hired_date = new Date(date_hired);
+        months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var formattedDateHired = months[hired_date.getMonth()] + ' ' + hired_date.getDate() + ", " + hired_date.getFullYear();
+
         $('#hdn-id').val(id);
         $('#hdn-email').val(email);
         $('#hdn-name').val(name);
@@ -89,7 +93,7 @@ $(document).ready(function () {
         $('#interview-time').html(formattedTime);
         $('#result').html(result);
         $('#training-date').html(training_date);
-        $('#date-hired').html(date_hired);
+        $('#date-hired').html(formattedDateHired);
         $('#score').html(score);
         $('#appicant-name').html(name);
     });
