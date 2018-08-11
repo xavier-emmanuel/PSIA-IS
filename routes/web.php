@@ -40,6 +40,8 @@ Route::group( [ 'middleware' => 'auth' ], function()
 
 	Route::post('/approve-applicant', 'ApprovalController@approveApplicant');
 
+	Route::post('/hire-applicant', 'HireController@hireApplicant');
+
 	Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 	Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');

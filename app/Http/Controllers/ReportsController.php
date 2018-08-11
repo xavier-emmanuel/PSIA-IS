@@ -50,7 +50,7 @@ class ReportsController extends Controller
         if (empty($row->date_hired)) {
             $date_hired = '';
         } else {
-            $date_hired = $row->date_hired->format('F d, Y');
+            $date_hired = Carbon::parse($row->date_hired)->format('F d, Y');
         }
         $html .= '<tr>
                     <td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>

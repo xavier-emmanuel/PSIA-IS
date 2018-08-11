@@ -6,6 +6,7 @@ $(document).ready(function () {
         $('#frm-set-interview :input:radio').removeAttr('disabled', 'disabled');
         $('.btn-save').html('Save');
         $('.btn-save').show();
+        $('#btn-hiring').show();
         var id = $(e.relatedTarget).data('id'),
             email = $(e.relatedTarget).data('email'),
             image = $(e.relatedTarget).data('image'),
@@ -47,7 +48,6 @@ $(document).ready(function () {
         }
 
         if (result == '') {
-            result = 'N/A';
             $('.dd-result').addClass("d-none");
         }
 
@@ -98,10 +98,19 @@ $(document).ready(function () {
             var formattedTime = 'N/A';
         }
 
-        if (result !== 'N/A') {
+        if (result == 'Approved') {
             $('#frm-set-interview').find(':radio:not(:checked)').attr('disabled', true);
             $('.dd-result').removeClass("d-none");
             $('.btn-save').hide();
+        } else if (result == 'Hired') {
+            $('#frm-set-interview').find(':radio:not(:checked)').attr('disabled', true);
+            $('.dd-result').removeClass("d-none");
+            $('.btn-save').hide();
+            $('#btn-hiring').hide();
+        }
+
+        if (date_hired !== 'N/A') {
+            $('.dd-date-hired').removeClass("d-none");
         }
 
         if (score !== 'N/A') {
@@ -117,10 +126,14 @@ $(document).ready(function () {
             $('.interview-field-score').addClass("d-none");
         });
         
+        var hired_date = new Date(date_hired);
+        months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var formattedDateHired = months[hired_date.getMonth()] + ' ' + hired_date.getDate() + ", " + hired_date.getFullYear();
 
         $('.hdn-id').val(id);
         $('.hdn-email').val(email);
         $('.hdn-name').val(name);
+        $('.hdn-job').val(job);
         $('#image-profile').attr('src', image);
         $('#name').html(name);
         $('#job').html(job);
@@ -132,10 +145,12 @@ $(document).ready(function () {
         $('#interview-time').html(formattedTime);
         $('#result').html(result);
         $('#training-date').html(training_date);
-        $('#date-hired').html(date_hired);
+        $('#date-hired').html(formattedDateHired);
         $('#interview-title').val(interview_title);
         $('#interview-message').val(interview_message);
         $('.interview-date').val($(e.relatedTarget).data('interview-date'));
+        $('#score').html(score);
+        $('#appicant-name').html(name);
     });
 
     $("#frm-set-interview").validate({
@@ -211,5 +226,39 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+    $("#frm-hire-applicant").unbind('submit').on('submit', function (event) {
+        event.preventDefault();
+
+        var data = new FormData($("#frm-hire-applicant")[0]);
+
+        $('#btn-hire').attr('disabled', 'disabled').html('<i class="fas fa-spinner fa-spin"></i>&nbsp; Yes');
+
+        $.ajax({
+            url: '/hire-applicant',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $('#btn-hire').removeAttr('disabled', 'disabled').html('Yes');
+
+                $('#hire-applicant').modal('hide');
+                $('#tbl-approved-applicant').DataTable().ajax.reload(null, false);
+
+                $.toast({
+                    heading: 'Success',
+                    text: data.success,
+                    position: 'top-right',
+                    icon: 'success',
+                    hideAfter: 3500
+                });
+            },
+            error: function (xhr, error, ajaxOptions, thrownError) {
+                alert(xhr.responseText);
+            }
+        });
     });
 });

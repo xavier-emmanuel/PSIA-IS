@@ -61,37 +61,71 @@
           </div>
           <div class="modal-body">
             <div id="image" class="text-center mb-3">
-              <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="John Doe" title="John Doe" class="img-thumbnail" width="120px" height="120px">
-            </div>
+              <img src="{{ asset(App::environment('production') ? '/public/img/patton-logo.png' : '/img/patton-logo.png') }}" alt="John Doe" title="John Doe" class="img-thumbnail" id="image-profile" width="120px" height="120px"></div>
             <dl class="row">
               <dt class="col-sm-4">Name:</dt>
-              <dd class="col-sm-8">John Doe</dd>
+              <dd class="col-sm-8" id="name"></dd>
               <dt class="col-sm-4">Applying for:</dt>
-              <dd class="col-sm-8">Security Guard</dd>
+              <dd class="col-sm-8" id="job"></dd>
               <dt class="col-sm-4">Age:</dt>
-              <dd class="col-sm-8">23</dd>
+              <dd class="col-sm-8" id="age"></dd>
               <dt class="col-sm-4">Gender:</dt>
-              <dd class="col-sm-8">Male</dd>
+              <dd class="col-sm-8" id="gender"></dd>
               <dt class="col-sm-4">Address:</dt>
-              <dd class="col-sm-8">#23 P-3 example address, Legazpi City</dd>
+              <dd class="col-sm-8" id="address"></dd>
               <dt class="col-sm-4">Contact Number:</dt>
-              <dd class="col-sm-8">+639xx-xxx-xxxx</dd>
-              <dt class="col-sm-4">Interview Date:</dt>
-              <dd class="col-sm-8">July 10, 2018</dd>
-              <dt class="col-sm-4">Inteview Time:</dt>
-              <dd class="col-sm-8">09:00 AM</dd>
-              <dt class="col-sm-4">Result:</dt>
-              <dd class="col-sm-8">Hired</dd>
-              <dt class="col-sm-4">Training Date:</dt>
-              <dd class="col-sm-8">August 17, 2018 09:00 AM</dd>
-              <dt class="col-sm-4">Date Hired:</dt>
-              <dd class="col-sm-8">July 10, 2018</dd>
+              <dd class="col-sm-8" id="mobile"></dd>
+              <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
+              <dd class="col-sm-8 dd-interview-date" id="interview-date"></dd>
+              <dt class="col-sm-4 dd-interview-time">Interview Time:</dt>
+              <dd class="col-sm-8 dd-interview-time" id="interview-time"></dd>
+              <dt class="col-sm-4 dd-interview-time">Interviewed?</dt>
+              <dd class="col-sm-8 dd-interviewed" id="interviewed">Yes</dd>
+              <dt class="col-sm-4 dd-interview-time">Score:</dt>
+              <dd class="col-sm-8 dd-score" id="score"></dd>
+              <dt class="col-sm-4 dd-result">Result:</dt>
+              <dd class="col-sm-8 dd-result" id="result"></dd>
+              <dt class="col-sm-4 dd-training-date">Training Date:</dt>
+              <dd class="col-sm-8 dd-training-date" id="training-date"></dd>
+              <dt class="col-sm-4 dd-date-hired">Date Hired:</dt>
+              <dd class="col-sm-8 dd-date-hired" id="date-hired"></dd>
             </dl>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-warning" id="btn-set-interview">Set Interview</button>
+            <button type="button" class="btn btn-warning" id="btn-hiring">Hire</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hire Modal -->
+    <div class="modal fade" id="hire-applicant" tabindex="-1" role="dialog" aria-labelledby="hireApplicantLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" id="frm-hire-applicant">
+            <input type="hidden" name="hdn_id" class="hdn-id">
+            <input type="hidden" name="hdn_email" class="hdn-email">
+            <input type="hidden" name="hdn_name" class="hdn-name">
+            <input type="hidden" name="hdn_job" class="hdn-job">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="hireApplicantLabel">Hiring</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-question-circle" style="font-size: 32px;"></i>
+                <p class="mb-0 ml-2">Are you sure you want to hire <span class="font-weight-bold text-primary" id="appicant-name"></span>?</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="btn-hire-close" data-dismiss="modal">No</button>
+              <button type="submit" class="btn btn-warning" id="btn-hire">Yes</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -100,34 +134,60 @@
     <div class="modal fade" id="set-interview" tabindex="-1" role="dialog" aria-labelledby="setInterviewLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="">Title:</label>
-              <input type="text|" name="" id="" class="form-control" placeholder="Interview">
-              <div class="valid-feedback">Help text</div>
+          <form method="post" id="frm-set-interview">
+            <input type="hidden" name="hdn_id" class="hdn-id">
+            <input type="hidden" name="hdn_email" class="hdn-email">
+            <input type="hidden" name="hdn_name" class="hdn-name">
+            <input type="hidden" name="frm_status" id="frm-status" value="Save">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="">Title:</label>
-              <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
-              <div class="valid-feedback">Help text</div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="">Title:</label>
+                <input type="text" name="interview_title" id="interview-title" class="form-control" placeholder="Interview">
+              </div>
+              <div class="form-group">
+                <label for="">Message:</label>
+                <textarea name="interview_message" id="interview-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Date &amp; Time:</label>
+                <input type="text" name="interview_date" class="form-control datetimepicker-input interview-date" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
+                />
+              </div>
+              <div class="form-group interview-field">
+                <label for="">Interviewed?</label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-yes" value="1">
+                  <label class="form-check-label" for="">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-no" value="0" checked="checked">
+                  <label class="form-check-label" for="">No</label>
+                </div>
+              </div>
+              <div class="form-group interview-field-score">
+                <label for="">Score:&nbsp; </label>
+                <div class="form-check form-check-inline ml-3 passed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-passed" value="Passed">
+                  <label class="form-check-label" for="">Passed</label>
+                </div>
+                <div class="form-check form-check-inline failed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-failed" value="Failed">
+                  <label class="form-check-label" for="">Failed</label>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="">Date &amp; Time:</label>
-              <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
-              />
-              <div class="valid-feedback">Help text</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
+              <button type="submit" class="btn btn-warning btn-save">Save</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-warning">Save</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -137,6 +197,7 @@
 @section('scripts')
   <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/moment.js' : '/vendors/timepicker/moment.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/vendors/timepicker/tempusdominus-bootstrap-4.min.js' : '/vendors/timepicker/tempusdominus-bootstrap-4.min.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/hr_applicant.js' : '/js/pages/hr_applicant.js') }}"></script>
   <script>
     $(function () {
       $('#datetimepicker5').datetimepicker({
@@ -154,11 +215,9 @@
         },
       });
 
-      $('#btn-set-interview').on('click', function () {
+      $('#btn-hiring').on('click', function () {
         $('#applicant-profile').modal('hide');
-        $('#applicant-profile').on('hidden.bs.modal', function () {
-          $('#set-interview').modal('show');
-        });
+        $('#hire-applicant').modal('show');
       });
     });
   </script>
