@@ -149,7 +149,7 @@ class ApplicantsController extends Controller
 	}
 
   public function ajaxShowEvaluatedApplicants(Request $request) {
-    $applicant = Applicant::where('interviewed', 1)->where('score', '!=', null)->get();
+    $applicant = Applicant::where('interviewed', 1)->where('score', '!=', null)->where('hired', 0)->where('approved', 0)->get();
 
     $data = array();
 
@@ -168,13 +168,6 @@ class ApplicantsController extends Controller
             $mobile = '<td>'.$row->mobile.'</td>';
             $age = '<td>'.$row->age.'</td>';
             $gender = '<td>'.$row->gender.'</td>';
-            if($result == 'Hired' ) {
-              $status = '<td><span class="badge badge-success">Hired</span></td>';
-            } else if($result == 'Approved' ) {
-              $status = '<td><span class="badge badge-secondary">Approved</span></td>';
-            } else {
-              $status = '<td><span class="badge badge-light">Pending</span></td>';
-            }
             $button = '<td>
                         <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-eye "></i>
@@ -188,7 +181,6 @@ class ApplicantsController extends Controller
                 $mobile,
                 $age,
                 $gender,
-                $status,
                 $button
                 );
         }
