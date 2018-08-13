@@ -23,6 +23,7 @@ $(document).ready(function () {
             result = $(e.relatedTarget).data('result'),
             training_date = $(e.relatedTarget).data('training-date'),
             date_hired = $(e.relatedTarget).data('date-hired'),
+            date_approved = $(e.relatedTarget).data('date-approved'),
             interviewed = $(e.relatedTarget).data('interviewed'),
             score = $(e.relatedTarget).data('score');
 
@@ -45,6 +46,11 @@ $(document).ready(function () {
         if (date_hired == '') {
             date_hired = 'N/A';
             $('.dd-date-hired').addClass("d-none");
+        }
+
+        if (date_approved == '') {
+            date_approved = 'N/A';
+            $('.dd-date-approved').addClass("d-none");
         }
 
         if (result == '') {
@@ -113,6 +119,10 @@ $(document).ready(function () {
             $('.dd-date-hired').removeClass("d-none");
         }
 
+        if (date_approved !== 'N/A') {
+            $('.dd-date-approved').removeClass("d-none");
+        }
+
         if (score !== 'N/A') {
             $('.interview-field-score').removeClass("d-none");
         }
@@ -130,6 +140,10 @@ $(document).ready(function () {
         months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var formattedDateHired = months[hired_date.getMonth()] + ' ' + hired_date.getDate() + ", " + hired_date.getFullYear();
 
+        var approved_date = new Date(date_approved);
+        months = ['Janunary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var formattedDateApproved = months[approved_date.getMonth()] + ' ' + approved_date.getDate() + ", " + approved_date.getFullYear();
+
         $('.hdn-id').val(id);
         $('.hdn-email').val(email);
         $('.hdn-name').val(name);
@@ -146,6 +160,7 @@ $(document).ready(function () {
         $('#result').html(result);
         $('#training-date').html(training_date);
         $('#date-hired').html(formattedDateHired);
+        $('#date-approved').html(formattedDateApproved);
         $('#interview-title').val(interview_title);
         $('#interview-message').val(interview_message);
         $('.interview-date').val($(e.relatedTarget).data('interview-date'));

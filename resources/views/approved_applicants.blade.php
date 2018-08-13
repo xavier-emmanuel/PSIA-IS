@@ -42,7 +42,6 @@
         <th>Contact</th>
         <th>Age</th>
         <th>Gender</th>
-        <th>Status</th>
         <th>Action</th>
       </thead>
       <tbody>
@@ -84,12 +83,10 @@
               <dd class="col-sm-8 dd-interviewed" id="interviewed">Yes</dd>
               <dt class="col-sm-4 dd-interview-time">Score:</dt>
               <dd class="col-sm-8 dd-score" id="score"></dd>
-              <dt class="col-sm-4 dd-result">Result:</dt>
-              <dd class="col-sm-8 dd-result" id="result"></dd>
               <dt class="col-sm-4 dd-training-date">Training Date:</dt>
               <dd class="col-sm-8 dd-training-date" id="training-date"></dd>
-              <dt class="col-sm-4 dd-date-hired">Date Hired:</dt>
-              <dd class="col-sm-8 dd-date-hired" id="date-hired"></dd>
+              <dt class="col-sm-4 dd-date-approved">Date Approved:</dt>
+              <dd class="col-sm-8 dd-date-approved" id="date-approved"></dd>
             </dl>
           </div>
           <div class="modal-footer">
