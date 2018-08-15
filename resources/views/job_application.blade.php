@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('stylesheets')
-  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.css' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.css') }}">
+  <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.css' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.css') }}">
   <link rel="stylesheet" href="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.css' : '/vendors/datepicker/datepicker.min.css') }}">
   <style>
     .bootstrap-tagsinput {
@@ -16,7 +16,7 @@
 @section('content')
 <main class="container py-5">
     <h2 class="text-center">Job Application for
-      <span class="text-primary font-weight-bold" id="application-heading-label">Job Title</span>
+      <span class="text-primary font-weight-bold" id="application-heading-label">{{ $job->name }}</span>
     </h2>
     <hr class="line">
 
@@ -28,7 +28,9 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-personal-info" name="frm_personal_info">
+        {{ csrf_field() }}
+        <input type="hidden" id="job-id" name="job_id" class="form-control" value="{{ $job->id }}">
         <div class="row">
           <!-- Name -->
           <div class="col-sm-12">
@@ -40,17 +42,17 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-surname" name="application_surname" class="form-control" placeholder="Surname">
+              <input type="text" id="application-surname" name="application_surname" class="form-control" placeholder="Surname" value="{{ Auth::user()->last_name }}" disabled="true">
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-given-name" name="application_given_name" class="form-control" placeholder="Given Name">
+              <input type="text" id="application-given-name" name="application_given_name" class="form-control" placeholder="Given Name" value="{{ Auth::user()->first_name }}" disabled="true">
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-middle-name" name="application_middle_name" class="form-control" placeholder="Last Name">
+              <input type="text" id="application-middle-name" name="application_middle_name" class="form-control" placeholder="Last Name" value="{{ Auth::user()->middle_name }}" disabled="true">
             </div>
           </div>
 
@@ -64,7 +66,7 @@
           </div>
           <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-present-address" name="application_present_address" class="form-control" placeholder="Present Address">
+              <input type="text" id="application-present-address" name="application_present_address" class="form-control" placeholder="Present Address" value="{{ Auth::user()->address }}" disabled="true">
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -73,7 +75,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">+63</div>
                 </div>
-                <input type="text" name="mobile_number" id="application-mobile-number" class="form-control" placeholder="e.g. 9363339999">
+                <input type="text" name="application_mobile_number" id="application-mobile-number" class="form-control" placeholder="e.g. 9363339999" value="{{ str_replace('+63', '', Auth::user()->mobile) }}" disabled="true">
               </div>
             </div>
           </div>
@@ -101,14 +103,14 @@
           <div class="col-sm-12">
             <div class="form-heading d-flex align-items-baseline">
               <h6 class="mb-0">Birth Date</h6>&nbsp;&nbsp;
-              <small class="text-muted mb-0">(Date of Birth and Place of BIrth)</small>
+              <small class="text-muted mb-0">(Date of Birth and Place of Birth)</small>
             </div>
             <hr class="mt-1 border-dark">
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
               <input type="text" id="application-date-of-birth" name="application_date_of_birth" class="form-control" data-toggle="datepicker"
-                placeholder="06/21/1995">
+                placeholder="06/21/1995" value="{{ Auth::user()->date_of_birth }}" disabled="true">
             </div>
           </div>
           <div class="col-lg-9 col-md-9 col-sm-12">
@@ -127,20 +129,20 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="number" id="application-age" name="application_age" class="form-control" placeholder="Age">
+              <input type="number" id="application-age" name="application_age" class="form-control" placeholder="Age" value="{{ Auth::user()->age }}" disabled="true">
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <select name="application_gender" id="application-gender" class="form-control">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+              <select name="application_gender" id="application-gender" class="form-control" disabled="true">
+                <option value="Male" {{ Auth::user()->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                <option value="Female" {{ Auth::user()->gender == 'Female' ? 'selected' : '' }}>Female</option>
               </select>
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-religion" name="application_religion" class="form-control" placeholder="Civil Status">
+              <input type="text" id="application-religion" name="application_religion" class="form-control" placeholder="Religion">
             </div>
           </div>
 
@@ -157,11 +159,11 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <select name="application_civil_status" id="application-civil-status" class="form-control">
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Separated">Separated</option>
+              <select name="application_civil_status" id="application-civil-status" class="form-control" disabled="true">
+                <option value="Single" {{ Auth::user()->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
+                <option value="Married" {{ Auth::user()->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
+                <option value="Widowed" {{ Auth::user()->civil_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+                <option value="Separated" {{ Auth::user()->civil_status == 'Seperated' ? 'selected' : '' }}>Separated</option>
               </select>
             </div>
           </div>
@@ -411,7 +413,7 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-contact-number" name="application_contact-number" class="form-control" placeholder="Contact Number">
+              <input type="text" id="application-contact-number" name="application_contact_number" class="form-control" placeholder="Contact Number">
             </div>
           </div>
           <div class="col-sm-12">
@@ -439,7 +441,8 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-educational-background" name="frm_educational_background">
+        {{ csrf_field() }}
         <div class="row">
           <!-- Elementary -->
           <div class="col-sm-12">
@@ -485,7 +488,8 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
-              <input type="text" id="application-high-school-honor" name="application_high_school_honor" class="form-control" placeholder="Honor/Award">
+              <input type="text" id="application-high-school-honor" name="application_high_school_honor
+              " class="form-control" placeholder="Honor/Award">
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -550,7 +554,8 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-government-exams" name="frm_government_exams">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-heading d-flex align-items-baseline">
@@ -645,7 +650,8 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-organizations" name="frm_organizations">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-heading d-flex align-items-baseline">
@@ -739,7 +745,8 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form  id="frm-employment-record" name="frm_employment_record">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-heading d-flex align-items-baseline">
@@ -930,7 +937,8 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-questions" name="frm_questions">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
@@ -942,11 +950,11 @@
             <div class="form-group">
               <label for="">Have you ever convicted/ charge in any court law?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="convictionOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="convictionsOptions1" name="convictionOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="convictionOptions" value="No">
+                <input class="form-check-input" type="radio" id="convictionsOptions2" name="convictionOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
@@ -960,11 +968,11 @@
             <div class="form-group">
               <label for="">Do you have any health problems?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="healthProblemOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="healthProblemOptions1" name="healthProblemOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="healthProblemOptions" value="No">
+                <input class="form-check-input" type="radio" id="healthProblemOptions2" name="healthProblemOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
@@ -978,11 +986,11 @@
             <div class="form-group">
               <label for="">Have you ever had an accident or operation?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="operationOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="operationOptions1" name="operationOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="operationOptions" value="No">
+                <input class="form-check-input" type="radio" id="operationOptions2" name="operationOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
@@ -1002,59 +1010,59 @@
             <div class="form-group">
               <label for="">Do you have friend/s or relative/s working in the Company?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="companyRelativeOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="companyRelativeOptions1" name="companyRelativeOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="companyRelativeOptions" value="No">
+                <input class="form-check-input" type="radio" id="companyRelativeOptions2" name="companyRelativeOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation"  class="form-control" placeholder="If YES, Please state name and relation">
+              <input type="text" name="application_relative"  class="form-control" placeholder="If YES, Please state name and relation">
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
               <label for="">Are you willing to be assigned to any subsidiary office of the Corporation?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="subsidiaryOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="subsidiaryOptions1" name="subsidiaryOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="subsidiaryOptions" value="No">
+                <input class="form-check-input" type="radio" id="subsidiaryOptions2" name="subsidiaryOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation"  class="form-control" placeholder="If NO, Please state your reason">
+              <input type="text" name="application_subsidary"  class="form-control" placeholder="If NO, Please state your reason">
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
               <label for="">Are you willing to accept provincial assignments?</label>
               <div class="form-check form-check-inline ml-3">
-                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" value="Yes">
+                <input class="form-check-input" type="radio" id="provicialAssignmentOptions1" name="provicialAssignmentOptions" value="Yes">
                 <label class="form-check-label" for="">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="provicialAssignmentOptions" value="No">
+                <input class="form-check-input" type="radio" id="provicialAssignmentOptions2" name="provicialAssignmentOptions" value="No">
                 <label class="form-check-label" for="">No</label>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="application_operation"  class="form-control" placeholder="If YES, Please state your preffered province of assignment">
+              <input type="text" name="application_assignment"  class="form-control" placeholder="If YES, Please state your preffered province of assignment">
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="application-dialects">Skills</label>
+              <label for="application-skills">Skills</label>
               <input type="text" name="application_skills" id="application-skills" class="form-control" placeholder="Data Encoder" data-role="tagsinput">
             </div>
           </div>
@@ -1065,25 +1073,25 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Accounting Work">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Accounting Work">
               <label class="form-check-label" for="defaultCheck1">
                 Accounting Work
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Clerical Work">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Clerical Work">
               <label class="form-check-label" for="defaultCheck1">
                 Clerical Work
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Computer Operations">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Computer Operations">
               <label class="form-check-label" for="defaultCheck1">
                 Computer Operations
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Supervisory Work">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Supervisory Work">
               <label class="form-check-label" for="defaultCheck1">
                 Supervisory Work
               </label>
@@ -1091,25 +1099,25 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Computer Repair">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Computer Repair">
               <label class="form-check-label" for="defaultCheck1">
                 Computer Repair
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Profiling Clients">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Profiling Clients">
               <label class="form-check-label" for="defaultCheck1">
                 Profiling Clients
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Sales Marketing">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Sales Marketing">
               <label class="form-check-label" for="defaultCheck1">
                 Sales Marketing
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Typing">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Typing">
               <label class="form-check-label" for="defaultCheck1">
                 Typing
               </label>
@@ -1117,31 +1125,31 @@
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Stenography">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Stenography">
               <label class="form-check-label" for="defaultCheck1">
                 Stenography
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Driving (w/ license)">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Driving (w/ license)">
               <label class="form-check-label" for="defaultCheck1">
                 Driving (w/ license)
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Collection">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Collection">
               <label class="form-check-label" for="defaultCheck1">
                 Collection
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Programming">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Programming">
               <label class="form-check-label" for="defaultCheck1">
                 Programming
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Others">
+              <input class="form-check-input" type="checkbox" name="selected_skill[]" value="Others">
               <label class="form-check-label" for="defaultCheck1">
                 Others
               </label>
@@ -1167,31 +1175,32 @@
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-additional-questions" name="frm_additional_questions">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">In fifty words or less, please describe yourself. Indicate your likes and dislikes, strengths and areas of
                 improvements, hobbies and interest among others</label>
-              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="personal_description" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">Explain why you joined Patton Security &amp; Investigation Agency Inc,.? </label>
-              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="reasons_of_appying" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">Briefly state our personal and career goals. How do you see yourself in five years from today? </label>
-              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="carreer_goals" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="form-group">
               <label for="">State your three (3) most important accomplishment in life: </label>
-              <textarea name="" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="personal_accomplishments" cols="30" rows="5" class="form-control"></textarea>
             </div>
           </div>
 
@@ -1207,14 +1216,15 @@
     </section>
 
     <section id="personal-preferences" class="d-none">
-      <h5 class="text-muted text-center mb-4">Additional Question</h5>
+      <h5 class="text-muted text-center mb-4">Personal Preferrences</h5>
       <div class="alert alert-info mb-4" role="alert">
         <i class="fas fa-exclamation-triangle"></i>&nbsp;
         <strong>NOTE: </strong> Please fill-out the form properly because you cannot edit the information you've provided once you
         click the NEXT button.
       </div>
 
-      <form action="">
+      <form id="frm-personal-preference" name="frm_personal_preference">
+        {{ csrf_field() }}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-heading d-flex align-items-baseline">
@@ -1225,49 +1235,49 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Full Name">
+              <input type="text" name="preference_name_1" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Occupation">
+              <input type="text" name="preference_occupation_1" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="preference_contact_1" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Full Name">
+              <input type="text" name="preference_name_2" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Occupation">
+              <input type="text" name="preference_occupation_2" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="preference_contact_2" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Full Name">
+              <input type="text" name="preference_name_3" class="form-control" placeholder="Full Name">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Occupation">
+              <input type="text" name="preference_occupation_3" class="form-control" placeholder="Occupation">
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group">
-              <input type="text" name="" class="form-control" placeholder="Contact Number">
+              <input type="text" name="preference_contact_3" class="form-control" placeholder="Contact Number">
             </div>
           </div>
 
@@ -1293,124 +1303,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
-    <script src="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js') }}"></script>
-  <script>
-    $(document).ready(function () {
-      $('#application-date-of-birth').datepicker();
-      $('#application-date-issued').datepicker();
-      $('#application-date-of-expiration').datepicker();
-      $('#application-father-date-of-birth').datepicker();
-      $('#application-mother-date-of-birth').datepicker();
-      $('#application-spouse-date-of-birth').datepicker();
-      $('#application-sibling-1-date-of-birth').datepicker();
-      $('#application-sibling-2-date-of-birth').datepicker();
-      $('#application-sibling-3-date-of-birth').datepicker();
-      $('#application-child-1-date-of-birth').datepicker();
-      $('#application-child-2-date-of-birth').datepicker();
-      $('#application-child-3-date-of-birth').datepicker();
-      $('#application-date-taken-1').datepicker();
-      $('#application-date-taken-2').datepicker();
-      $('#application-date-taken-3').datepicker();
-      $('#application-membership-year-from-1').datepicker();
-      $('#application-membership-year-to-1').datepicker();
-      $('#application-membership-year-from-2').datepicker();
-      $('#application-membership-year-to-2').datepicker();
-      $('#application-membership-year-from-3').datepicker();
-      $('#application-membership-year-to-3').datepicker();
-      $('#application-employment-period-from-1').datepicker();
-      $('#application-employment-period-to-1').datepicker();
-      $('#application-employment-period-from-2').datepicker();
-      $('#application-employment-period-to-2').datepicker();
-      $('#application-employment-period-from-3').datepicker();
-      $('#application-employment-period-to-3').datepicker();
-
-      const personalInfoNextBtn = $('#btn-personal-information-next'),
-        personalInfoWrapper = $('#personal-information'),
-        educationalBackgroundBtn = $('#btn-educational-background-next'),
-        educationalBackgroundWrapper = $('#educational-background'),
-        governmentExamsNextBtn = $('#btn-government-exams-next'),
-        governmentExamsWrapper = $('#government-exams'),
-        organizationsWrapper = $('#organizations'),
-        organizationsBtn = $('#btn-organizations-next'),
-        employmentRecordWrapper = $('#employment-record'),
-        employmentRecordBtn = $('#btn-employment-record-next'),
-        questionWrapper = $('#question'),
-        questionBtn = $('#btn-questions-next'),
-        question2Wrapper = $('#question-2'),
-        question2Btn = $('#btn-addtional-question-next'),
-        personalPreferencesWrapper = $('#personal-preferences'),
-        personalPreferencesBtn = $('#btn-application-finish');
-
-      personalInfoNextBtn.on('click', function (e) {
-        e.preventDefault();
-        personalInfoWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        educationalBackgroundWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      educationalBackgroundBtn.on('click', function (e) {
-        e.preventDefault();
-        educationalBackgroundWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        governmentExamsWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      governmentExamsNextBtn.on('click', function (e) {
-        e.preventDefault();
-        governmentExamsWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        organizationsWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      organizationsBtn.on('click', function (e) {
-        e.preventDefault();
-        organizationsWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        employmentRecordWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      employmentRecordBtn.on('click', function (e) {
-        e.preventDefault();
-        employmentRecordWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        questionWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      questionBtn.on('click', function (e) {
-        e.preventDefault();
-        questionWrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        question2Wrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-
-      question2Btn.on('click', function (e) {
-        e.preventDefault();
-        question2Wrapper.fadeOut('slow', function () {
-          $(this).addClass('d-none');
-        });
-        personalPreferencesWrapper.fadeIn('slow', function () {
-          $(this).removeClass('d-none');
-        });
-      });
-    });
-  </script>
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js' : '/vendors/bootstrap-tags-input/bootstrap-tagsinput.min.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/job_application.js' : '/js/pages/job_application.js') }}"></script>
 @endsection

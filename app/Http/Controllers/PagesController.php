@@ -9,9 +9,11 @@ use App\JobVacancy;
 class PagesController extends Controller
 {
 		public function index() {
-			$featured_jobs = JobVacancy::where('featured', '=', 1)->get();
-			$jobs = JobVacancy::where([['featured', '=', 0], ['hiring_status', '=', 1] ])->get();
-			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'jobs' => $jobs));
+			$featured_jobs = JobVacancy::where([['featured', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
+			$urgent_jobs = JobVacancy::where([['featured', '=', 0], ['hiring_status', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
+			$jobs = JobVacancy::where('no_of_vacancy', '!=', 0)->get();
+
+			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'urgent_jobs' => $urgent_jobs, 'jobs' => $jobs));
 		}
 
 		public function about() {
@@ -31,7 +33,8 @@ class PagesController extends Controller
 			return view('verify')->with(array('page' => 'Verify Account', 'data' => $account));
 		}
 
-		public function jobApplication() {
-			return view('job_application')->with(array('page' => 'Job Application'));
+		public function jobApplication($job_id) {
+			$job = JobVacancy::where('id', $job_id)->first();
+			return view('job_application')->with(array('page' => 'Job Application', 'job' => $job));
 		}
 }

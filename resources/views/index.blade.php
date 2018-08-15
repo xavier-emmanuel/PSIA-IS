@@ -27,7 +27,7 @@
         </section>
         <section class="c-job-list container">
             <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-12">
+                <div class="col-lg-9 col-md-9 col-sm-12 left-panel">
                     <div class="card c-job-list__featured mb-4" style="display: {{ $featured_jobs->count() == 0 ? 'none' : ''}}">
                         <div class="card-header bg-primary text-light">Featured Hiring</div>
                         @foreach($featured_jobs as $featured_job)
@@ -37,28 +37,28 @@
                                     <small class="text-muted">{{ $featured_job->created_at->diffForHumans() }}</small>
                                 </div>
                                 <p class="card-text">{!! $featured_job->description !!}</p>
-                                <a href="" style="display: {{ Auth::check() ? '' : 'none' }}"><button class="btn btn-outline-primary"><i class="fas fa-briefcase"></i>&nbsp; Apply</button></a>
+                                <button class="btn btn-sm btn-outline-primary btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" data-id="{{ $featured_job->id }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
                                 <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-check"></i>&nbsp; Apply</button>
                             </div>
                         @endforeach
                     </div>
-                    <div class="card c-job-list__urgent mb-4" style="display: {{ $jobs->count() == 0 ? 'none' : ''}}">
+                    <div class="card c-job-list__urgent mb-4" style="display: {{ $urgent_jobs->count() == 0 ? 'none' : ''}}">
                         <div class="card-header bg-primary text-light">Urgent Hiring</div>
                         <div class="card-body p-0">
-                            @foreach($jobs as $job)
+                            @foreach($urgent_jobs as $urgent_job)
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex align-items-start">
-                                    <img src="{{ asset(App::environment('production') ? '/public/uploads/job_vacancy' : '/uploads/job_vacancy') }}/{{ $job->image }}" alt="" class="border mr-2" width="80px">
+                                    <img src="{{ asset(App::environment('production') ? '/public/uploads/job_vacancy' : '/uploads/job_vacancy') }}/{{ $urgent_job->image }}" alt="" class="border mr-2" width="80px">
                                     <div class="flex-column w-100">
                                         <div class="d-flex justify-content-between">
-                                            <h4 class="card-title">{{ $job->name }}</h4>
-                                            <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
+                                            <h4 class="card-title">{{ $urgent_job->name }}</h4>
+                                            <small class="text-muted">{{ $urgent_job->created_at->diffForHumans() }}</small>
                                         </div>
                                         <div class="flex-column w-100">
                                             <div>
-                                                {!! str_limit($job->description, 200) !!}
+                                                {!! str_limit($urgent_job->description, 200) !!}
                                             </div>
-                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-job-id="{{ $job->id }}" data-job-name="{{ $job->name }}" data-job-description="{{ $job->description }}" data-job-vacancy="{{ $job->no_of_vacancy }}" data-job-image="{{ $job->image }}" data-job-time="{{ $job->created_at->diffForHumans() }}">Read more</button>
+                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-job-id="{{ $urgent_job->id }}" data-job-name="{{ $urgent_job->name }}" data-job-description="{{ $urgent_job->description }}" data-job-vacancy="{{ $urgent_job->no_of_vacancy }}" data-job-image="{{ $urgent_job->image }}" data-job-time="{{ $urgent_job->created_at->diffForHumans() }}">Read more</button>
                                         </div>
                                     </div>
                                 </li>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <img src="img/ads.jpg" alt="" width="100%">
+                    <img src="img/ads.jpg" alt="" width="100%" class="right-panel">
                 </div>
             </div>
         </section>
@@ -87,7 +87,8 @@
             <div class="modal-body" id="job-description">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary btn-lg" id="btn-apply"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-primary btn-lg btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button class="btn btn-outline-primary btn-lg btn-apply-login" data-dismiss="modal" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
             </div>
             </div>
         </div>
@@ -109,5 +110,4 @@
     });
 	</script>
     <script src="{{ asset(App::environment('production') ? '/public/js/pages/apply.js' : '/js/pages/apply.js') }}"></script>
-    <script src="{{ asset(App::environment('production') ? '/public/js/pages/login.js' : '/js/pages/login.js') }}"></script>
 @endsection

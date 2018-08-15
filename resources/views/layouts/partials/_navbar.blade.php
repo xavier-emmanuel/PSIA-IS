@@ -34,7 +34,7 @@
           </ul>
           <ul class="navbar-nav" style="display: {{ Auth::check() ? 'block' : 'none' }}">
             <li class="nav-item d-flex align-items-center">
-              <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ Auth::check() ? Auth::user()->image : '' }}" alt="" class="rounded-circle" style="width: 50px; height: 50px; background-color: #fff;" id="user-image">
+              <img src="{{ Auth::check() ? asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') : '' }}/{{ Auth::check() ? Auth::user()->image : '' }}" alt="" class="rounded-circle" style="width: 50px; height: 50px; background-color: #fff;" id="user-image">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
