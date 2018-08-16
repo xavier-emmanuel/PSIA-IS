@@ -5,6 +5,7 @@ $(document).ready(function () {
         $('#frm-set-interview :input').removeAttr('readonly', 'readonly');
         $('#frm-set-interview :input:radio').removeAttr('disabled', 'disabled');
         $('.btn-save').html('Save');
+        $('#frm-status').val('Save');
         $('.btn-save').show();
         $('#btn-hiring').show();
         var id = $(e.relatedTarget).data('id'),
@@ -62,15 +63,6 @@ $(document).ready(function () {
             $('.interview-field-score').addClass("d-none");
         }
 
-        if (interviewed == 1) {
-            $('#interviewed-yes').prop('checked', true);
-            $('#interviewed-no').prop('checked', false);
-            $('.interview-field-score').removeClass("d-none");
-        } else {
-            $('#interviewed-yes').prop('checked', false);
-            $('#interviewed-no').prop('checked', true);
-        }
-
         if (score == 'Passed') {
             $('#exam-passed').prop('checked', true);
             $('#exam-failed').prop('checked', false);
@@ -104,6 +96,26 @@ $(document).ready(function () {
             var formattedTime = 'N/A';
         }
 
+        if (interviewed == 1) {
+            $('#interviewed-yes').prop('checked', true);
+            $('#interviewed-no').prop('checked', false);
+            $('.interview-field-score').removeClass("d-none");
+            $('.interview-date').attr('readonly', 'readonly');
+            $('.btn-resched').hide();
+        } else if (interviewed == 0 && $('#frm-status').val() == 'Update') {
+            $('#interviewed-yes').prop('checked', false);
+            $('#interviewed-no').prop('checked', true);
+            $('.btn-resched').show();
+
+            $('.btn-resched').on('click', function() {
+                $('#frm-status').val('Resched');
+                $('.interview-date').removeAttr('readonly', 'readonly');
+                $('.btn-resched').hide();
+            });
+        } else if (interviewed == 0 && $('#frm-status').val() == 'Save') {
+            $('.btn-resched').hide();
+        }
+
         if (result == 'Approved') {
             $('#frm-set-interview').find(':radio:not(:checked)').attr('disabled', true);
             $('.dd-result').removeClass("d-none");
@@ -129,11 +141,16 @@ $(document).ready(function () {
 
         $('#interviewed-yes').on('click', function() {
             $('.interview-field-score').removeClass("d-none");
+            $('.interview-date').attr('readonly', 'readonly');
+            $('.interview-date').val($(e.relatedTarget).data('interview-date'));
+            $('#frm-status').val('Update');
+            $('.btn-resched').hide();
         });
 
         $('#interviewed-no').on('click', function() {
             $('input[name=exam_score]').prop('checked', false);
             $('.interview-field-score').addClass("d-none");
+            $('.btn-resched').show();
         });
         
         var hired_date = new Date(date_hired);

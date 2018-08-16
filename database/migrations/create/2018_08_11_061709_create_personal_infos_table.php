@@ -23,12 +23,12 @@ class CreatePersonalInfosTable extends Migration
             $table->string('religion');
             $table->integer('height');
             $table->integer('weight');
-            $table->integer('sss_number');
-            $table->integer('tin_number');
-            $table->integer('philhealth_number');
-            $table->integer('license_number');
-            $table->string('date_issued');
-            $table->string('expiration_date');
+            $table->integer('sss_number')->nullable();
+            $table->integer('tin_number')->nullable();
+            $table->integer('philhealth_number')->nullable();
+            $table->integer('license_number')->nullable();
+            $table->string('date_issued')->nullable();
+            $table->string('expiration_date')->nullable();
             $table->string('father_name');
             $table->string('father_birth_date');
             $table->string('father_occupation');

@@ -176,6 +176,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
+              <button type="button" class="btn btn-warning btn-resched">Reschedule Interview</button>
               <button type="submit" class="btn btn-warning btn-save">Save</button>
             </div>
           </form>

@@ -21,13 +21,15 @@ class Interview extends Mailable
     public $interviewTime;
     public $title;
     public $message;
+    public $frm_status;
 
-    public function __construct($interviewDate, $interviewTime, $title, $message)
+    public function __construct($interviewDate, $interviewTime, $title, $message, $frm_status)
     {
         $this->interviewDate = $interviewDate;
         $this->interviewTime = $interviewTime;
         $this->title = $title;
         $this->message = $message;
+        $this->frm_status = $frm_status;
     }
 
     /**
@@ -36,9 +38,15 @@ class Interview extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')
+    {   
+        if ($this->frm_status == 'Resched') {
+            return $this->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')
+                    ->subject('Reschedule of Job Interview')
+                    ->markdown('emails.interview');
+        } else {
+            return $this->from('pattonsecu@gmail.com', 'Patton Security & Investigation Agency')
                     ->subject('Job Interview')
                     ->markdown('emails.interview');
+        }
     }
 }
