@@ -28,9 +28,12 @@
 	<main class="container py-5 px-0 border border-dark">
 
     <section id="section-one">
-      <figure class="d-flex justify-content-end mr-3">
-        <img src="{{ asset('img/default_image.png') }}" alt="" height="192px" width="192px" class="border border-secondary">
-      </figure>
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center" style="width: 80%;">Application Form</h1>
+        <figure class="mr-3" style="width: 20%;">
+          <img src="{{ asset('img/default_image.png') }}" alt="" height="192px" width="192px" class="border border-secondary">
+        </figure>
+      </div>
       <div class="table-header">1. PERSONAL INFORMATION</div>
       <div class="d-flex justify-content-around table-subheading">
         <h6 class="font-weight-bold">Last Name</h6>
