@@ -79,7 +79,7 @@
 
     <!-- Approval Modal -->
     <div class="modal fade" id="approve-applicant" tabindex="-1" role="dialog" aria-labelledby="approveApplicantLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <form method="post" id="frm-approve-applicant">
             <input type="hidden" name="hdn_id" id="hdn-id">

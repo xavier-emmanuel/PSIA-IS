@@ -11,7 +11,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ Request::is('job-vacancy') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('GM-dashboard') ? 'active' : '' }}">
               <a class="nav-link" href="/GM-dashboard">Dashboard
                 <span class="sr-only">(current)</span>
               </a>

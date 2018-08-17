@@ -174,10 +174,12 @@
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
-              <button type="button" class="btn btn-warning btn-resched">Reschedule Interview</button>
-              <button type="submit" class="btn btn-warning btn-save">Save</button>
+            <div class="modal-footer d-flex justify-content-between">
+              <div>
+                <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
+                <button type="submit" class="btn btn-warning btn-save">Save</button>
+              </div>
+              <button type="button" class="btn btn-info btn-resched">Reschedule Interview</button>
             </div>
           </form>
         </div>

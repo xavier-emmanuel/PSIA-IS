@@ -7,7 +7,7 @@ use App\Applicant;
 
 class ApplicantsController extends Controller
 {
-    //
+
 	public function ajaxShowApplicants(Request $request) {
 		$applicant = Applicant::where('job_vacancy_id', '!=', 0)->where('approved', '!=', 1)->where('hired', '!=', 1)->get();
 
@@ -65,7 +65,7 @@ class ApplicantsController extends Controller
             } else {
               $result = '';
             }
-            
+
             $id = '<td>'.$row->id.'</td>';
             $name = '<td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>';
 			      $job = '<td>'.$row->jobVacancies->name.'</td>';
@@ -109,7 +109,7 @@ class ApplicantsController extends Controller
             } else {
               $result = '';
             }
-            
+
             $id = '<td>'.$row->id.'</td>';
             $name = '<td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>';
 			      $job = '<td>'.$row->jobVacancies->name.'</td>';

@@ -38,6 +38,9 @@
                                 </div>
                                 <p class="card-text">{!! $featured_job->description !!}</p>
                                 <button class="btn btn-sm btn-outline-primary btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" data-id="{{ $featured_job->id }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+
+                                <p class="mb-0 text-success"><i class="fas fa-check"></i>&nbsp;&nbsp; Applied</p>
+
                                 <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-check"></i>&nbsp; Apply</button>
                             </div>
                         @endforeach
