@@ -31,7 +31,10 @@ class ApplicantsController extends Controller
             $button = '<td>
                         <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-eye "></i>
-                        </button>
+                        </button>&nbsp;
+                        <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/'.$row->id.'/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" target="_blank" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
+                          <i class="fas fa-paperclip "></i>
+                        </a>
                       </td>';
 
     	     	$data[] = array(
@@ -75,7 +78,10 @@ class ApplicantsController extends Controller
             $button = '<td>
                         <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-eye "></i>
-                        </button>
+                        </button>&nbsp;
+                        <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/'.$row->id.'/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" target="_blank" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
+                          <i class="fas fa-paperclip "></i>
+                        </a>
                       </td>';
 
     	     	$data[] = array(
@@ -119,7 +125,10 @@ class ApplicantsController extends Controller
             $button = '<td>
                         <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-date-approved="'.$row->date_approved.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-eye "></i>
-                        </button>
+                        </button>&nbsp;
+                        <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/'.$row->id.'/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" target="_blank" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
+                          <i class="fas fa-paperclip "></i>
+                        </a>
                       </td>';
 
     	     	$data[] = array(
@@ -161,7 +170,7 @@ class ApplicantsController extends Controller
             $age = '<td>'.$row->age.'</td>';
             $gender = '<td>'.$row->gender.'</td>';
             $button = '<td>
-                        <a class="btn btn-info" id="btn-applicant-form" href="/applicant-form/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" target="_blank" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
+                        <a class="btn btn-info" id="btn-applicant-form" href="/applicant-form/'.$row->id.'/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-paperclip "></i>
                         </a>
                       </td>';

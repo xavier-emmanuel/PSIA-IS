@@ -36,6 +36,7 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::get('/approved-applicants', 'HRPagesController@approvedApplicants');
 	Route::get('/job-vacancy', 'HRPagesController@jobVacancy');
 	Route::get('/HR-dashboard', 'HRPagesController@dashboard');
+	Route::get('/HR/applicant-form/{id}/{name}', 'HRPagesController@applicantForm');
 
 	Route::post('/set-interview', 'InterviewController@setInterview');
 
@@ -43,7 +44,7 @@ Route::group( [ 'middleware' => 'auth' ], function()
 
 	Route::post('/hire-applicant', 'HireController@hireApplicant');
 
-	Route::get('/applicant-form/{name}', 'GMPagesController@applicantForm');
+	Route::get('/applicant-form/{id}/{name}', 'GMPagesController@applicantForm');
 
 	Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 	Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');

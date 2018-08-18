@@ -113,18 +113,15 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-                $('#btn-approve').removeAttr('disabled', 'disabled').html('Yes');
 
-                $('#approve-applicant').modal('hide');
-                $('#tbl-evaluated-applicants').DataTable().ajax.reload(null, false);
+                localStorage.setItem("Approve", data.OperationStatus);
+                setTimeout(function() {
+                    $('#btn-approve').removeAttr('disabled', 'disabled').html('Yes');
+                    $('#approve-applicant').modal('hide');
+                    $('#btn-approval').attr('disabled', 'disabled').html('<i class="fas fa-check"></i>&nbsp; Approved');
+                    window.location.href = '/GM-dashboard';
+                }, 2000);
 
-                $.toast({
-                    heading: 'Success',
-                    text: data.success,
-                    position: 'top-right',
-                    icon: 'success',
-                    hideAfter: 3500
-                });
             },
             error: function (xhr, error, ajaxOptions, thrownError) {
                 alert(xhr.responseText);

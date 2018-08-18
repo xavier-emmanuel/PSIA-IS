@@ -30,4 +30,9 @@ class HRPagesController extends Controller
     public function profile() {
         return view('profile')->with(array('page' => 'User Profile'));
     }
+
+    public function applicantForm($id) {
+        $applicant = Applicant::find($id);
+        return view('applicant_form')->with(array('page' => 'Applicant Form | HR', 'applicant' => $applicant));
+    }
 }

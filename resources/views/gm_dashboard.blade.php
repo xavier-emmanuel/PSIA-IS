@@ -125,5 +125,19 @@
         $('#approve-applicant').modal('show');
       });
     });
+
+    $(document).ready(function(){
+        if(localStorage.getItem("Approve"))
+        {
+            $.toast({
+                heading: 'Success',
+                text: 'You have successfully approved the applicant.',
+                position: 'top-right',
+                icon: 'success',
+                hideAfter: 3500
+            });
+            localStorage.clear();
+        }
+    });
   </script>
 @endsection
