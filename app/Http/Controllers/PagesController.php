@@ -11,7 +11,7 @@ class PagesController extends Controller
 		public function index() {
 			$featured_jobs = JobVacancy::where([['featured', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
 			$urgent_jobs = JobVacancy::where([['featured', '=', 0], ['hiring_status', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
-			$jobs = JobVacancy::where('no_of_vacancy', '!=', 0)->get();
+			$jobs = JobVacancy::where([['no_of_vacancy', '!=', 0], ['featured', '=', 0], ['hiring_status', '=', 0]])->get();
 
 			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'urgent_jobs' => $urgent_jobs, 'jobs' => $jobs));
 		}

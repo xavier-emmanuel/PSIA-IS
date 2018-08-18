@@ -25,10 +25,10 @@ class CreateEducationalBackgroundsTable extends Migration
             $table->string('highschool_award')->nullable();
             $table->string('highschool_year');
             $table->string('highschool_address');
-            $table->string('college_school');
+            $table->string('college_school')->nullable();
             $table->string('college_award')->nullable();
-            $table->string('college_year');
-            $table->string('college_address');
+            $table->string('college_year')->nullable();
+            $table->string('college_address')->nullable();
             $table->timestamps();
         });
     }

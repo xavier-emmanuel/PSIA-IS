@@ -1,8 +1,18 @@
 $(document).ready(function() {
 	$('.btn-read-more').on('click', function() {
 		$('#job-title').html($(this).data('job-name'));
+		$('#number-of-vacancy').html($(this).data('job-vacancy'));
 		$('#job-description').html($(this).data('job-description'));
 		$('.btn-apply').attr('data-id', $(this).data('job-id'));
+		var job_id = $(this).data('job-id');
+		var user_id = $(this).data('user-id');
+		if(job_id == user_id) {
+			$('#btn-apply').hide();
+			$('#btn-applied').show();
+		} else if (job_id != user_id && user_id != '') {
+			$('#btn-applied').hide();
+			$('#btn-apply').show();
+		}
 	})
 
 	$('.btn-apply').on('click', function() {
@@ -10,19 +20,5 @@ $(document).ready(function() {
 		setTimeout(function () {
       window.location.href = job_id + '/job-application';
     }, 100);
-	})
-
-	$('html, body').on('scroll', function(e){
-		var w_height = $('body').height();
-		var l_height = $('.left-panel').height();
-		var l_outer_height = $('.left-panel').outerHeight() - $('body').scrollTop() - 600;
-		var r_height = $(".right-panel").height();
-		var windows_height = $(window).height();
-		if ($('body').scrollTop() >= r_height) {
-				$(".right-panel").css('top', $('body').scrollTop());
-		}
-		else {
-			$(".right-panel").css('top', '0px');
-		}
 	})
 })

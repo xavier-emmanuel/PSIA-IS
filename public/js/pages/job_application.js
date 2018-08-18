@@ -101,32 +101,50 @@ $(document).ready(function () {
 
   governmentExamsNextBtn.on('click', function (e) {
     e.preventDefault();
-    governmentExamsWrapper.fadeOut('slow', function () {
-      $(this).addClass('d-none');
-    });
-    organizationsWrapper.fadeIn('slow', function () {
-      $(this).removeClass('d-none');
-    });
+    governmentExams();
+    var government_exams_valid = $('#frm-government-exams').valid();
+    if (!government_exams_valid) {
+	    return false;
+	  } else {
+	    governmentExamsWrapper.fadeOut('slow', function () {
+	      $(this).addClass('d-none');
+	    });
+	    organizationsWrapper.fadeIn('slow', function () {
+	      $(this).removeClass('d-none');
+	    });
+	   }
   });
 
   organizationsBtn.on('click', function (e) {
     e.preventDefault();
-    organizationsWrapper.fadeOut('slow', function () {
-      $(this).addClass('d-none');
-    });
-    employmentRecordWrapper.fadeIn('slow', function () {
-      $(this).removeClass('d-none');
-    });
+    organization();
+    var organizations_valid = $('#frm-organizations').valid();
+    if (!organizations_valid) {
+	    return false;
+	  } else {
+	    organizationsWrapper.fadeOut('slow', function () {
+	      $(this).addClass('d-none');
+	    });
+	    employmentRecordWrapper.fadeIn('slow', function () {
+	      $(this).removeClass('d-none');
+	    });
+	  }
   });
 
   employmentRecordBtn.on('click', function (e) {
     e.preventDefault();
-    employmentRecordWrapper.fadeOut('slow', function () {
-      $(this).addClass('d-none');
-    });
-    questionWrapper.fadeIn('slow', function () {
-      $(this).removeClass('d-none');
-    });
+    employmentRecord();
+    var employment_record_valid = $('#frm-employment-record').valid();
+    if (!employment_record_valid) {
+	    return false;
+	  } else {
+	    employmentRecordWrapper.fadeOut('slow', function () {
+	      $(this).addClass('d-none');
+	    });
+	    questionWrapper.fadeIn('slow', function () {
+	      $(this).removeClass('d-none');
+	    });
+	  }
   });
 
   questionBtn.on('click', function (e) {
@@ -163,14 +181,7 @@ $(document).ready(function () {
 
 	personalPreferencesBtn.on('click', function (e) {
 		e.preventDefault();
-		// personalInfo();
-		// var personal_info_valid = $('#frm-personal-info').valid();
-		// educationalBackground();
-		// var educational_background_valid = $('#frm-educational-background').valid();
-		// questions();
-		// var questions_valid = $('#frm-questions').valid();
-		// additionalQuestions();
-		// var additional_questions_valid = $('#frm-additional-questions').valid();
+
 		personalPreference();
 		var personal_preference_valid = $('#frm-personal-preference').valid();
     if (!personal_preference_valid) {
@@ -281,10 +292,6 @@ function personalInfo() {
 				min: 1
 			},
 			application_civil_status: 'required',
-			// application_sss_number: 'required',
-			// application_tin_number: 'required',
-			// application_philhealth: 'required',
-			// application_license_number: 'required',
 			application_date_issued: {
 				required: function(element){
             return $("#application-license-number").val()!="";
@@ -454,10 +461,6 @@ function personalInfo() {
 				min: 'Please input a valid integer.'
 			},
 			application_civil_status: 'Required field cannot be left blank.',
-			// application_sss_number: 'Required field cannot be left blank.',
-			// application_tin_number: 'Required field cannot be left blank.',
-			// application_philhealth: 'Required field cannot be left blank.',
-			// application_license_number: 'Required field cannot be left blank.',
 			application_date_issued: {
 				required: 'Required field cannot be left blank.',
 				date: 'Please input a valid date.',
@@ -577,13 +580,10 @@ function educationalBackground() {
 				maxlength: 4,
 			},
 			application_high_school_school_address: 'required',
-			application_college: 'required',
 			application_college_year_graduated: {
-				required: true,
 				minlength: 4,
 				maxlength: 4,
-			},
-			application_college_school_address: 'required',
+			}
 		},
 		messages: {
 			application_elementary: 'Required field cannot be left blank.',
@@ -600,13 +600,202 @@ function educationalBackground() {
 				maxlength: 'Invalid year of graduation.',
 			},
 			application_high_school_school_address: 'Required field cannot be left blank.',
-			application_college: 'Required field cannot be left blank.',
 			application_college_year_graduated: {
-				required: 'Required field cannot be left blank.',
 				minlength: 'Invalid year of graduation.',
 				maxlength: 'Invalid year of graduation.',
+			}
+		},
+    highlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
+	});
+}
+
+function governmentExams() {
+	$('#frm-government-exams').validate({
+		ignore: [],
+    debug: false,
+		rules: {
+			application_date_taken_1: {
+				date: true
 			},
-			application_college_school_address: 'Required field cannot be left blank.',
+			application_date_taken_2: {
+				date: true
+			},
+			application_date_taken_3: {
+				date: true
+			},
+		},
+		messages: {
+			application_date_taken_1: {
+				date: 'Please input a valid date.'
+			},
+			application_date_taken_2: {
+				date: 'Please input a valid date.'
+			},
+			application_date_taken_3: {
+				date: 'Please input a valid date.'
+			},
+		},
+    highlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
+	});
+}
+
+function organization() {
+	$('#frm-organizations').validate({
+		ignore: [],
+    debug: false,
+		rules: {
+			application_membership_year_from_1: {
+				date: true,
+				dateLessThan: '#application-membership-year-to-1'
+			},
+			application_membership_year_to_1: {
+				date: true,
+				dateGreaterThan: '#application-membership-year-from-1'
+			},
+			application_membership_year_from_2: {
+				date: true,
+				dateLessThan: '#application-membership-year-to-2'
+			},
+			application_membership_year_to_2: {
+				date: true,
+				dateGreaterThan: '#application-membership-year-from-2'
+			},
+			application_membership_year_from_3: {
+				date: true,
+				dateLessThan: '#application-membership-year-to-3'
+			},
+			application_membership_year_to_3: {
+				date: true,
+				dateGreaterThan: '#application-membership-year-from-3'
+			},
+		},
+		messages: {
+			application_membership_year_from_1: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of membership.'
+			},
+			application_membership_year_to_1: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of membership.'
+			},
+			application_membership_year_from_2: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of membership.'
+			},
+			application_membership_year_to_2: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of membership.'
+			},
+			application_membership_year_from_3: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of membership.'
+			},
+			application_membership_year_to_3: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of membership.'
+			},
+		},
+    highlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-control').removeClass('is-invalid').removeClass('is-valid').addClass('is-valid');
+    },
+    errorElement: 'div',
+    errorClass: 'invalid-feedback',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
+	});
+}
+
+function employmentRecord() {
+	$('#frm-employment-record').validate({
+		ignore: [],
+    debug: false,
+		rules: {
+			application_employment_period_from_1: {
+				date: true,
+				dateLessThan: '#application-employment-period-to-1'
+			},
+			application_employment_period_to_1: {
+				date: true,
+				dateGreaterThan: '#application-employment-period-from-1'
+			},
+			application_employment_period_from_2: {
+				date: true,
+				dateLessThan: '#application-employment-period-to-2'
+			},
+			application_employment_period_to_2: {
+				date: true,
+				dateGreaterThan: '#application-employment-period-from-2'
+			},
+			application_employment_period_from_3: {
+				date: true,
+				dateLessThan: '#application-employment-period-to-3'
+			},
+			application_employment_period_to_3: {
+				date: true,
+				dateGreaterThan: '#application-employment-period-from-3'
+			},
+		},
+		messages: {
+			application_employment_period_from_1: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of employment.'
+			},
+			application_employment_period_to_1: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of employment.'
+			},
+			application_employment_period_from_2: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of employment.'
+			},
+			application_employment_period_to_2: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of employment.'
+			},
+			application_employment_period_from_3: {
+				date: 'Please input a valid date.',
+				dateLessThan: 'Date must be less than end of employment.'
+			},
+			application_employment_period_to_3: {
+				date: 'Please input a valid date.',
+				dateGreaterThan: 'Date must be greater than start of employment.'
+			},
 		},
     highlight: function (element) {
         $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
@@ -650,7 +839,7 @@ function questions() {
 			},
 			subsidiaryOptions: 'required',
 			application_subsidary: {
-				required:'#subsidiaryOptions1:checked'
+				required:'#subsidiaryOptions2:checked'
 			},
 			provicialAssignmentOptions: 'required',
 			application_assignment: {

@@ -36,12 +36,11 @@
                                     <h4 class="card-title">{{ $featured_job->name }}</h4>
                                     <small class="text-muted">{{ $featured_job->created_at->diffForHumans() }}</small>
                                 </div>
+                                <div><p><strong>No. of vacancy:</strong> {{ $featured_job->no_of_vacancy }}</p></div>
                                 <p class="card-text">{!! $featured_job->description !!}</p>
-                                <button class="btn btn-sm btn-outline-primary btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" data-id="{{ $featured_job->id }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
-
-                                <p class="mb-0 text-success"><i class="fas fa-check"></i>&nbsp;&nbsp; Applied</p>
-
-                                <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-check"></i>&nbsp; Apply</button>
+                                <button class="btn btn-sm btn-outline-primary btn-apply" style="display: {{ Auth::check() ? Auth::user()->job_vacancy_id == $featured_job->id ? 'none' : '' : 'none' }}" data-id="{{ $featured_job->id }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                                <p class="mb-0 text-success" style="display: {{ Auth::check() ? Auth::user()->job_vacancy_id == $featured_job->id ? '' : 'none' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': '' : '' }}><i class="fas fa-check"></i>&nbsp; Applied</p>
+                                <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
                             </div>
                         @endforeach
                     </div>
@@ -61,7 +60,31 @@
                                             <div>
                                                 {!! str_limit($urgent_job->description, 200) !!}
                                             </div>
-                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-job-id="{{ $urgent_job->id }}" data-job-name="{{ $urgent_job->name }}" data-job-description="{{ $urgent_job->description }}" data-job-vacancy="{{ $urgent_job->no_of_vacancy }}" data-job-image="{{ $urgent_job->image }}" data-job-time="{{ $urgent_job->created_at->diffForHumans() }}">Read more</button>
+                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-user-id="{{ Auth::check() ? Auth::user()->job_vacancy_id : ''}}" data-job-id="{{ $urgent_job->id }}" data-job-name="{{ $urgent_job->name }}" data-job-description="{{ $urgent_job->description }}" data-job-vacancy="{{ $urgent_job->no_of_vacancy }}" data-job-image="{{ $urgent_job->image }}" data-job-time="{{ $urgent_job->created_at->diffForHumans() }}">Read more</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="card c-job-list__urgent mb-4" style="display: {{ $jobs->count() == 0 ? 'none' : ''}}">
+                        <div class="card-header bg-primary text-light">Other Job Openings</div>
+                        <div class="card-body p-0">
+                            @foreach($jobs as $job)
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-start">
+                                    <img src="{{ asset(App::environment('production') ? '/public/uploads/job_vacancy' : '/uploads/job_vacancy') }}/{{ $job->image }}" alt="" class="border mr-2" width="80px">
+                                    <div class="flex-column w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="card-title">{{ $job->name }}</h4>
+                                            <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
+                                        </div>
+                                        <div class="flex-column w-100">
+                                            <div>
+                                                {!! str_limit($job->description, 200) !!}
+                                            </div>
+                                            <button class="btn btn-link p-0 btn-read-more" data-toggle="modal" data-target="#job-modal" data-user-id="{{ Auth::check() ? Auth::user()->job_vacancy_id : ''}}" data-job-id="{{ $job->id }}" data-job-name="{{ $job->name }}" data-job-description="{{ $job->description }}" data-job-vacancy="{{ $job->no_of_vacancy }}" data-job-image="{{ $job->image }}" data-job-time="{{ $job->created_at->diffForHumans() }}">Read more</button>
                                         </div>
                                     </div>
                                 </li>
@@ -87,10 +110,13 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="job-description">
+            <div class="modal-body">
+                <div><p><strong>No. of vacancy:</strong> <span id="number-of-vacancy"></span></p></div>
+                <div id="job-description"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary btn-lg btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-primary btn-lg btn-apply" id="btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-success btn-lg" id="btn-applied" style="display: {{ Auth::check() ? Auth::user()->role != 'Applicant' || Auth::user()->job_vacancy_id == 0 ? 'none' : '' : 'none' }}"><i class="fas fa-check"></i>&nbsp; Applied</button>
                 <button class="btn btn-outline-primary btn-lg btn-apply-login" data-dismiss="modal" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
             </div>
             </div>
