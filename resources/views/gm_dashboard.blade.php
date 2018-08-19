@@ -12,7 +12,7 @@
 	<main class="container py-5">
     <h2 class="text-center">Evaluated Applicants</h2>
     <hr class="line">
-    @foreach($data as $applicant)
+    @forelse($data as $applicant)
       @php
       if ($applicant->hired == 1 && $applicant->approved == 1) {
         $result = 'Hired';
@@ -42,7 +42,13 @@
           </div>
         </div>
       </div>
-    @endforeach
+    @empty
+      <div class="card mb-3" style="height: 260px;">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;No data available.</h5>
+        </div>
+      </div>
+    @endforelse
   </main>
 
   <!-- Applicant Profile Modal -->
