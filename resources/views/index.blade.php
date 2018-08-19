@@ -115,9 +115,9 @@
                 <div id="job-description"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary btn-lg btn-apply" id="btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
-                <button type="button" class="btn btn-outline-success btn-lg" id="btn-applied" style="display: {{ Auth::check() ? Auth::user()->role != 'Applicant' || Auth::user()->job_vacancy_id == 0 ? 'none' : '' : 'none' }}"><i class="fas fa-check"></i>&nbsp; Applied</button>
-                <button class="btn btn-outline-primary btn-lg btn-apply-login" data-dismiss="modal" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-primary btn-apply" id="btn-apply" style="display: {{ Auth::check() ? '' : 'none' }}" {{ Auth::check() ? Auth::user()->role != 'Applicant' ? 'disabled': Auth::user()->job_vacancy_id != 0 ? 'disabled' : '' : '' }}><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
+                <button type="button" class="btn btn-outline-success" id="btn-applied" style="display: {{ Auth::check() ? Auth::user()->role != 'Applicant' || Auth::user()->job_vacancy_id == 0 ? 'none' : '' : 'none' }}"><i class="fas fa-check"></i>&nbsp; Applied</button>
+                <button class="btn btn-outline-primary btn-apply-login" data-dismiss="modal" data-toggle="modal" data-target="#login-modal" style="display: {{ Auth::check() ? 'none' : '' }}"><i class="fas fa-briefcase"></i>&nbsp; Apply</button>
             </div>
             </div>
         </div>
