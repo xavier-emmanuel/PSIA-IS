@@ -10,7 +10,7 @@
 
 @section('content')
 	<main class="container py-5">
-    <h2 class="text-center">Evaluated Applicant {{ $data->count() < 2 ? '' : 's'}}</h2>
+    <h2 class="text-center">Evaluated Applicant{{ $data->count() < 2 ? '' : 's'}}</h2>
     <hr class="line">
     @forelse($data as $applicant)
       @php
