@@ -9,7 +9,8 @@ use App\PersonalInfo;
 class GMPagesController extends Controller
 {
     public function dashboard() {
-    	return view('gm_dashboard')->with(array('page' => 'Dashboard'));
+    	$applicant = Applicant::where('interviewed', 1)->where('score', '!=', null)->where('hired', 0)->where('approved', 0)->get();
+    	return view('gm_dashboard')->with(array('page' => 'Dashboard' , 'data' => $applicant));
     }
 
     public function applicantForm($id) {

@@ -213,4 +213,5 @@
 @section('scripts')
 	<script src="{{ asset(App::environment('production') ? '/public/vendors/datepicker/datepicker.min.js' : '/vendors/datepicker/datepicker.min.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/profile.js' : '/js/pages/profile.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/report.js' : '/js/pages/report.js') }}"></script>
 @endsection

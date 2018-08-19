@@ -40,7 +40,10 @@ class HRPagesController extends Controller
     }
 
     public function profile() {
-        return view('profile')->with(array('page' => 'User Profile'));
+        $applicant_form = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+        return view('profile')->with(array('page' => 'User Profile', 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function applicantForm($id) {

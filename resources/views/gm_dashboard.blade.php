@@ -12,40 +12,37 @@
 	<main class="container py-5">
     <h2 class="text-center">Evaluated Applicants</h2>
     <hr class="line">
-
-    <div class="card mb-3">
-      <div class="card-body d-flex">
-        <figure class="mb-0">
-          <img src="{{ asset('img/default_image.png') }}" width="192px" height="192px" class="border">
-        </figure>
-        <div class="info ml-3 w-50">
-          <h4 class="font-weight-bold">Charles Marnie B. Limpo</h4>
-          <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;+639367995285</p>
-          <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;charlesmarnielimpo@gmail.com</p>
-          <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;#23 Example Address, Legazpi City</p>
-          <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;Male</p>
-          <!-- <p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;Female</p> -->
-          <p><i class="fas fa-smile"></i>&nbsp;&nbsp;23 years old</p>
-        </div>
-        <div class="d-flex flex-column align-items-end w-50">
-          <p><em>Applying for: </em><span class="text-primary">&nbsp;Back-end Web Developer</span></p>
-          <a href="" class="ml-auto"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+    @foreach($data as $applicant)
+      @php
+      if ($applicant->hired == 1 && $applicant->approved == 1) {
+        $result = 'Hired';
+      } else if ($applicant->hired == 0 && $applicant->approved == 1) {
+        $result = 'Approved';
+      } else {
+        $result = '';
+      }
+      @endphp
+      <div class="card mb-3">
+        <div class="card-body d-flex">
+          <figure class="mb-0">
+            <img src="/uploads/accounts/{{ $applicant->image }}" width="192px" height="192px" class="border">
+          </figure>
+          <div class="info ml-3 w-50">
+            <h4 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h4>
+            <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ $applicant->mobile }}</p>
+            <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ $applicant->email }}</p>
+            <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{ $applicant->address }}</p>
+            <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;{{ $applicant->gender }}</p>
+            <!-- <p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;Female</p> -->
+            <p><i class="fas fa-smile"></i>&nbsp;&nbsp;{{ $applicant->age }}</p>
+          </div>
+          <div class="d-flex flex-column align-items-end w-50">
+            <p><em>Applying for: </em><span class="text-primary">&nbsp;{{ $applicant->jobVacancies->name }}</span></p>
+            <a class="btn btn-info" id="btn-applicant-form" href="/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}.'" data-name="{{ $applicant->first_name }}.' {{ $applicant->middle_name }}.' {{ $applicant->last_name }}.'" data-job="{{ $applicant->jobVacancies->name }}.'" data-age="{{ $applicant->age }}.'" data-gender="{{ $applicant->gender }}.'" data-address="{{ $applicant->address }}.'" data-mobile="{{ $applicant->mobile }}.'" data-interview-title="{{ $applicant->interview_title }}.'" data-interview-message="{{ $applicant->interview_message }}.'" data-interview-date="{{ $applicant->date_of_interview }}.'" data-interview-time="{{ $applicant->date_of_interview }}.'" data-result="{{ $result }}.'" data-training-date="" data-date-hired="{{ $applicant->date_hired }}.'" data-interviewed="{{ $applicant->interviewed }}.'" data-score="{{ $applicant->score }}.'"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <table id="tbl-evaluated-applicants" class="table table-hover ">
-      <thead>
-        <th>#</th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Contact</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Action</th>
-      </thead>
-      <tbody></tbody>
-    </table>
+    @endforeach
   </main>
 
   <!-- Applicant Profile Modal -->
@@ -134,13 +131,6 @@
 <script src="{{ asset(App::environment('production') ? '/public/js/pages/gm_applicant.js' : '/js/pages/gm_applicant.js') }}"></script>
   <script>
     $(document).ready(function() {
-      $('#tbl-evaluated-applicants').DataTable({
-        "ajax": {
-            url: "/evaluated-applicants/show",
-            type: 'GET'
-        },
-      });
-
       $('#btn-approval').on('click', function () {
         $('#applicant-profile').modal('hide');
         $('#approve-applicant').modal('show');
@@ -160,5 +150,22 @@
             localStorage.clear();
         }
     });
+
+    var slug = function(str) {
+      str = str.replace(/^\s+|\s+$/g, '');
+      str = str.toLowerCase();
+
+      var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+      var to = "aaaaaeeeeeiiiiooooouuuunc------";
+      for (var i = 0, l = from.length; i < l; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+      }
+
+      str = str.replace(/[^a-z0-9 -]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+
+      return str;
+    };
   </script>
 @endsection
