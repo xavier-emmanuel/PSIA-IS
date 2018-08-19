@@ -25,7 +25,7 @@
       <div class="card mb-3">
         <div class="card-body d-flex">
           <figure class="mb-0">
-            <img src="/uploads/accounts/{{ $applicant->image }}" width="192px" height="192px" class="border">
+            <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" width="192px" height="192px" class="border">
           </figure>
           <div class="info ml-3 w-50">
             <h3 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h3>

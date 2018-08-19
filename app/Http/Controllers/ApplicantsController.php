@@ -9,7 +9,8 @@ class ApplicantsController extends Controller
 {
 
   public function applicantDashboard(Request $request) {
-    return view('applicant_dashboard')->with(array('page' => 'Dashboard'));
+    $applicant = Applicant::all();
+    return view('applicant_dashboard')->with(array('page' => 'Dashboard', 'data' => $applicant));
   }
 
 	public function ajaxShowApplicants(Request $request) {

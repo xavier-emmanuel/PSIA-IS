@@ -361,7 +361,7 @@ class ReportsController extends Controller
         PDF::MultiCell(189.9, 5, $applicant->personalInfos->contact_address, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // IMAGE
-        PDF::Image('/uploads/accounts/'.$applicant->image, 149, 10, 50.8, 50.8, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+        PDF::Image(\App::environment('production') ? '/public/uploads/accounts/'.$applicant->image : '/uploads/accounts/'.$applicant->image, 149, 10, 50.8, 50.8, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
 
         //
         // SECOND PAGE DISPLAYS HERE

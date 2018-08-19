@@ -31,7 +31,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h1 class="text-center" style="width: 80%;">Application Form</h1>
         <figure class="mr-3" style="width: 20%;">
-          <img src="/uploads/accounts/{{ $applicant->image }}" alt="" height="192px" width="192px" class="border border-secondary">
+          <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" alt="{{ Auth::user()->first_name }}" alt="" height="192px" width="192px" class="border border-secondary">
         </figure>
       </div>
       <div class="table-header">1. PERSONAL INFORMATION</div>
