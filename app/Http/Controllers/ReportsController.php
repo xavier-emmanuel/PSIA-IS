@@ -145,7 +145,7 @@ class ReportsController extends Controller
         PDF::SetFont('dejavusans','B', 8);
         PDF::Cell(19, 5, 'Date Hired:', 0, 0, '');
         PDF::SetFont('dejavusans','', 8);
-        PDF::Cell(130, 5, empty($applicant->date_hired) ? 'N/A' : $applicant->date_hired, 0, 1, '');
+        PDF::Cell(130, 5, empty($applicant->date_hired) ? 'N/A' : Carbon::parse($applicant->date_hired)->format('F d, Y'), 0, 1, '');
 
         // PERSONAL INFORMATION
         PDF::SetFont('dejavusans', 'B', 9);
