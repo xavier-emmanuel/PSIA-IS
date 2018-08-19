@@ -26,17 +26,17 @@ class HRPagesController extends Controller
     }
 
     public function approvedApplicants() {
-        $applicant = Applicant::where('role', 'Applicant')->get();
+        $applicant = Applicant::where('approved', 1)->where('hired', 0)->get();
         $applicant_name = Applicant::where('role', 'Applicant')->first();
         $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
     	return view('approved_applicants')->with(array('page' => 'Approved Applicants', 'data' => $applicant, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function hiredApplicants() {
-        $applicant_form = Applicant::where('role', 'Applicant')->get();
+        $applicant = Applicant::where('hired', 1)->get();
         $applicant_name = Applicant::where('role', 'Applicant')->first();
         $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
-    	return view('hired_applicants')->with(array('page' => 'Hired Applicants', 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
+    	return view('hired_applicants')->with(array('page' => 'Hired Applicants', 'data' => $applicant, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function profile() {

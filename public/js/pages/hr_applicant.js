@@ -185,6 +185,19 @@ $(document).ready(function () {
         $('#appicant-name').html(name);
     });
 
+    $('#hire-applicant').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data('id'),
+            email = $(e.relatedTarget).data('email'),
+            name = $(e.relatedTarget).data('name'),
+            job = $(e.relatedTarget).data('job');
+
+        $('#appicant-name').html(name);
+        $('.hdn-id').val(id);
+        $('.hdn-email').val(email);
+        $('.hdn-name').val(name);
+        $('.hdn-job').val(job);
+    });
+
     $("#frm-set-interview").validate({
         ignore: [],
         debug: false,
@@ -275,18 +288,13 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-                $('#btn-hire').removeAttr('disabled', 'disabled').html('Yes');
 
-                $('#hire-applicant').modal('hide');
-                $('#tbl-approved-applicant').DataTable().ajax.reload(null, false);
-
-                $.toast({
-                    heading: 'Success',
-                    text: data.success,
-                    position: 'top-right',
-                    icon: 'success',
-                    hideAfter: 3500
-                });
+                localStorage.setItem("Hire", data.OperationStatus);
+                setTimeout(function() {
+                    $('#btn-hire').attr('disabled', 'disabled').html('<i class="fas fa-check"></i>&nbsp; Yes');
+                    window.location.href = '/approved-applicants';
+                }, 2000);
+                
             },
             error: function (xhr, error, ajaxOptions, thrownError) {
                 alert(xhr.responseText);

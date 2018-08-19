@@ -5,7 +5,7 @@
   <style>
     .c-breadcrumbs__wrapper {
       margin-top: 91px;
-      z-index: 1;
+      z-index: 1
     }
 
     main {
@@ -34,55 +34,61 @@
   <main class="container py-5 ">
     <h2 class="text-center ">Approved Applicants</h2>
     <hr class="line">
-    <!-- <table id="tbl-approved-applicant" class="table table-hover ">
-      <thead>
-        <th>#</th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Contact</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Action</th>
-      </thead>
-      <tbody>
 
-      </tbody>
-    </table> -->
+    @forelse($data as $applicant)
+      @php
+      if ($applicant->hired == 1 && $applicant->approved == 1) {
+        $result = 'Hired';
+      } else if ($applicant->hired == 0 && $applicant->approved == 1) {
+        $result = 'Approved';
+      } else {
+        $result = '';
+      }
+      @endphp
+      <div class="card mb-3">
+        <div class="card-body d-flex">
+          <figure class="mb-0">
+            <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" width="192px" height="192px" class="border">
+          </figure>
+          <div class="info ml-3 w-50">
+            <h3 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h3>
+            <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ $applicant->mobile }}</p>
+            <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ $applicant->email }}</p>
+            <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{ $applicant->address }}</p>
+            <p class="mb-1"><i class="fas fa-{{ $applicant->gender == 'Male' ? 'male' : 'female' }}"></i>&nbsp;&nbsp;{{ $applicant->gender }}</p>
+            <p><i class="fas fa-smile"></i>&nbsp;&nbsp;{{ $applicant->age }} {{ $applicant->age < 2 ? 'year old' : 'years old'}}</p>
+          </div>
+          <div class="d-flex flex-column align-items-end w-50">
+            <p><em>Applying for: </em><span class="text-primary">&nbsp;{{ $applicant->jobVacancies->name }}</span></p>
 
-    <div class="card mb-3">
-      <div class="card-body d-flex">
-        <figure class="mb-0">
-          <img src="img/default_image.png" width="192px" height="192px" class="border">
-        </figure>
-        <div class="info ml-3 w-50">
-          <h3 class="font-weight-bold">Charles Marnie B. Limpo</h3>
-          <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;+639367995285</p>
-          <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;charlesmarnielimpo@gmail.com</p>
-          <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;#23 Example Address, Legazpi City</p>
-          <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;Male</p>
-          <p><i class="fas fa-smile"></i>&nbsp;&nbsp;23 years old</p>
-        </div>
-        <div class="d-flex flex-column align-items-end w-50">
-          <p><em>Applying for: </em><span class="text-primary">&nbsp;Web Developer</span></p>
+            <dl class="row">
+              <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
+              <dd class="col-sm-8 dd-interview-date" id="interview-date">{{ \Carbon\Carbon::parse($applicant->date_of_interview)->format('F d, Y')}}</dd>
+              <dt class="col-sm-4 dd-interview-time">Interview Time:</dt>
+              <dd class="col-sm-8 dd-interview-time" id="interview-time">{{ \Carbon\Carbon::parse($applicant->date_of_interview)->format('h:i A')}}</dd>
+              <dt class="col-sm-4 dd-interview-time">Score:</dt>
+              <dd class="col-sm-8 dd-score" id="score"><span class="badge badge-{{ $applicant->score == 'Passed' ? 'success' : 'danger' }}"><i class="fas fa-{{ $applicant->score == 'Passed' ? 'check' : 'times' }}"></i>&nbsp; {{ $applicant->score == 'Passed' ? 'Passed' : 'Failed' }}</span></dd>
+              <dt class="col-sm-4 dd-date-approved">Date Approved:</dt>
+              <dd class="col-sm-8 dd-date-approved" id="date-approved">{{ \Carbon\Carbon::parse($applicant->date_approved)->format('F d, Y')}}</dd>
+            </dl>
 
-          <dl class="row">
-            <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
-            <dd class="col-sm-8 dd-interview-date" id="interview-date">August 27, 2018</dd>
-            <dt class="col-sm-4 dd-interview-time">Interview Time:</dt>
-            <dd class="col-sm-8 dd-interview-time" id="interview-time">10:00 AM</dd>
-            <dt class="col-sm-4 dd-interview-time">Score:</dt>
-            <dd class="col-sm-8 dd-score" id="score"><span class="badge badge-success">Passed</span></dd>
-            <dt class="col-sm-4 dd-date-approved">Date Approved:</dt>
-            <dd class="col-sm-8 dd-date-approved" id="date-approved">August 19, 2018</dd>
-          </dl>
-
-          <div class="d-flex justify-content-end w-100">
-            <button class="btn btn-warning">Hire</button>&emsp;
-            <a class="btn btn-info" id="btn-applicant-form" href="" title="View Application" ><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+            <div class="d-flex justify-content-end w-100">
+              <button class="btn btn-warning" id="btn-hiring" data-toggle="modal" data-target="#hire-applicant" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}">Hire</button>&emsp;
+              <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" target="_blank" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    @empty
+      <div class="card mb-5" style="height: 243px;">
+        <div class="card-body d-flex">
+          <figure class="mb-0">
+            <img src="img/default_image.png" width="192px" height="192px" class="border">
+          </figure>
+          <h5 class="card-title text-center w-100"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;No data available</h5>
+        </div>
+      </div>
+    @endforelse
 
     <!-- Applicant Profile Modal -->
     <div class="modal fade" id="applicant-profile" tabindex="-1" role="dialog" aria-labelledby="applicantProfileLabel" aria-hidden="true">
@@ -240,19 +246,17 @@
           date: 'fas fa-calendar-alt'
         }
       });
-    });
-    $(document).ready(function () {
-      $('#tbl-approved-applicant').DataTable({
-        "ajax": {
-            url: "/approved-applicants/show",
-            type: 'GET'
-        },
-      });
 
-      $('#btn-hiring').on('click', function () {
-        $('#applicant-profile').modal('hide');
-        $('#hire-applicant').modal('show');
-      });
+      if(localStorage.getItem("Hire")){
+        $.toast({
+          heading: 'Success',
+          text: 'You have successfully hired the applicant.',
+          position: 'top-right',
+          icon: 'success',
+          hideAfter: 3500
+        });
+        localStorage.clear();
+      }
     });
   </script>
 @endsection

@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Applicant;
+use App\JobVacancy;
+use Auth;
 
 class ApplicantsController extends Controller
 {
 
   public function applicantDashboard(Request $request) {
-    $applicant = Applicant::all();
-    return view('applicant_dashboard')->with(array('page' => 'Dashboard', 'data' => $applicant));
+    $applicant = Applicant::where('id', Auth::id())->first();
+    $job = JobVacancy::where('id', Auth::id())->first();
+    return view('applicant_dashboard')->with(array('page' => 'Dashboard', 'data' => $applicant, 'job' => $job));
   }
 
 	public function ajaxShowApplicants(Request $request) {

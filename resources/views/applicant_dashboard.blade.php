@@ -16,19 +16,23 @@
     <div class="card">
       <div class="card-body">
         <div id="card-header" class="d-flex justify-content-between mb-3">
-          <h5 class="card-title">Application for <span class="text-primary">Back-end Web Developer</span></h5>
-          <!-- Change badge accordngly
-                badge badge-info = Pending
-                badge badge-warning = Approved
-                badge badge-success = Hired -->
-          <p>Status: <span class="badge badge-info">Pending</span></p>
+          <h5 class="card-title">Application for <span class="text-primary">{{ $job->name }}</span></h5>
+          @if($data->approved == 1 && $data->hired == 0) 
+            <p>Status: <span class="badge badge-warning">Approved</span></p>
+          @elseif($data->hired == 1) 
+            <p>Status: <span class="badge badge-success">Hired</span></p>
+          @else 
+            <p>Status: <span class="badge badge-info">Pending</span></p>
+          @endif
         </div>
-        <p>CrunchMatch is a database created to list all of the individuals who are attending the TechCrunch Disrupt conference in San Francisco, and exhibiting in Startup Alley. It allows exhibitors to match with each other, and request meetings to chat about partnerships.<br><br>We need to record all of the individuals, their titles and their companies in this list into an excel document so that we can do further research on them.<br><br>Here are the steps:<br><br>1. Log into the CrunchMatch San Francisco website - choose "login with Brella Account" and the login will be provided via chat once the job is accepted.<br>2. Scroll down and ensure that "Matches" is selected in the menu bar under the search bar.<br>3. Please record the information for each profile into excel. You should not need to click into each profile to get this information. I will share the excel document with fields for each piece of information. There is an example picture of the profiles attached.<br>4. At 310 or so profiles, it will probably take about 2.5 hours to complete.<br>5. I need this completed by Tuesday morning Pacific Standard Time.</p>
+        {!! $job->description !!}
 
         <hr>
 
-        <h6 class="font-weight-bold">Interview: <span class="badge badge-success"><i class="fas fa-check"></i>&nbsp; Passed</span></h6>
-        <h6 class="font-weight-bold">Exam: <span class="badge badge-danger"><i class="fas fa-times"></i>&nbsp; Failed</span></h6>
+        <h6 class="font-weight-bold">Interview: <span class="badge badge-{{ $data->interviewed == 1 ? 'success' : 'danger' }}"><i class="fas fa-{{ $data->interviewed == 1 ? 'check' : 'times' }}"></i>&nbsp; {{ $data->interviewed == 1 ? 'Yes' : 'No' }}</span></h6>
+        @if($data->interviewed == 1)
+          <h6 class="font-weight-bold">Exam: <span class="badge badge-{{ $data->score == 'Passed' ? 'success' : 'danger' }}"><i class="fas fa-{{ $data->score == 'Passed' ? 'check' : 'times' }}"></i>&nbsp; {{ $data->score == 'Passed' ? 'Passed' : 'Failed' }}</span></h6>
+        @endif
       </div>
     </div>
   </main>
