@@ -16,8 +16,7 @@
     <div class="card">
       <div class="card-body">
         <div id="card-header" class="d-flex justify-content-between mb-3">
-          <h5 class="card-title">Application for <span class="text-primary">Back-end Web Developer
-</span></h5>
+          <h5 class="card-title">Application for <span class="text-primary">Back-end Web Developer</span></h5>
           <!-- Change badge accordngly
                 badge badge-info = Pending
                 badge badge-warning = Approved

@@ -13,6 +13,27 @@
     <h2 class="text-center">Evaluated Applicants</h2>
     <hr class="line">
 
+    <div class="card">
+      <div class="card-body d-flex">
+        <figure class="mb-0">
+          <img src="{{ asset('img/default_image.png') }}" width="192px" height="192px" class="border">
+        </figure>
+        <div class="info ml-3 w-100">
+          <div class="d-flex justify-content-between align-content-center">
+            <h4 class="font-weight-bold">Charles Marnie B. Limpo</h4>
+            <a href="" class="ml-auto"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+          </div>
+          <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;+639367995285</p>
+          <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;charlesmarnielimpo@gmail.com</p>
+          <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;Male</p>
+          <!-- <p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;Female</p> -->
+          <p><i class="fas fa-smile"></i>&nbsp;&nbsp;23 years old</p>
+          <p class="mb-0"><em>Applied for: </em><span class="text-primary">Back-end Web Developer
+</span></p>
+        </div>
+      </div>
+    </div>
+
      <table id="tbl-evaluated-applicants" class="table table-hover ">
        <thead>
          <th>#</th>
