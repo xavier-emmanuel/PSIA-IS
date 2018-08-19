@@ -46,6 +46,7 @@ Route::group( [ 'middleware' => 'auth' ], function()
 
 	Route::get('/applicant-form/{id}/{name}', 'GMPagesController@applicantForm');
 
+	Route::get('/applicant-dashboard', 'ApplicantsController@applicantDashboard');
 	Route::get('/applicants/show', 'ApplicantsController@ajaxShowApplicants');
 	Route::get('/hired-applicants/show', 'ApplicantsController@ajaxShowHiredApplicants');
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');

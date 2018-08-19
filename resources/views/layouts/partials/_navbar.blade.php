@@ -41,6 +41,8 @@
                   <span id="user-firstname">{{ Auth::check() ? Auth::user()->first_name : '' }}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/applicant-dashboard" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
+                    <i class="fas fa-tachometer-alt"></i>&nbsp; Dashboard</a>
                   <a class="dropdown-item" href="/user-profile" style="display: {{ Auth::check() ? Auth::user()->verified == 0 ? 'none' : '' : ''}}">
                     <i class="fas fa-user-circle"></i>&nbsp; Profile</a>
                   <a class="dropdown-item" href="/logout">

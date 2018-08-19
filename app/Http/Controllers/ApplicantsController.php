@@ -8,6 +8,10 @@ use App\Applicant;
 class ApplicantsController extends Controller
 {
 
+  public function applicantDashboard(Request $request) {
+    return view('applicant_dashboard')->with(array('page' => 'Dashboard'));
+  }
+
 	public function ajaxShowApplicants(Request $request) {
 		$applicant = Applicant::where('job_vacancy_id', '!=', 0)->where('approved', '!=', 1)->where('hired', '!=', 1)->get();
 
