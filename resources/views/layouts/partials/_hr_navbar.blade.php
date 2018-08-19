@@ -88,8 +88,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <a type="button" target="_blank" class="btn btn-warning" id="btn-generate">Generate</a>
+          <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a target="_blank" class="btn btn-warning" id="btn-generate">Generate</a>
         </div>
       </div>
     </div>

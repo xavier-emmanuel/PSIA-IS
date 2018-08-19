@@ -34,7 +34,7 @@
   <main class="container py-5 ">
     <h2 class="text-center ">Approved Applicants</h2>
     <hr class="line">
-    <table id="tbl-approved-applicant" class="table table-hover ">
+    <!-- <table id="tbl-approved-applicant" class="table table-hover ">
       <thead>
         <th>#</th>
         <th>Name</th>
@@ -47,7 +47,42 @@
       <tbody>
 
       </tbody>
-    </table>
+    </table> -->
+
+    <div class="card mb-3">
+      <div class="card-body d-flex">
+        <figure class="mb-0">
+          <img src="img/default_image.png" width="192px" height="192px" class="border">
+        </figure>
+        <div class="info ml-3 w-50">
+          <h3 class="font-weight-bold">Charles Marnie B. Limpo</h3>
+          <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;+639367995285</p>
+          <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;charlesmarnielimpo@gmail.com</p>
+          <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;#23 Example Address, Legazpi City</p>
+          <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;Male</p>
+          <p><i class="fas fa-smile"></i>&nbsp;&nbsp;23 years old</p>
+        </div>
+        <div class="d-flex flex-column align-items-end w-50">
+          <p><em>Applying for: </em><span class="text-primary">&nbsp;Web Developer</span></p>
+
+          <dl class="row">
+            <dt class="col-sm-4 dd-interview-date">Interview Date:</dt>
+            <dd class="col-sm-8 dd-interview-date" id="interview-date">August 27, 2018</dd>
+            <dt class="col-sm-4 dd-interview-time">Interview Time:</dt>
+            <dd class="col-sm-8 dd-interview-time" id="interview-time">10:00 AM</dd>
+            <dt class="col-sm-4 dd-interview-time">Score:</dt>
+            <dd class="col-sm-8 dd-score" id="score"><span class="badge badge-success">Passed</span></dd>
+            <dt class="col-sm-4 dd-date-approved">Date Approved:</dt>
+            <dd class="col-sm-8 dd-date-approved" id="date-approved">August 19, 2018</dd>
+          </dl>
+
+          <div class="d-flex justify-content-end w-100">
+            <button class="btn btn-warning">Hire</button>&emsp;
+            <a class="btn btn-info" id="btn-applicant-form" href="" title="View Application" ><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Applicant Profile Modal -->
     <div class="modal fade" id="applicant-profile" tabindex="-1" role="dialog" aria-labelledby="applicantProfileLabel" aria-hidden="true">
