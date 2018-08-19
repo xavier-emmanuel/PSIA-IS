@@ -9,7 +9,7 @@
 
     .c-breadcrumbs__wrapper {
       margin-top: 91px;
-      z-index: -1
+      z-index: 1;
     }
 
     .navbar-nav {

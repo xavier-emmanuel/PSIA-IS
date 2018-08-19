@@ -4,7 +4,7 @@
   <style>
     .c-breadcrumbs__wrapper {
       margin-top: 91px;
-      z-index: -1
+      z-index: 1;
     }
 
     main {
@@ -30,7 +30,48 @@
   <main class="container py-5 ">
     <h2 class="text-center ">Hired Applicants</h2>
     <hr class="line">
-    <table id="tbl-hired-applicant" class="table table-hover ">
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="img/default_image.png" alt="Charles Marnie B. Limpo" class="mb-3" width="192px" style="border-radius: 50%;">
+            <a href="#" data-toggle="modal" data-target="#applicant-profile">
+              <h6 class="font-weight-bold">Charles Marnie B. Limpo</h6>
+            </a>
+            <small><p><em>Web Developer</em></p></small>
+            <button class="btn btn-info"><i class="fas fa-paperclip"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="img/default_image.png" alt="Charles Marnie B. Limpo" class="mb-3" width="192px" style="border-radius: 50%;">
+            <a href="#" data-toggle="modal" data-target="#applicant-profile">
+              <h6 class="font-weight-bold">Charles Marnie B. Limpo</h6>
+            </a>
+            <small><p><em>Web Developer</em></p></small>
+            <button class="btn btn-info"><i class="fas fa-paperclip"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="img/default_image.png" alt="Charles Marnie B. Limpo" class="mb-3" width="192px" style="border-radius: 50%;">
+            <a href="#" data-toggle="modal" data-target="#applicant-profile">
+              <h6 class="font-weight-bold">Charles Marnie B. Limpo</h6>
+            </a>
+            <small><p><em>Web Developer</em></p></small>
+            <button class="btn btn-info"><i class="fas fa-paperclip"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <table id="tbl-hired-applicant" class="table table-hover ">
       <thead>
         <th>#</th>
         <th>Name</th>
@@ -43,14 +84,14 @@
       <tbody>
 
       </tbody>
-    </table>
+    </table> -->
 
     <!-- Applicant Profile Modal -->
     <div class="modal fade" id="applicant-profile" tabindex="-1" role="dialog" aria-labelledby="applicantProfileLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="applicantProfileLabel">Applicant Profile</h5>
+            <h5 class="modal-title" id="applicantProfileLabel">Employee Profile</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -88,68 +129,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Set Interview Modal -->
-    <div class="modal fade" id="set-interview" tabindex="-1" role="dialog" aria-labelledby="setInterviewLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form method="post" id="frm-set-interview">
-            <input type="hidden" name="hdn_id" class="hdn-id">
-            <input type="hidden" name="hdn_email" class="hdn-email">
-            <input type="hidden" name="hdn_name" class="hdn-name">
-            <input type="hidden" name="frm_status" id="frm-status" value="Save">
-            {{ csrf_field() }}
-            <div class="modal-header">
-              <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="">Title:</label>
-                <input type="text" name="interview_title" id="interview-title" class="form-control" placeholder="Interview">
-              </div>
-              <div class="form-group">
-                <label for="">Message:</label>
-                <textarea name="interview_message" id="interview-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="">Date &amp; Time:</label>
-                <input type="text" name="interview_date" class="form-control datetimepicker-input interview-date" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
-                />
-              </div>
-              <div class="form-group interview-field">
-                <label for="">Interviewed?</label>
-                <div class="form-check form-check-inline ml-3">
-                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-yes" value="1">
-                  <label class="form-check-label" for="">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-no" value="0" checked="checked">
-                  <label class="form-check-label" for="">No</label>
-                </div>
-              </div>
-              <div class="form-group interview-field-score">
-                <label for="">Score:&nbsp; </label>
-                <div class="form-check form-check-inline ml-3 passed-field">
-                  <input class="form-check-input" type="radio" name="exam_score" id="exam-passed" value="Passed">
-                  <label class="form-check-label" for="">Passed</label>
-                </div>
-                <div class="form-check form-check-inline failed-field">
-                  <input class="form-check-input" type="radio" name="exam_score" id="exam-failed" value="Failed">
-                  <label class="form-check-label" for="">Failed</label>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
-              <button type="submit" class="btn btn-warning btn-save">Save</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
