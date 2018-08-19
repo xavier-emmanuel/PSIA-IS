@@ -10,7 +10,7 @@
 
 @section('content')
 	<main class="container py-5">
-    <h2 class="text-center">Evaluated Applicants</h2>
+    <h2 class="text-center">Evaluated Applicant {{ $data->count() < 2 ? '' : 's'}}</h2>
     <hr class="line">
     @forelse($data as $applicant)
       @php
@@ -28,7 +28,7 @@
             <img src="/uploads/accounts/{{ $applicant->image }}" width="192px" height="192px" class="border">
           </figure>
           <div class="info ml-3 w-50">
-            <h4 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h4>
+            <h3 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h3>
             <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ $applicant->mobile }}</p>
             <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ $applicant->email }}</p>
             <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{ $applicant->address }}</p>
