@@ -205,7 +205,7 @@
     <section id="section-two" class="d-none">
       <div class="table-header">4. EDUCATIONAL BACKGROUND</div>
       <div class="d-flex w-100 text-center border-bottom">
-        <div class="border-right" style="width: 30%;"><h6 class="my-1">&emsp;Name of School <small>(Elementary - Tertiary)</small></h6></div>
+        <div class="border-right" style="width: 30%;"><h6 class="my-1">&emsp;Name of School</h6></div>
         <div class="border-right" style="width: 40%;"><h6 class="my-1">&emsp;Address</h6></div>
         <div class="border-right" style="width: 15%;"><h6 class="my-1">Honor/Award</h6></div>
         <div style="width: 15%;"><h6 class="my-1">Year Graduated</h6></div>
@@ -230,7 +230,7 @@
       </div>
       <div class="table-header">5. GOVERNMENT EXAMS TAKEN</div>
       <div class="d-flex w-100 text-center border-bottom">
-        <div class="border-right" style="width: 30%;"><h6 class="my-1">&emsp;Type/Title of Examination <small>(Elementary - Tertiary)</small></h6></div>
+        <div class="border-right" style="width: 30%;"><h6 class="my-1">&emsp;Type/Title of Examination</h6></div>
         <div class="border-right" style="width: 40%;"><h6 class="my-1">&emsp;Place Taken</h6></div>
         <div class="border-right" style="width: 15%;"><h6 class="my-1">Date Taken</h6></div>
         <div style="width: 15%;"><h6 class="my-1">Result/Grade</h6></div>
@@ -298,7 +298,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1">Last Position</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Nature of Job</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
@@ -308,7 +308,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1">Starting Salary</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Reason for Leaving</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
@@ -328,7 +328,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1"></h6>Last Position</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Nature of Job</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
@@ -338,7 +338,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1"></h6>Starting Salary</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Reason for Leaving</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
@@ -358,7 +358,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1"></h6>Last Position</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Name of Immediate Superior</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Nature of Job</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
@@ -368,7 +368,7 @@
       </div>
       <div class="d-flex w-100 text-center">
         <div class="border-right" style="width: 33.33%"><h6 class="my-1"></h6>Starting Salary</h6></div>
-        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving <small>(mm-dd-yyyy)</small></h6></div>
+        <div class="border-right" style="width: 33.33%"><h6 class="my-1">Salary Upon Leaving</h6></div>
         <div class="" style="width: 33.33%"><h6 class="my-1">Reason for Leaving</h6></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">

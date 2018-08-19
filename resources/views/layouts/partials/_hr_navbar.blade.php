@@ -36,6 +36,7 @@
                 Reports
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="" data-toggle="modal" data-target="#application-form-modal">Application Form</a>
                 <a class="dropdown-item" href="/hired-applicant-report" target="_blank">Hired Applicants</a>
                 <a class="dropdown-item" href="/approved-applicant-report" target="_blank">Approved Applicants</a>
               </div>
@@ -62,3 +63,34 @@
       </div>
     </nav>
   </header>
+
+  <div class="modal fade" id="application-form-modal" tabindex="-1" role="dialog" aria-labelledby="addJobVacancyLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <form id="" name="" method="post">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="addJobVacancyLabel">Generate Applicant Form</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="applicant-form-name">Select Name:</label>
+                <select name="" id="" class="form-control">
+                  <option value="">Select name</option>
+                  <option value="">Charles Marnie Limpo</option>
+                  <option value="">Xavier Emmanuel Rebotica</option>
+                  <option value="">Jordan Lopez</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-warning">Generate</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
