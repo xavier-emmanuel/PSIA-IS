@@ -18,6 +18,7 @@ class HireController extends Controller
 	    $hired->date_hired = Carbon::now();
 	    $hired->hired = 1;
 
+	    $hired->jobVacancies->decrement('no_of_vacancy', 1);
 		$hired->save();
 
 		$name = $input['hdn_name'];

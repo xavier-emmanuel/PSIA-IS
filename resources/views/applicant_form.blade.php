@@ -267,17 +267,17 @@
       <div class="d-flex w-100 text-center border-bottom">
         <div class="border-right w-50"><p class="my-1 text-left">&emsp;&emsp;{{ empty($applicant->organizations->organization_name_1) ? 'N/A' : $applicant->organizations->organization_name_1 }}</p></div>
         <div class="border-right w-25"><p class="my-1">{{ empty($applicant->organizations->organization_date_from_1) ? 'N/A' : $year_of_employment1 }}</p></div>
-        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_name_1) ? 'N/A' : $applicant->organizations->organization_position_1 }}</p></div>
+        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_position_1) ? 'N/A' : $applicant->organizations->organization_position_1 }}</p></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
         <div class="border-right w-50"><p class="my-1 text-left">&emsp;&emsp;{{ empty($applicant->organizations->organization_name_2) ? 'N/A' : $applicant->organizations->organization_name_2 }}</p></div>
         <div class="border-right w-25"><p class="my-1">{{ empty($applicant->organizations->organization_date_from_2) ? 'N/A' : $year_of_employment2 }}</p></div>
-        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_name_2) ? 'N/A' : $applicant->organizations->organization_position_2 }}</p></div>
+        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_position_2) ? 'N/A' : $applicant->organizations->organization_position_2 }}</p></div>
       </div>
       <div class="d-flex w-100 text-center border-bottom">
         <div class="border-right w-50"><p class="my-1 text-left">&emsp;&emsp;{{ empty($applicant->organizations->organization_name_3) ? 'N/A' : $applicant->organizations->organization_name_3 }}</p></div>
         <div class="border-right w-25"><p class="my-1">{{ empty($applicant->organizations->organization_date_from_3) ? 'N/A' : $year_of_employment3 }}</p></div>
-        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_name_3) ? 'N/A' : $applicant->organizations->organization_position_3 }}</p></div>
+        <div class="w-25"><p class="my-1">{{ empty($applicant->organizations->organization_position_3) ? 'N/A' : $applicant->organizations->organization_position_3 }}</p></div>
       </div>
       <div class="table-header">7. EMPLOYMENT RECORD <small>(Previous Employers)</small></div>
       <div class="table-header">&emsp;7.1. Company 1</div>
@@ -314,8 +314,8 @@
       <div class="d-flex w-100 text-center border-bottom">
         <div class="border-right" style="width: 33.33%"><p class="my-1">{{ empty($applicant->employmentRecord->starting_salary_1) ? 'N/A' : $applicant->employmentRecord->starting_salary_1 }}</p></div>
         <div class="border-right" style="width: 33.33%"><p class="my-1">{{ empty($applicant->employmentRecord->salary_upon_leaving_1) ? 'N/A' : $applicant->employmentRecord->salary_upon_leaving_1 }}</p></div>
-        <div class="" style="width: 33.33%"><p class="my-1">N/A</p></div>
-      </div><div class="table-header">&emsp;{{ empty($applicant->employmentRecord->reason_of_leaving_1) ? 'N/A' : $applicant->employmentRecord->reason_of_leaving_1 }}</div>
+        <div class="" style="width: 33.33%"><p class="my-1">{{ empty($applicant->employmentRecord->reason_of_leaving_1) ? 'N/A' : $applicant->employmentRecord->reason_of_leaving_1 }}</p></div>
+      </div><div class="table-header">&emsp;7.2. Company 2</div>
       <div class="d-flex w-100 text-center">
         <div class="border-right w-25"><h6 class="my-1">Company Name</h6></div>
         <div class="border-right w-25"><h6 class="my-1">Period of Employment <small>(From-To)</small></h6></div>

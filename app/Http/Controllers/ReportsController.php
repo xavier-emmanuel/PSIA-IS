@@ -131,10 +131,11 @@ class ReportsController extends Controller
         PDF::Output();
     }
 
-    public function applicationFormReport(Request $request) {
+    public function applicationFormReport($id) {
+        $applicant = Applicant::find($id);
 
         PDF::SetMargins(10, 10, 10, 10);
-        PDF::SetTitle('Approved Applicants');
+        PDF::SetTitle('Application Form');
         PDF::AddPage('P', 'Legal');
         PDF::SetLineStyle( array( 'width' => 0.5, 'color' => array(0,0,0)));
         PDF::Rect(10, 10, 189.9, 278);
@@ -144,7 +145,7 @@ class ReportsController extends Controller
         PDF::SetFont('dejavusans','B', 8);
         PDF::Cell(19, 5, 'Date Hired:', 0, 0, '');
         PDF::SetFont('dejavusans','', 8);
-        PDF::Cell(130, 5, 'August 21, 2018', 0, 1, '');
+        PDF::Cell(130, 5, empty($applicant->date_hired) ? 'N/A' : $applicant->date_hired, 0, 1, '');
 
         // PERSONAL INFORMATION
         PDF::SetFont('dejavusans', 'B', 9);
@@ -161,9 +162,9 @@ class ReportsController extends Controller
 
         // DISPLAY NAME HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(63.3, 5, 'Limpo', 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, 'Charles Marnie', 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, 'Barba', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, $applicant->last_name, 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, $applicant->first_name, 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, $applicant->middle_name, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::MultiCell(45, 5, 'Date of Birth (mm-dd-yyyy)', 'R', 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
@@ -174,11 +175,11 @@ class ReportsController extends Controller
 
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(45, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(84.9, 5, '#23 Example Address, Legazpi City', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(20, 5, 'Male', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(25, 5, 'Single', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(15, 5, '23', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(45, 5, $applicant->date_of_birth, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(84.9, 5, $applicant->place_of_birth, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(20, 5, $applicant->gender, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(25, 5, $applicant->civil_status, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(15, 5, $applicant->age, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::MultiCell(47.4, 5, 'Height (in centimeter)', 'R', 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
@@ -188,10 +189,10 @@ class ReportsController extends Controller
 
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(47.4, 5, '172', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '55', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Roman Catholic', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '+639367995285', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->height, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->weight, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->religion, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->mobile, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // SPOUSE
         PDF::SetFont('dejavusans', 'B', 9);
@@ -200,17 +201,17 @@ class ReportsController extends Controller
         // NAME
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(47.4, 5, 'Last Name', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
-        PDF::MultiCell(47.4, 5, 'First Name', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
-        PDF::MultiCell(47.4, 5, 'Middle Name', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
+        PDF::MultiCell(47.4, 5, 'Full Name', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
+        PDF::MultiCell(47.4, 5, 'Date of Birth (mm-dd-yyyy)', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
+        PDF::MultiCell(47.4, 5, 'Occupation', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
         PDF::MultiCell(47.4, 5, 'Dependent', 0, 'C', 1, 1, '', '', true, 0, false, true, 5, '', true);
 
         // DISPLAY SPOUSE NAME HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(47.4, 5, 'Limpo', 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Charles Marnie', 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Charles Marnie', 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'I Dont Know Who', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->spouse_name) ? 'N/A' : $applicant->personalInfos->spouse_name, 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->spouse_birth_date) ? 'N/A' : $applicant->personalInfos->spouse_birth_date, 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->spouse_occupation) ? 'N/A' : $applicant->personalInfos->spouse_occupation, 'B', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->spouse_dependent) ? 'N/A' : $applicant->personalInfos->spouse_dependent, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // CHILDRED
         PDF::SetFont('dejavusans', 'B', 9);
@@ -226,15 +227,15 @@ class ReportsController extends Controller
         // DISPLAY CHILD NAME HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->child_name_1) ? '     N/A' : $applicant->personalInfos->child_name_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_birth_date_1) ? 'N/A' : $applicant->personalInfos->child_birth_date_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_occupation_1) ? 'N/A' : $applicant->personalInfos->child_occupation_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->child_name_2) ? '     N/A' : $applicant->personalInfos->child_name_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_birth_date_2) ? 'N/A' : $applicant->personalInfos->child_birth_date_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_occupation_2) ? 'N/A' : $applicant->personalInfos->child_occupation_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->child_name_3) ? '     N/A' : $applicant->personalInfos->child_name_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_name_3) ? 'N/A' : $applicant->personalInfos->child_name_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->child_name_3) ? 'N/A' : $applicant->personalInfos->child_name_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // ADDRESS
         PDF::SetFont('dejavusans', 'B', 9);
@@ -249,8 +250,8 @@ class ReportsController extends Controller
         // DISPLAY ADDRESS HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(142.3, 5, '     #23 Example Address, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '+639367995285', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(142.3, 5, '     '.$applicant->address, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->mobile, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -260,8 +261,8 @@ class ReportsController extends Controller
         // DISPLAY ADDRESS HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(142.3, 5, '     #23 Example Address, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '+639367995285', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(142.3, 5, '     '.$applicant->personalInfos->provincial_address, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->phone_number) ? 'N/A' : $applicant->personalInfos->phone_number, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // GOVERNMENT IDS
         PDF::SetFont('dejavusans', 'B', 9);
@@ -276,9 +277,9 @@ class ReportsController extends Controller
 
         // DISPLAY GOVERNMENT IDS HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(63.3, 5, '12123', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, '123123', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, '123123', 'BR', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->sss_number) ? 'N/A' : $applicant->personalInfos->sss_number, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->tin_number) ? 'N/A' : $applicant->personalInfos->tin_number, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->philhealth_number) ? 'N/A' : $applicant->personalInfos->philhealth_number, 'BR', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::MultiCell(63.3, 5, 'License No. / SBR No.', 'R', 'C', 1, 0, '', '', true, 0, false, true, 5, '', true);
@@ -287,9 +288,9 @@ class ReportsController extends Controller
 
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(63.3, 5, '123123', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(63.3, 5, '08-21-2019', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->license_number) ? 'N/A' : $applicant->personalInfos->license_number, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->date_issued) ? 'N/A' : $applicant->personalInfos->date_issued, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(63.3, 5, empty($applicant->personalInfos->expiration_date) ? 'N/A' : $applicant->personalInfos->expiration_date, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // FAMILY MEMBERS
         PDF::SetFont('dejavusans', 'B', 9);
@@ -308,12 +309,12 @@ class ReportsController extends Controller
         // DISPLAY HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalInfos->father_name, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->father_birth_date, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->father_occupation, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalInfos->mother_name, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->mother_birth_date, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->mother_occupation, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
         // SIBLINGS DETAILS
         PDF::SetFont('dejavusans', 'B', 9);
         PDF::SetFillColor(222, 226, 230);
@@ -326,15 +327,15 @@ class ReportsController extends Controller
         PDF::MultiCell(47.4, 5, 'Occupation', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, '', true);// // DISPLAY HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->siblings_name_1) ? '     N/A' : $applicant->personalInfos->siblings_name_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_birth_date_1) ? 'N/A' : $applicant->personalInfos->siblings_birth_date_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_occupation_1) ? 'N/A' : $applicant->personalInfos->siblings_occupation_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->siblings_name_2) ? '     N/A' : $applicant->personalInfos->siblings_name_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_birth_date_2) ? 'N/A' : $applicant->personalInfos->siblings_birth_date_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_occupation_2) ? 'N/A' : $applicant->personalInfos->siblings_occupation_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.empty($applicant->personalInfos->siblings_name_3) ? '     N/A' : $applicant->personalInfos->siblings_name_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_birth_date_3) ? 'N/A' : $applicant->personalInfos->siblings_birth_date_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, empty($applicant->personalInfos->siblings_occupation_3) ? 'N/A' : $applicant->personalInfos->siblings_occupation_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // CONTACT PERSON
         PDF::SetFont('dejavusans', 'B', 9);
@@ -348,19 +349,19 @@ class ReportsController extends Controller
         PDF::MultiCell(47.4, 5, 'Contact Number', 0, 'C', 1, 1, '', '', true, 0, false, true, 5, '', true); // DISPLAY HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalInfos->contact_name, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->contact_relation, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalInfos->contact_number, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::MultiCell(189.9, 5, 'Address', 0, 'C', 1, 1, '', '', true, 0, false, true, 5, '', true);
         // DISPLAY HERE
         PDF::SetFont('dejavusans','', 9);
-        PDF::MultiCell(189.9, 5, '#23 Example Address, Legazpi City', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(189.9, 5, $applicant->personalInfos->contact_address, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
         // IMAGE
-        PDF::Image('img/default_image.png', 149, 10, 50.8, 50.8, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+        PDF::Image('/uploads/accounts/'.$applicant->image, 149, 10, 50.8, 50.8, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
 
         //
         // SECOND PAGE DISPLAYS HERE
@@ -384,18 +385,18 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, $applicant->educationalBackground->elementary_school, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, $applicant->educationalBackground->elementary_address, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->educationalBackground->elementary_award) ? 'N/A' : $applicant->educationalBackground->elementary_award, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, $applicant->educationalBackground->elementary_year, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, $applicant->educationalBackground->highschool_school, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, $applicant->educationalBackground->highschool_address, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->educationalBackground->highschool_award) ? 'N/A' : $applicant->educationalBackground->highschool_award, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, $applicant->educationalBackground->highschool_year, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, $applicant->educationalBackground->college_school, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, $applicant->educationalBackground->college_address, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->educationalBackground->college_award) ? 'N/A' : $applicant->educationalBackground->college_award, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, $applicant->educationalBackground->college_year, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
 
         // GOVERNMENT EXAMS TAKEN
         PDF::SetFont('dejavusans', 'B', 9);
@@ -412,20 +413,25 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(55.9, 10, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(60, 10, 'Brgy. 33 Ramom Santos St., Penaranda, Legazpi City', 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Honor/Award', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
-        PDF::MultiCell(37, 10, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, empty($applicant->governmentExams->examination_1) ? '     N/A' : $applicant->governmentExams->examination_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, empty($applicant->governmentExams->examination_place_taken_1) ? '     N/A' : $applicant->governmentExams->examination_place_taken_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_date_taken_1) ? 'N/A' : $applicant->governmentExams->examination_date_taken_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_result_1) ? 'N/A' : $applicant->governmentExams->examination_result_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, empty($applicant->governmentExams->examination_2) ? '     N/A' : $applicant->governmentExams->examination_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, empty($applicant->governmentExams->examination_place_taken_2) ? '     N/A' : $applicant->governmentExams->examination_place_taken_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_date_taken_2) ? 'N/A' : $applicant->governmentExams->examination_date_taken_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_result_2) ? 'N/A' : $applicant->governmentExams->examination_result_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(55.9, 10, empty($applicant->governmentExams->examination_3) ? '     N/A' : $applicant->governmentExams->examination_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(60, 10, empty($applicant->governmentExams->examination_place_taken_3) ? '     N/A' : $applicant->governmentExams->examination_place_taken_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_date_taken_3) ? 'N/A' : $applicant->governmentExams->examination_date_taken_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 10, 'M', true);
+        PDF::MultiCell(37, 10, empty($applicant->governmentExams->examination_result_3) ? 'N/A' : $applicant->governmentExams->examination_result_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 10, 'M', true);
 
         // ORGANIZATIONS
+
+        $year_of_employment1 = $applicant->organizations->organization_date_from_1 .'-'. $applicant->organizations->organization_date_to_1;
+        $year_of_employment2 = $applicant->organizations->organization_date_from_2 .'-'. $applicant->organizations->organization_date_to_2;
+        $year_of_employment3 = $applicant->organizations->organization_date_from_3 .'-'. $applicant->organizations->organization_date_to_3;
+
         PDF::SetFont('dejavusans', 'B', 9);
         PDF::SetFillColor(222, 226, 230);
         PDF::MultiCell(189.9, 6, '6. SCHOOL/CIVIC/BUSINESS/LOCAL ORGANIZATIONS', 'B', 'L', 1, 1, '', '', true, 0, false, true, 6, 'M', true);
@@ -439,17 +445,21 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(94.9, 8, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'June 15, 2016 to April 04, 2017', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'June 15, 2016 to April 04, 2017', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, "Southern Luzon Technological College Foundation, Inc.", 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'June 15, 2016 to April 04, 2017', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'Year Graduated', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, empty($applicant->organizations->organization_name_1) ? '     N/A' : $applicant->organizations->organization_name_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_date_from_1) ? 'N/A' : $year_of_employment1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_position_1) ? 'N/A' : $applicant->organizations->organization_position_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, empty($applicant->organizations->organization_name_2) ? '     N/A' : $applicant->organizations->organization_name_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_date_from_2) ? 'N/A' : $year_of_employment2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_position_2) ? 'N/A' : $applicant->organizations->organization_position_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, empty($applicant->organizations->organization_name_3) ? '     N/A' : $applicant->organizations->organization_name_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_date_from_3) ? 'N/A' : $year_of_employment3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, empty($applicant->organizations->organization_position_3) ? 'N/A' : $applicant->organizations->organization_position_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         // EMPLOYMENT RECORD
+        $period_of_employment1 = $applicant->employmentRecord->period_of_emlployment_from_1 .'-'. $applicant->employmentRecord->period_of_emlployment_to_1;
+        $period_of_employment2 = $applicant->employmentRecord->period_of_emlployment_from_2 .'-'. $applicant->employmentRecord->period_of_emlployment_to_2;
+        $period_of_employment3 = $applicant->employmentRecord->period_of_emlployment_from_3 .'-'. $applicant->employmentRecord->period_of_emlployment_to_3;
+        
         PDF::SetFont('dejavusans', 'B', 9);
         PDF::SetFillColor(222, 226, 230);
         PDF::MultiCell(189.9, 6, '7. EMPLOYMENT RECORD (Previous Employers)', 'B', 'L', 1, 1, '', '', true, 0, false, true, 6, 'M', true);
@@ -465,9 +475,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_name_1) ? 'N/A' : $applicant->employmentRecord->company_name_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->period_of_emlployment_from_1) ? 'N/A' : $period_of_employment1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_address_1) ? '     N/A' : $applicant->employmentRecord->company_address_1, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -478,9 +488,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->work_position_1) ? 'N/A' : $applicant->employmentRecord->work_position_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->superior_name_1) ? 'N/A' : $applicant->employmentRecord->superior_name_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->nature_of_job_1) ? 'N/A' : $applicant->employmentRecord->nature_of_job_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -491,9 +501,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->starting_salary_1) ? 'N/A' : $applicant->employmentRecord->starting_salary_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->salary_upon_leaving_1) ? 'N/A' : $applicant->employmentRecord->salary_upon_leaving_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->reason_of_leaving_1) ? 'N/A' : $applicant->employmentRecord->reason_of_leaving_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         // COMPANY 2
         PDF::SetFont('dejavusans', 'B', 9);
@@ -509,9 +519,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_name_2) ? 'N/A' : $applicant->employmentRecord->company_name_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->period_of_emlployment_from_2) ? 'N/A' : $period_of_employment2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_address_2) ? '     N/A' : $applicant->employmentRecord->company_address_2, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -522,9 +532,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->work_position_2) ? 'N/A' : $applicant->employmentRecord->work_position_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->superior_name_2) ? 'N/A' : $applicant->employmentRecord->superior_name_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->nature_of_job_2) ? 'N/A' : $applicant->employmentRecord->nature_of_job_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -535,9 +545,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->starting_salary_2) ? 'N/A' : $applicant->employmentRecord->starting_salary_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->salary_upon_leaving_2) ? 'N/A' : $applicant->employmentRecord->salary_upon_leaving_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->reason_of_leaving_2) ? 'N/A' : $applicant->employmentRecord->reason_of_leaving_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         // COMPANY 3
         PDF::SetFont('dejavusans', 'B', 9);
@@ -553,9 +563,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_name_3) ? 'N/A' : $applicant->employmentRecord->company_name_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->period_of_emlployment_from_3) ? 'N/A' : $period_of_employment3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->company_address_3) ? '     N/A' : $applicant->employmentRecord->company_address_3, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -566,9 +576,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->work_position_3) ? 'N/A' : $applicant->employmentRecord->work_position_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->superior_name_3) ? 'N/A' : $applicant->employmentRecord->superior_name_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->nature_of_job_3) ? 'N/A' : $applicant->employmentRecord->nature_of_job_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -579,9 +589,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(63.3, 8, "CollabUX Web Solutions", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'May 14, 2017 to February 05, 2018', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(63.3, 8, 'EWAN EWAN EWAN', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->starting_salary_3) ? 'N/A' : $applicant->employmentRecord->starting_salary_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->salary_upon_leaving_3) ? 'N/A' : $applicant->employmentRecord->salary_upon_leaving_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(63.3, 8, empty($applicant->employmentRecord->reason_of_leaving_3) ? 'N/A' : $applicant->employmentRecord->reason_of_leaving_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         //
         // THIRD PAGE DISPLAYS HERE
@@ -591,6 +601,36 @@ class ReportsController extends Controller
         PDF::Rect(10, 10, 189.9, 278);
 
         // OTHERS
+        if ($applicant->questions->convicted == '0') {
+            $convicted = 'No';
+        } else {
+            $convicted = 'Yes, '. $applicant->questions->convicted_details;
+        }
+
+        if ($applicant->questions->health_problems == '0') {
+            $health_problems = 'No';
+        } else {
+            $health_problems = 'Yes, '. $applicant->questions->health_problems_details;
+        }
+
+        if ($applicant->questions->accident == '0') {
+            $accident = 'No';
+        } else {
+            $accident = 'Yes, '. $applicant->questions->accident_details;
+        }
+
+        if ($applicant->questions->relative == '0') {
+            $relative = 'No';
+        } else {
+            $relative = 'Yes, '. $applicant->questions->relative_name;
+        }
+
+        if ($applicant->questions->provincial_assignments == '0') {
+            $provincial_assignments = 'No';
+        } else {
+            $provincial_assignments = 'Yes, '. $applicant->questions->preffered_office;
+        }
+
         PDF::SetFont('dejavusans', 'B', 9);
         PDF::SetFillColor(222, 226, 230);
         PDF::MultiCell(189.9, 6, '8. OTHERS', 'B', 'L', 1, 1, '', '', true, 0, false, true, 6, 'M', true);
@@ -604,9 +644,9 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(47.4, 8, "English", 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(47.4, 8, 'Web Developer, Programming', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, 'No', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, $applicant->questions->dialect, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(47.4, 8, $applicant->questions->skills, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $convicted, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -617,8 +657,8 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(94.9, 8, 'No', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, 'No', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $health_problems, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $accident, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -628,8 +668,8 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(94.9, 8, 'N/A', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, 'No', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, empty($applicant->questions->recommend_name) ? 'N/A' : $applicant->questions->recommend_name, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $relative, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 8);
         PDF::SetFillColor(255, 255, 255);
@@ -639,8 +679,8 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(94.9, 8, 'No', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
-        PDF::MultiCell(94.9, 8, 'Computer Operations, Computer Repair, Typing,Programming', 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $provincial_assignments, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(94.9, 8, $applicant->questions->skills_select, 'B', 'C', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(222, 226, 230);
@@ -649,7 +689,7 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(189.9, 20, '          asdsasadasdasdasdsadsaasdasdasdasasdasdsdasdsasadsadsadsa', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(189.9, 20, '          '.$applicant->questions->self_description, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(222, 226, 230);
@@ -658,7 +698,7 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(189.9, 20, '          asdsasadasdasdasdsadsaasdasdasdasasdasdsdasdsasadsadsadsa', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(189.9, 20, '          '.$applicant->questions->reason_of_applying, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(222, 226, 230);
@@ -667,7 +707,7 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(189.9, 20, '          asdsasadasdasdasdsadsaasdasdasdasasdasdsdasdsasadsadsadsa', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(189.9, 20, '          '.$applicant->questions->career_goals, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(222, 226, 230);
@@ -676,7 +716,7 @@ class ReportsController extends Controller
         // DISPLAY HERE
         PDF::SetFont('dejavusans', '', 9);
         PDF::SetFillColor(255, 255, 255);
-        PDF::MultiCell(189.9, 20, '          asdsasadasdasdasdsadsaasdasdasdasasdasdsdasdsasadsadsadsa', 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
+        PDF::MultiCell(189.9, 20, '          '.$applicant->questions->accomplishments, 'B', '', 1, 1, '', '', true, 0, false, true, 8, 'M', true);
 
         // PERSONAL PREFERENCES
         PDF::SetFont('dejavusans', 'B', 9);
@@ -692,15 +732,15 @@ class ReportsController extends Controller
         // DISPLAY HERE
         // DO NOT REMOVE SPACES INSIDE QUOTATION
         PDF::SetFont('dejavusans', '', 9);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(94.9, 5, '     Charles Marnie B. Limpo', 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, '06-21-1995', 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
-        PDF::MultiCell(47.4, 5, 'Student', 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalPreference->preference_name_1, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_occupation_1, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_contact_1, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalPreference->preference_name_2, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_occupation_2, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_contact_2, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(94.9, 5, '     '.$applicant->personalPreference->preference_name_3, 'BR', '', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_occupation_3, 'BR', 'C', 1, 0, '', '', true, 0, false, true, 5, 'M', true);
+        PDF::MultiCell(47.4, 5, $applicant->personalPreference->preference_contact_3, 'B', 'C', 1, 1, '', '', true, 0, false, true, 5, 'M', true);
 
 
         PDF::MultiCell(189.9, 15, '', 0, 'C', 1, 1, '', '', true, 0, false, true, 15, 'M', true);

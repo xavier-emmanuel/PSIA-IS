@@ -9,22 +9,34 @@ use App\JobVacancy;
 class HRPagesController extends Controller
 {
     public function dashboard() {
-        $approved = Applicant::where('approved', 1)->count();
+        $applicant = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+        $approved = Applicant::where('approved', 1)->where('hired', 0)->count();
         $hired = Applicant::where('hired', 1)->count();
         $job = JobVacancy::where('no_of_vacancy', '!=', 0)->count();
-    	return view('hr_dashboard')->with(array('page' => 'Dashboard', 'approved' => $approved, 'hired' => $hired, 'job' => $job));
+    	return view('hr_dashboard')->with(array('page' => 'Dashboard', 'data' => $applicant, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name, 'approved' => $approved, 'hired' => $hired, 'job' => $job));
     }
 
     public function jobVacancy() {
-    	return view('job_vacancy')->with(array('page' => 'Job Vacancy'));
+        $applicant_form = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+    	return view('job_vacancy')->with(array('page' => 'Job Vacancy', 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function approvedApplicants() {
-    	return view('approved_applicants')->with(array('page' => 'Approved Applicants'));
+        $applicant = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+    	return view('approved_applicants')->with(array('page' => 'Approved Applicants', 'data' => $applicant, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function hiredApplicants() {
-    	return view('hired_applicants')->with(array('page' => 'Hired Applicants'));
+        $applicant_form = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+    	return view('hired_applicants')->with(array('page' => 'Hired Applicants', 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 
     public function profile() {
@@ -33,6 +45,9 @@ class HRPagesController extends Controller
 
     public function applicantForm($id) {
         $applicant = Applicant::find($id);
-        return view('applicant_form')->with(array('page' => 'Applicant Form | HR', 'applicant' => $applicant));
+        $applicant_form = Applicant::where('role', 'Applicant')->get();
+        $applicant_name = Applicant::where('role', 'Applicant')->first();
+        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
+        return view('applicant_form')->with(array('page' => 'Applicant Form | HR', 'applicant' => $applicant, 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
     }
 }

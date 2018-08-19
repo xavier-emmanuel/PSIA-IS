@@ -52,9 +52,9 @@ Route::group( [ 'middleware' => 'auth' ], function()
 	Route::get('/approved-applicants/show', 'ApplicantsController@ajaxShowApprovedApplicants');
 	Route::get('/evaluated-applicants/show', 'ApplicantsController@ajaxShowEvaluatedApplicants');
 
-	Route::get('/hired-applicant-report', 'ReportsController@hiredApplicantReport');
-	Route::get('/approved-applicant-report', 'ReportsController@approvedApplicantReport');
-	Route::get('/application-form-report', 'ReportsController@applicationFormReport');
+	Route::get('/reports/hired-applicant-report', 'ReportsController@hiredApplicantReport');
+	Route::get('/reports/approved-applicant-report', 'ReportsController@approvedApplicantReport');
+	Route::get('/reports/application-form-report/{id}/{name}', 'ReportsController@applicationFormReport');
 });
 
 Route::get('/check-email', 'RegisterController@checkEmail');

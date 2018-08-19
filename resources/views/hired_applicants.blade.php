@@ -158,6 +158,7 @@
 
 @section('scripts')
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/hr_applicant.js' : '/js/pages/hr_applicant.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/report.js' : '/js/pages/report.js') }}"></script>
   <script>
     $(document).ready(function () {
       $('#tbl-hired-applicant').DataTable({

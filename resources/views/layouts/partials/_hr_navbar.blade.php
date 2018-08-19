@@ -37,8 +37,8 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#application-form-modal">Application Form</a>
-                <a class="dropdown-item" href="/hired-applicant-report" target="_blank">Hired Applicants</a>
-                <a class="dropdown-item" href="/approved-applicant-report" target="_blank">Approved Applicants</a>
+                <a class="dropdown-item" href="/reports/hired-applicant-report" target="_blank">Hired Applicants</a>
+                <a class="dropdown-item" href="/reports/approved-applicant-report" target="_blank">Approved Applicants</a>
               </div>
             </li>
           </ul>
@@ -65,32 +65,32 @@
   </header>
 
   <div class="modal fade" id="application-form-modal" tabindex="-1" role="dialog" aria-labelledby="addJobVacancyLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <form id="" name="" method="post">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <input type="hidden" name="hdn_report_id" id="hdn-report-id" value="{{ $applicant_name->id }}">
+        <input type="hidden" name="hdn_report_name" id="hdn-report-name" value="{{ $slug_name }}">
             {{ csrf_field() }}
-            <div class="modal-header">
-              <h5 class="modal-title" id="addJobVacancyLabel">Generate Applicant Form</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="applicant-form-name">Select Name:</label>
-                <select name="" id="" class="form-control">
-                  <option value="">Select name</option>
-                  <option value="">Charles Marnie Limpo</option>
-                  <option value="">Xavier Emmanuel Rebotica</option>
-                  <option value="">Jordan Lopez</option>
-                </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-warning">Generate</button>
-            </div>
-          </form>
+        <div class="modal-header">
+          <h5 class="modal-title" id="addJobVacancyLabel">Generate Applicant Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="applicant-form-name">Select Name:</label>
+            <select name="report_applicant_name" id="report-applicant-name" class="form-control">
+              @foreach($data as $applicant)
+              <option value="{{ $applicant->id }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}
+              </option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a type="button" target="_blank" class="btn btn-warning" id="btn-generate">Generate</a>
         </div>
       </div>
     </div>
+  </div>

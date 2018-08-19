@@ -236,4 +236,5 @@
   <script src="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/config.js' : '/vendors/ckeditor/config.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/vendors/ckeditor/styles.js' : '/vendors/ckeditor/styles.js') }}"></script>
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/job_vacancy.js' : '/js/pages/job_vacancy.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/report.js' : '/js/pages/report.js') }}"></script>
 @endsection
