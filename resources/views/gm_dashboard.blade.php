@@ -13,7 +13,7 @@
     <h2 class="text-center">Evaluated Applicants</h2>
     <hr class="line">
 
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-body d-flex">
         <figure class="mb-0">
           <img src="{{ asset('img/default_image.png') }}" width="192px" height="192px" class="border">
@@ -28,24 +28,23 @@
           <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;Male</p>
           <!-- <p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;Female</p> -->
           <p><i class="fas fa-smile"></i>&nbsp;&nbsp;23 years old</p>
-          <p class="mb-0"><em>Applied for: </em><span class="text-primary">Back-end Web Developer
-</span></p>
+          <p class="mb-0"><em>Applied for: </em><span class="text-primary">Back-end Web Developer</span></p>
         </div>
       </div>
     </div>
 
-     <table id="tbl-evaluated-applicants" class="table table-hover ">
-       <thead>
-         <th>#</th>
-         <th>Name</th>
-         <th>Job</th>
-         <th>Contact</th>
-         <th>Age</th>
-         <th>Gender</th>
-         <th>Action</th>
-       </thead>
-       <tbody></tbody>
-     </table>
+    <table id="tbl-evaluated-applicants" class="table table-hover ">
+      <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Job</th>
+        <th>Contact</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Action</th>
+      </thead>
+      <tbody></tbody>
+    </table>
   </main>
 
   <!-- Applicant Profile Modal -->
