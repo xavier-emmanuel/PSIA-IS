@@ -32,26 +32,22 @@
             <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ $applicant->mobile }}</p>
             <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ $applicant->email }}</p>
             <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{ $applicant->address }}</p>
-            @php
-              if ($applicant->gender == 'Male') {
-                echo '<p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;'.$applicant->gender.'</p>';
-              }
-              else {
-                echo '<p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;'.$applicant->gender.'</p>';
-              }
-            @endphp
-            <p><i class="fas fa-smile"></i>&nbsp;&nbsp;{{ $applicant->age }}</p>
+            <p class="mb-1"><i class="fas fa-{{ $applicant->gender == 'Male' ? 'male' : 'female' }}"></i>&nbsp;&nbsp;{{ $applicant->gender }}</p>
+            <p><i class="fas fa-smile"></i>&nbsp;&nbsp;{{ $applicant->age }} {{ $applicant->age < 2 ? 'year old' : 'years old'}}</p>
           </div>
           <div class="d-flex flex-column align-items-end w-50">
             <p><em>Applying for: </em><span class="text-primary">&nbsp;{{ $applicant->jobVacancies->name }}</span></p>
-            <a class="btn btn-info" id="btn-applicant-form" href="/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}.'" data-name="{{ $applicant->first_name }}.' {{ $applicant->middle_name }}.' {{ $applicant->last_name }}.'" data-job="{{ $applicant->jobVacancies->name }}.'" data-age="{{ $applicant->age }}.'" data-gender="{{ $applicant->gender }}.'" data-address="{{ $applicant->address }}.'" data-mobile="{{ $applicant->mobile }}.'" data-interview-title="{{ $applicant->interview_title }}.'" data-interview-message="{{ $applicant->interview_message }}.'" data-interview-date="{{ $applicant->date_of_interview }}.'" data-interview-time="{{ $applicant->date_of_interview }}.'" data-result="{{ $result }}.'" data-training-date="" data-date-hired="{{ $applicant->date_hired }}.'" data-interviewed="{{ $applicant->interviewed }}.'" data-score="{{ $applicant->score }}.'"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+            <a class="btn btn-info" target="_blank" id="btn-applicant-form" href="/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}.'" data-name="{{ $applicant->first_name }}.' {{ $applicant->middle_name }}.' {{ $applicant->last_name }}.'" data-job="{{ $applicant->jobVacancies->name }}.'" data-age="{{ $applicant->age }}.'" data-gender="{{ $applicant->gender }}.'" data-address="{{ $applicant->address }}.'" data-mobile="{{ $applicant->mobile }}.'" data-interview-title="{{ $applicant->interview_title }}.'" data-interview-message="{{ $applicant->interview_message }}.'" data-interview-date="{{ $applicant->date_of_interview }}.'" data-interview-time="{{ $applicant->date_of_interview }}.'" data-result="{{ $result }}.'" data-training-date="" data-date-hired="{{ $applicant->date_hired }}.'" data-interviewed="{{ $applicant->interviewed }}.'" data-score="{{ $applicant->score }}.'"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
           </div>
         </div>
       </div>
     @empty
-      <div class="card mb-3" style="height: 260px;">
-        <div class="card-body text-center">
-          <h5 class="card-title"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;No data available.</h5>
+      <div class="card mb-5" style="height: 243px;">
+        <div class="card-body d-flex">
+          <figure class="mb-0">
+            <img src="img/default_image.png" width="192px" height="192px" class="border">
+          </figure>
+          <h5 class="card-title text-center w-100"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;No data available</h5>
         </div>
       </div>
     @endforelse
