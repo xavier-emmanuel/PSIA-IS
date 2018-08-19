@@ -32,8 +32,14 @@
             <p class="mb-1"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ $applicant->mobile }}</p>
             <p class="mb-1"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ $applicant->email }}</p>
             <p class="mb-1"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{ $applicant->address }}</p>
-            <p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;{{ $applicant->gender }}</p>
-            <!-- <p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;Female</p> -->
+            @php
+              if ($applicant->gender == 'Male') {
+                echo '<p class="mb-1"><i class="fas fa-male"></i>&nbsp;&nbsp;'.$applicant->gender.'</p>';
+              }
+              else {
+                echo '<p class="mb-1"><i class="fas fa-female"></i>&nbsp;&nbsp;'.$applicant->gender.'</p>';
+              }
+            @endphp
             <p><i class="fas fa-smile"></i>&nbsp;&nbsp;{{ $applicant->age }}</p>
           </div>
           <div class="d-flex flex-column align-items-end w-50">
