@@ -546,6 +546,7 @@
 
 @section('scripts')
   <script src="{{ asset(App::environment('production') ? '/public/js/pages/gm_applicant.js' : '/js/pages/gm_applicant.js') }}"></script>
+  <script src="{{ asset(App::environment('production') ? '/public/js/pages/report.js' : '/js/pages/report.js') }}"></script>
   <script>
     const sectionOneBtn = $('#btn-next-section-one'),
         sectionOneWrapper = $('#section-one'),
