@@ -31,7 +31,7 @@
           <h3>EMAIL US AT</h3>
         </div>
         <div class="c-box__details">
-          <p class="mb-0">patton_scrty@yahoo.com.ph</p>
+          <p class="mb-0">pattonsecu@gmail.com</p>
         </div>
       </div>
     </div>

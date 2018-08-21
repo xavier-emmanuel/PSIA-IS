@@ -198,7 +198,7 @@ class JobApplicationController extends Controller
     	}
       $question->preffered_office = $request->application_assignment;
       $question->skills = $request->application_skills;
-      $selected_skills = implode(",", $request->get('selected_skill'));
+      $selected_skills = implode(", ", $request->get('selected_skill'));
       $question->skills_select = $selected_skills;
       $question->self_description = $request->personal_description;
       $question->reason_of_applying = $request->reasons_of_appying;

@@ -21,28 +21,28 @@ class RegisterController extends Controller
 
 			$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
 			
-			// $username = "imjordanlopez@gmail.com";
-			// $hash = "5c768719065ead607b69e04c08ce2fc4e8265884f91fec5bdaed27ecfd1e9f9a";
+			/*$username = "imjordanlopez@gmail.com";
+			$hash = "5c768719065ead607b69e04c08ce2fc4e8265884f91fec5bdaed27ecfd1e9f9a";
 
-			// // Config variables. Consult http://api.txtlocal.com/docs for more info.
-			// $test = "0";
+			// Config variables. Consult http://api.txtlocal.com/docs for more info.
+			$test = "0";
 
-			// // Data for text message. This is the text message data.
-			// $sender = "PSIA"; // This is who the message appears to be from.
-			// $numbers = "63".$input['mobile']; // A single number or a comma-seperated list of numbers
-			// $message = 'This is Patton Security & Investigation Agency. 
+			// Data for text message. This is the text message data.
+			$sender = "PSIA"; // This is who the message appears to be from.
+			$numbers = "63".$input['mobile']; // A single number or a comma-seperated list of numbers
+			$message = 'This is Patton Security & Investigation Agency. 
 			
-			// Your verification code is '.$code.'.';
-			// // 612 chars or less
-			// // A single number or a comma-seperated list of numbers
-			// $message = urlencode($message);
-			// $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-			// $ch = curl_init('http://api.txtlocal.com/send/?');
-			// curl_setopt($ch, CURLOPT_POST, true);
-			// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			// $result = curl_exec($ch); // This is the result from the API
-			// curl_close($ch);
+			Your verification code is '.$code.'.';
+			// 612 chars or less
+			// A single number or a comma-seperated list of numbers
+			$message = urlencode($message);
+			$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+			$ch = curl_init('http://api.txtlocal.com/send/?');
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($ch); // This is the result from the API
+			curl_close($ch);*/
 
 			$register = new Register();
 
