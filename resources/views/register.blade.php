@@ -77,11 +77,6 @@
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="">Age:</label>
-                  <input type="number" name="age" id="age" class="form-control" placeholder="23"></div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="form-group">
                   <label for="">Gender:</label>
                   <select name="gender" id="gender" class="form-control">
                     <option value="Male">Male</option>

@@ -51,7 +51,7 @@ class RegisterController extends Controller
 			$register->last_name = $input['last_name'];
 			$register->email = $input['email'];
 			$register->mobile = '+63'.$input['mobile'];
-			$register->age = $input['age'];
+			$register->age = date_diff(date_create($input['date_of_birth']), date_create('now'))->y;
 			$register->gender = $input['gender'];
 			$register->civil_status = $input['civil_status'];
 			$register->address = $input['address'];

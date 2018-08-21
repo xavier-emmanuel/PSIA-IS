@@ -121,7 +121,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="">Age:</label>
-                  <input type="number" name="age" id="age" class="form-control" value="{{ Auth::user()->age }}" autocomplete="off">
+                  <input type="number" name="age" id="age" class="form-control" value="{{ Auth::user()->age }}" autocomplete="off" readonly>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12">

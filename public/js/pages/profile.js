@@ -187,6 +187,7 @@ function updatePersonal() {
 				success: function (data) {
 					$('#btn-update-personal').removeAttr('disabled', 'disabled').html('<i class="fas fa-save"></i>&nbsp; Save Changes')
 					$('#user-firstname').text(data.firstname);
+					$('#age').val(data.age);
 
 					$.toast({
 						heading: 'Success!',

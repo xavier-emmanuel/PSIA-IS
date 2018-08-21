@@ -147,7 +147,6 @@ $(document).ready(function () {
                     maxlength: 10,
                     digits: true
                 },
-                age: "required",
                 address: "required",
                 place_of_birth: "required",
                 date_of_birth: "required"
@@ -166,7 +165,6 @@ $(document).ready(function () {
                     maxlength: 'Please enter at least 10 characters. Ex: 9123456789',
                     digits: 'Please enter a valid mobile number.'
                 },
-                age: "Required field cannot be left blank.",
                 address: "Required field cannot be left blank.",
                 place_of_birth: "Required field cannot be left blank.",
                 date_of_birth: "Required field cannot be left blank."
