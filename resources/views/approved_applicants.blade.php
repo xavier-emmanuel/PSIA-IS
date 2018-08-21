@@ -35,7 +35,7 @@
     <h2 class="text-center ">Approved Applicants</h2>
     <hr class="line">
 
-    @forelse($data as $applicant)
+    @forelse($approved as $applicant)
       @php
       if ($applicant->hired == 1 && $applicant->approved == 1) {
         $result = 'Hired';
@@ -74,7 +74,7 @@
 
             <div class="d-flex justify-content-end w-100">
               <button class="btn btn-warning" id="btn-hiring" data-toggle="modal" data-target="#hire-applicant" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}">Hire</button>&emsp;
-              <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" target="_blank" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
+              <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" target="_blank" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}"><i class="fas fa-external-link-alt"></i>&nbsp;&nbsp;View Application</a>
             </div>
           </div>
         </div>

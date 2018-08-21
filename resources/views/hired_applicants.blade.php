@@ -32,7 +32,7 @@
     <hr class="line">
 
     <div class="row">
-      @forelse($data as $applicant)
+      @forelse($hired as $applicant)
         @php
           if ($applicant->hired == 1 && $applicant->approved == 1) {
             $result = 'Hired';
@@ -46,11 +46,11 @@
           <div class="card">
             <div class="card-body text-center">
               <img src="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" alt="Charles Marnie B. Limpo" class="mb-3 border" width="192px" style="border-radius: 50%;">
-              <a href="#" data-toggle="modal" data-target="#applicant-profile" title="View Title" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}">
+              <a href="#" data-toggle="modal" data-target="#applicant-profile" title="View Title" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}">
                 <h6 class="font-weight-bold">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}</h6>
               </a>
               <small><p><em>{{ $applicant->jobVacancies->name }}</em></p></small>
-              <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" target="_blank" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="/uploads/accounts/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}"><i class="fas fa-paperclip"></i></a>
+              <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/{{ $applicant->id }}/{{ str_slug($applicant->first_name .' '. $applicant->middle_name .' '. $applicant->last_name) }}" target="_blank" title="View Application" data-id="{{ $applicant->id }}" data-email="{{ $applicant->email }}" data-image="{{ asset(App::environment('production') ? '/public/uploads/accounts' : '/uploads/accounts') }}/{{ $applicant->image }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}" data-job="{{ $applicant->jobVacancies->name }}" data-age="{{ $applicant->age }}" data-gender="{{ $applicant->gender }}" data-address="{{ $applicant->address }}" data-mobile="{{ $applicant->mobile }}" data-interview-title="{{ $applicant->interview_title }}" data-interview-message="{{ $applicant->interview_message }}" data-interview-date="{{ $applicant->date_of_interview }}" data-interview-time="{{ $applicant->date_of_interview }}" data-result="{{ $result }}" data-training-date="" data-date-hired="{{ $applicant->date_hired }}" data-interviewed="{{ $applicant->interviewed }}" data-score="{{ $applicant->score }}"><i class="fas fa-paperclip"></i></a>
             </div>
           </div>
         </div>
@@ -109,6 +109,68 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set Interview Modal -->
+    <div class="modal fade" id="set-interview" tabindex="-1" role="dialog" aria-labelledby="setInterviewLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" id="frm-set-interview">
+            <input type="hidden" name="hdn_id" class="hdn-id">
+            <input type="hidden" name="hdn_email" class="hdn-email">
+            <input type="hidden" name="hdn_name" class="hdn-name">
+            <input type="hidden" name="frm_status" id="frm-status" value="Save">
+            {{ csrf_field() }}
+            <div class="modal-header">
+              <h5 class="modal-title" id="setInterviewLabel">Set Inverview</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="">Title:</label>
+                <input type="text" name="interview_title" id="interview-title" class="form-control" placeholder="Interview">
+              </div>
+              <div class="form-group">
+                <label for="">Message:</label>
+                <textarea name="interview_message" id="interview-message" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Date &amp; Time:</label>
+                <input type="text" name="interview_date" class="form-control datetimepicker-input interview-date" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"
+                />
+              </div>
+              <div class="form-group interview-field">
+                <label for="">Interviewed?</label>
+                <div class="form-check form-check-inline ml-3">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-yes" value="1">
+                  <label class="form-check-label" for="">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interviewed" id="interviewed-no" value="0" checked="checked">
+                  <label class="form-check-label" for="">No</label>
+                </div>
+              </div>
+              <div class="form-group interview-field-score">
+                <label for="">Score:&nbsp; </label>
+                <div class="form-check form-check-inline ml-3 passed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-passed" value="Passed">
+                  <label class="form-check-label" for="">Passed</label>
+                </div>
+                <div class="form-check form-check-inline failed-field">
+                  <input class="form-check-input" type="radio" name="exam_score" id="exam-failed" value="Failed">
+                  <label class="form-check-label" for="">Failed</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="btn-save-close" data-dismiss="modal">Back</button>
+              <button type="submit" class="btn btn-warning btn-save">Save</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

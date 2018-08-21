@@ -13,11 +13,11 @@ class PagesController extends Controller
 			$featured_jobs = JobVacancy::where([['featured', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
 			$urgent_jobs = JobVacancy::where([['featured', '=', 0], ['hiring_status', '=', 1], ['no_of_vacancy', '!=', 0]])->get();
 			$jobs = JobVacancy::where([['no_of_vacancy', '!=', 0], ['featured', '=', 0], ['hiring_status', '=', 0]])->get();
-			$applicant_form = Applicant::where('role', 'Applicant')->get();
+			$applicant = Applicant::where('role', 'Applicant')->where('job_vacancy_id', '!=', 0)->get();
 	        $applicant_name = Applicant::where('role', 'Applicant')->first();
 	        $slug_name = str_slug($applicant_name->first_name.' '.$applicant_name->middle_name.' '.$applicant_name->last_name);
 
-			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'urgent_jobs' => $urgent_jobs, 'jobs' => $jobs, 'data' => $applicant_form, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
+			return view('index')->with(array('page' => 'Home', 'featured_jobs' => $featured_jobs, 'urgent_jobs' => $urgent_jobs, 'jobs' => $jobs, 'data' => $applicant, 'applicant_name' => $applicant_name, 'slug_name' => $slug_name));
 		}
 
 		public function about() {

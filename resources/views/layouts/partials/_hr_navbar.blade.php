@@ -77,19 +77,27 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label for="applicant-form-name">Select Name:</label>
-            <select name="report_applicant_name" id="report-applicant-name" class="form-control">
-              @foreach($data as $applicant)
-              <option value="{{ $applicant->id }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}
-              </option>
-              @endforeach
-            </select>
-          </div>
+          @if($applicant_name->job_vacancy_id !== 0)
+            <div class="form-group">
+              <label for="applicant-form-name">Select Name:</label>
+              <select name="report_applicant_name" id="report-applicant-name" class="form-control">
+                @foreach($data as $applicant)
+                <option value="{{ $applicant->id }}" data-name="{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}">{{ $applicant->first_name }} {{ $applicant->middle_name }} {{ $applicant->last_name }}
+                </option>
+                @endforeach
+              </select>
+            </div>
+          @else
+            <div class="card mb-5" style="height: 243px;">
+              <div class="card-body d-flex">
+                <h5 class="card-title text-center w-100"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;No data available</h5>
+              </div>
+            </div>
+          @endif
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <a target="_blank" class="btn btn-warning" id="btn-generate">Generate</a>
+          <a target="_blank" class="btn btn-warning" id="btn-generate" {{ $applicant_name->job_vacancy_id !== 0 ? '' : 'hidden' }}>Generate</a>
         </div>
       </div>
     </div>

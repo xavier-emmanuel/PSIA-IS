@@ -71,7 +71,7 @@ class ReportsController extends Controller
     }
 
     public function approvedApplicantReport(Request $request) {
-        $hired = Applicant::where('approved', 1)->get();
+        $hired = Applicant::where('approved', 1)->where('hired', 0)->get();
 
         PDF::setHeaderCallback(function($pdf) {
             PDF::Image('img/patton-logo.png', 60, 13, 20, 'PNG');

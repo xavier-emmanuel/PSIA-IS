@@ -12,7 +12,7 @@ class ApplicantsController extends Controller
 
   public function applicantDashboard(Request $request) {
     $applicant = Applicant::where('id', Auth::id())->first();
-    $job = JobVacancy::where('id', Auth::id())->first();
+    $job = JobVacancy::where('id', isset($applicant->jobVacancies->id) ? $applicant->jobVacancies->id : 0)->first();
     return view('applicant_dashboard')->with(array('page' => 'Dashboard', 'data' => $applicant, 'job' => $job));
   }
 
@@ -30,6 +30,8 @@ class ApplicantsController extends Controller
               $result = '';
             }
 
+            $image = \App::environment('production') ? '/public/uploads/accounts/'.$row->image : '/uploads/accounts/'.$row->image;
+
             $id = '<td>'.$row->id.'</td>';
             $name = '<td>'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'</td>';
 			      $job = '<td>'.$row->jobVacancies->name.'</td>';
@@ -37,7 +39,7 @@ class ApplicantsController extends Controller
             $age = '<td>'.$row->age.'</td>';
             $gender = '<td>'.$row->gender.'</td>';
             $button = '<td>
-                        <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
+                        <button class="btn btn-info" id="btn-view-profile-'.$row->id.'" title="View Profile" data-toggle="modal" data-target="#applicant-profile" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="'.$image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
                           <i class="fas fa-eye "></i>
                         </button>&nbsp;
                         <a class="btn btn-info" id="btn-applicant-form" href="/HR/applicant-form/'.$row->id.'/'.str_slug($row->first_name.' '.$row->middle_name.' '.$row->last_name).'" target="_blank" title="View Application" data-id="'.$row->id.'" data-email="'.$row->email.'" data-image="/uploads/accounts/'.$row->image.'" data-name="'.$row->first_name.' '.$row->middle_name.' '.$row->last_name.'" data-job="'.$row->jobVacancies->name.'" data-age="'.$row->age.'" data-gender="'.$row->gender.'" data-address="'.$row->address.'" data-mobile="'.$row->mobile.'" data-interview-title="'.$row->interview_title.'" data-interview-message="'.$row->interview_message.'" data-interview-date="'.$row->date_of_interview.'" data-interview-time="'.$row->date_of_interview.'" data-result="'.$result.'" data-training-date="" data-date-hired="'.$row->date_hired.'" data-interviewed="'.$row->interviewed.'" data-score="'.$row->score.'">
