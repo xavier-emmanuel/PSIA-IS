@@ -26,10 +26,10 @@ class ProfileController extends Controller
     	$account = Register::find(Auth::id());
 
     	if(! $request->username == '') {
-   			$account->username = $request->username;   			
+   			$account->username = $request->username;
    		}
    		if(! $request->new_password == '') {
-		 	$account->password = bcrypt($request->new_password);   			
+		 	$account->password = bcrypt($request->new_password);
    		}
 		$account->save();
 
@@ -48,7 +48,7 @@ class ProfileController extends Controller
     	$account->date_of_birth = $request->date_of_birth;
     	$account->place_of_birth = $request->place_of_birth;
     	$account->save();
-			
+
 		return response()->json(['success'=>'Personal details has been successfully updated.', 'firstname' => $account->first_name, 'age' => $account->age]);
     }
 

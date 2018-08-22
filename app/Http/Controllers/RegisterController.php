@@ -20,7 +20,7 @@ class RegisterController extends Controller
 			}
 
 			$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
-			
+
 			$username = "xavier.rebotica@oneiroswebsolutions.com";
 			$hash = "d1288bb77a154394dbcf91d18431ced5c0d096adf7646be2bc15910b9852e4cb";
 
@@ -30,8 +30,8 @@ class RegisterController extends Controller
 			// Data for text message. This is the text message data.
 			$sender = "PSIA"; // This is who the message appears to be from.
 			$numbers = "63".$input['mobile']; // A single number or a comma-seperated list of numbers
-			$message = 'This is Patton Security & Investigation Agency. 
-			
+			$message = 'This is Patton Security & Investigation Agency.
+
 			Your verification code is '.$code.'.';
 			// 612 chars or less
 			// A single number or a comma-seperated list of numbers
