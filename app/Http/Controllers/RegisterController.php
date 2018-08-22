@@ -21,8 +21,8 @@ class RegisterController extends Controller
 
 			$code = intval(rand(1,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9));
 			
-			/*$username = "imjordanlopez@gmail.com";
-			$hash = "5c768719065ead607b69e04c08ce2fc4e8265884f91fec5bdaed27ecfd1e9f9a";
+			$username = "xavier.rebotica@oneiroswebsolutions.com";
+			$hash = "d1288bb77a154394dbcf91d18431ced5c0d096adf7646be2bc15910b9852e4cb";
 
 			// Config variables. Consult http://api.txtlocal.com/docs for more info.
 			$test = "0";
@@ -42,7 +42,7 @@ class RegisterController extends Controller
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$result = curl_exec($ch); // This is the result from the API
-			curl_close($ch);*/
+			curl_close($ch);
 
 			$register = new Register();
 
